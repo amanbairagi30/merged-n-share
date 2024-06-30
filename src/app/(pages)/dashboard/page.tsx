@@ -6,11 +6,8 @@ import React from 'react'
 export default function Dashboard() {
 
     return (
-        <div>
-            Hello , You r loogged in
-            <Button onClick={async () => {
-                await signOut();
-            }}>Logout</Button>
+        <div className='text-white'>
+            hi
         </div>
     )
 }

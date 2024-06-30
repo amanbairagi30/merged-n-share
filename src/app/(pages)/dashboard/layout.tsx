@@ -4,6 +4,8 @@ import React from 'react'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import Sidebar from '@/components/Sidebar'
+import Topbar from '@/components/Topbar'
 
 
 type Props = { children: React.ReactNode }
@@ -16,11 +18,15 @@ const Layout = async (props: Props) => {
         redirect('/');
     }
     return (
-        <div className="flex overflow-scroll h-screen  bg-grid-white/[0.15] relative  ">
+        <div className="flex text-white  h-screen w-screen">
             {/* <Sidebar /> */}
-            <div className="w-full">
-                {/* <InfoBar /> */}
-                {props.children}
+            <Sidebar />
+            <div className="flex flex-col  w-[calc(100vw-18rem)]">
+                {/* <TopBar /> */}
+                <Topbar />
+                <div className='h-[calc(100vh-4rem)] p-4 border-green-500'>
+                    {props.children}
+                </div>
             </div>
         </div>
     )
