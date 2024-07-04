@@ -5,17 +5,17 @@ export const sideBarOptions = {
         {
             name: 'Dashboard',
             icon: LayoutDashboard,
-            href: "/works/dashboard",
+            href: "/work/dashboard",
         },
         {
             name: 'My PRs',
             icon: GitPullRequest,
-            href: "/works/my-pr",
+            href: "/work/my-pr",
         },
         {
             name: 'Organisation',
             icon: Building2,
-            href: "/works/organisation",
+            href: "/work/organisation",
         },
     ],
 }

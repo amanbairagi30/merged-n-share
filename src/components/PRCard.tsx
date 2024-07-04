@@ -77,7 +77,7 @@ export default function PRCard({ user, PRData }: any) {
 
     return (
         <>
-            <div className='border-2 border-transparent hover:transition-all hover:duration-700 hover:ease-linear hover:border-white hover:border-2 bg-[#101010] flex flex-col cursor-pointer rounded-lg h-[20rem] p-4'>
+            <div className='border-2 border-slate-800 hover:transition-all hover:duration-700 hover:ease-linear hover:border-blue-500 hover:border-2 bg-[#101010] flex flex-col cursor-pointer rounded-lg h-[20rem] p-4'>
                 <div className='flex items-center justify-between'>
                     <div className='flex flex-col'>
                         <div className='flex gap-2 items-center'>

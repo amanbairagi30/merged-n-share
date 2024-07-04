@@ -24,6 +24,7 @@ import {
 import { Loader } from 'lucide-react';
 import { Organisations as OrgType } from '@prisma/client';
 import { toast } from 'sonner';
+import Image from 'next/image';
 
 export default function MyPR() {
     const session = useSession();
@@ -86,7 +87,7 @@ export default function MyPR() {
                         return extractAmount(item.body);
                     }
                     return null;
-                }).filter((amount: any) => amount !== null);;
+                }).filter((amount: any) => amount !== null);
 
                 console.log(hkiratComments)
                 prDetails.bounty = hkiratComments;
@@ -181,8 +182,15 @@ export default function MyPR() {
                                 <SelectGroup>
                                     <SelectLabel>Select</SelectLabel>
                                     {
-                                        organisations && organisations.map((org) => {
-                                            return <SelectItem value={org.name} key={org.id}>{org.name}</SelectItem>
+                                        organisations && organisations.map((org: any) => {
+                                            return (
+                                                <SelectItem value={org.name} key={org.id}>
+                                                    <div className='flex items-center gap-2'>
+                                                        <Image className='w-[2rem] rounded-full h-[2rem]' src={org?.avatar_url} width='500' height='500' alt='org-img' />
+                                                        <p>{org.name}</p>
+                                                    </div>
+                                                </SelectItem>
+                                            )
                                         })
                                     }
                                 </SelectGroup>
@@ -244,12 +252,12 @@ export default function MyPR() {
                 {/* PR cards */}
                 {isLoading ? (
                     <div className='flex w-full h-[80vh] gap-2 items-center justify-center'>
-                        <Loader className='animate-spin' />
+                        <Loader className='animate-in' />
                         <span className='text-xs'>Fetching your PRs from DB</span>
                     </div>
                 ) : (
                     prdata && prdata.length > 0 ? (
-                        <div className='grid grid-cols-1 lg:grid-cols-3 py-2 my-6 h-full flex-wrap gap-4'>
+                        <div className='grid grid-cols-1 lg:grid-cols-2 py-2 my-6 h-full flex-wrap gap-4'>
                             {prdata.map((item, index) => (
                                 <PRCard key={index} user={user} PRData={item} />
                             ))}
