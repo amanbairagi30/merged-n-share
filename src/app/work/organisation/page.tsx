@@ -9,7 +9,7 @@ import { Organisations as OrgType } from '@prisma/client';
 const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisations: (orgs: OrgType[]) => void, approvedOrganisations: OrgType[] }) => {
 
     const [orgName, setOrgName] = useState<String>("");
-console.log(process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN)
+    console.log(process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN)
     const fetchOrganisationsOnSearch = async (name: string) => {
 
         if (name.trim() === "") {
@@ -43,7 +43,7 @@ console.log(process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN)
         }
     };
 
-    const debouncedFetchOrganisations = useCallback(debounce(fetchOrganisationsOnSearch, 400), []);
+    const debouncedFetchOrganisations = useCallback(debounce(fetchOrganisationsOnSearch, 400), [approvedOrganisations]);
 
     const HandleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

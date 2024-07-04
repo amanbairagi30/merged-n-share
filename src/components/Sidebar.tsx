@@ -14,7 +14,7 @@ export default function Sidebar() {
         const currentPathName = pathName;
         const newActive = sideBarOptions.general.findIndex((option: any) => option.href === currentPathName);
         setActiveIndex(newActive);
-    }, [pathName, sideBarOptions.general])
+    }, [pathName])
     return (
         <div className='border-r-2 flex flex-col border-[#353535] min-w-[18rem]'>
             <div className=' border-[#424242] flex items-center px-4 h-[4rem]'>

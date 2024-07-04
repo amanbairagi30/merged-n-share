@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
 import { BadgeDollarSign, EllipsisVertical, Link2, LucideExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import PointIcon from "../app/assets/point.png";
+import Image from 'next/image';
 
 export default function PRCard({ user, PRData }: any) {
     const { prURL,
@@ -102,7 +103,7 @@ export default function PRCard({ user, PRData }: any) {
                     <span className='text-2xl font-[600]'>{prTitle.slice(0, 40)}...</span>
                     <div className='flex items-center gap-2'>
                         <div className='mt-2 border-2 border-yellow-500 px-2 py-1 rounded-full gap-1 flex items-center'>
-                            <img className='w-[1rem] h-[1rem]' src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="" />
+                            <Image width='400' height='400' className='w-[1rem] h-[1rem]' src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="coin-image" />
                             <span className='text-sm'>{prPoint}</span>
                         </div>
                         {

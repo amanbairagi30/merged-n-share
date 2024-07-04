@@ -223,7 +223,7 @@ export default function MyPR() {
 
                                                             {newMergedPRData.map((item, index) => {
                                                                 return (
-                                                                    <div className='mt-4 border-2 border-black rounded-lg font-semibold px-4 py-2'>
+                                                                    <div key={`pr-${index}-glimpse`} className='mt-4 border-2 border-black rounded-lg font-semibold px-4 py-2'>
 
                                                                         #{item?.prNumber} in {item?.repoURL.split("/")[item.repoURL.split("/").length - 1]}
                                                                     </div>
