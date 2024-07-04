@@ -9,7 +9,6 @@ import { Organisations as OrgType } from '@prisma/client';
 const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisations: (orgs: OrgType[]) => void, approvedOrganisations: OrgType[] }) => {
 
     const [orgName, setOrgName] = useState<String>("");
-    console.log(process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN)
     const fetchOrganisationsOnSearch = async (name: string) => {
 
         if (name.trim() === "") {
@@ -78,7 +77,7 @@ const Organisations = () => {
 
         const fetchApprovedOrganisations = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/api/organisation`, {
+                const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/organisation`, {
                     method: 'GET'
                 });
                 if (response.ok) {

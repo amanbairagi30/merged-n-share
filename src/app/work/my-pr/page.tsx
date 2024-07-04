@@ -110,7 +110,7 @@ export default function MyPR() {
 
         /* to fetch the organisations for the dropdown */
         const fetchOrganisations = async () => {
-            const response = await fetch(`http://localhost:3000/api/organisation`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/organisation`, {
                 method: "GET",
             })
             const resp = await response.json();
@@ -124,7 +124,7 @@ export default function MyPR() {
 
     const getAllPullrequests = async () => {
         setIsLoading(true);
-        const response = await fetch(`http://localhost:3000/api/pr`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/pr`, {
             method: "GET",
         })
         const resp = await response.json();
@@ -148,7 +148,7 @@ export default function MyPR() {
     };
 
     const savePRsInDatabase = async (prs: any[]) => {
-        const response = await fetch(`http://localhost:3000/api/pr`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/pr`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ export default function OrgCard({ organisation, isApproved, setApprovedOrganisat
 
     const handleApproval = async () => {
 
-        const response = await fetch(`http://localhost:3000/api/organisation`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/organisation`, {
             method: 'POST',
             body: JSON.stringify({
                 id: organisation.id,
