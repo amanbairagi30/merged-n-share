@@ -15,7 +15,7 @@ export async function POST(req: Request) {
 
         console.log(session?.user);
 
-        //@ts-ignore
+        // @ts-ignore
         if (!session?.user?.id) {
             return NextResponse.json({ success: false, message: "User ID not found" });
         }

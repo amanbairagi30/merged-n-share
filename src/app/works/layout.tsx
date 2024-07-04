@@ -24,7 +24,7 @@ const Layout = async (props: Props) => {
             <div className="flex flex-col  w-[calc(100vw-18rem)]">
                 {/* <TopBar /> */}
                 <Topbar />
-                <div className='h-[calc(100vh-4rem)] p-4 border-green-500'>
+                <div className='!h-[calc(100vh-4rem)] p-4 border-green-500'>
                     {props.children}
                 </div>
             </div>

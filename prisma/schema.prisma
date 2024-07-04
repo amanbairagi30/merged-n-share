@@ -54,7 +54,38 @@ model User {
   admin         Boolean       @default(false)
   accounts      Account[]
   sessions      Session[]
-  // pullRequests  PullRequest[]
+  pullRequests  PullRequest[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Organisations{
+   id        Int      @id 
+   name      String
+   avatar_url String?  @default("https://www.campusfrance.org/sites/default/files/styles/mobile_visuel_principal_page/public/organisation%20organigramme_3.jpg?itok=qD2R_LHp")
+   github_url String?
+}
+
+
+model PullRequest {
+  id         String   @id @default(cuid())
+  prURL      String
+  prTitle    String
+  prNumber   Int
+  repoURL    String
+  userName   String
+  avatar     String
+  commentURL String
+  isVerified Boolean
+  mergedAt   DateTime
+  body       String?
+  prPoint    Int
+  draft      Boolean
+  bounty     String? // Nullable field for bounty information
+
+  userId String // Foreign key relation to User model
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

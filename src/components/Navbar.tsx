@@ -25,7 +25,7 @@ export const Navbar = () => {
 
                         <div className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl"
                             onClick={async () => {
-                                session?.data?.user ? router.push("/dashboard") : await signIn();
+                                session?.data?.user ? router.push("/works/dashboard") : await signIn();
 
                             }}
                         >
