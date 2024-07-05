@@ -45,7 +45,7 @@ export default function MyPR() {
         setIsLoading(true);
         setShowFetchedMergedPRDialog(true)
         //@ts-ignore
-        const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:amanbairagi30+org:${orgName}+is:merged`, {
+        const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${orgName}+is:merged`, {
             method: 'GET',
         })
         setIsLoading(false);
@@ -175,7 +175,7 @@ export default function MyPR() {
                     <div>Merged PRs({prdata?.length})</div>
                     <div className="flex gap-2 ">
                         <Select onValueChange={(e) => setOrgName(e)}>
-                            <SelectTrigger className="min-w-[180px] max-w-full px-4 bg-[#202020]">
+                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-[#202020]">
                                 <SelectValue placeholder="Select a Organisation" />
                             </SelectTrigger>
                             <SelectContent className='bg-[#202020] text-white'>
@@ -184,9 +184,9 @@ export default function MyPR() {
                                     {
                                         organisations && organisations.map((org: any) => {
                                             return (
-                                                <SelectItem value={org.name} key={org.id}>
+                                                <SelectItem  value={org.name} key={org.id}>
                                                     <div className='flex items-center gap-2'>
-                                                        <Image className='w-[2rem] rounded-full h-[2rem]' src={org?.avatar_url} width='500' height='500' alt='org-img' />
+                                                        <Image className='w-[1.5rem] rounded-full h-[1.5rem]' src={org?.avatar_url} width='500' height='500' alt='org-img' />
                                                         <p>{org.name}</p>
                                                     </div>
                                                 </SelectItem>

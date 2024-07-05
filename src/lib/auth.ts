@@ -1,8 +1,9 @@
-import { AuthOptions, SessionStrategy } from "next-auth"
+import { AuthOptions, Profile, SessionStrategy } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import prisma from "./db"
 import { Adapter } from "next-auth/adapters"
+import { JWT } from "next-auth/jwt"
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -18,28 +19,47 @@ export const authOptions: AuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     session: { strategy: "jwt" as SessionStrategy },
     callbacks: {
-        async jwt({ token , profile}: any) {
-            if(profile){
-                token.username = profile.login;
+        async signIn({ user, account, profile }: any) {
+            console.log("SignIn callback - User:", user);
+            console.log("SignIn callback - Account:", account);
+            console.log("SignIn callback - Profile:", profile);
+
+            if (account?.provider === "github" && profile && 'login' in profile) {
+                try {
+                    await prisma.user.update({
+                        where: { id: user.id },
+                        data: { username: profile.login as string },
+                    });
+                    console.log("Updated user with username:", profile.login);
+                } catch (error) {
+                    console.error("Error updating user:", error);
+                    // Continue sign-in process even if update fails
+                }
             }
-            console.log("Profile login : ",profile?.login)
-            console.log("username : ",token.username)
+            return true;
+        },
+        async jwt({ token, user, account, profile }:any){
+            if (profile && 'login' in profile) {
+                token.username = profile.login as string;
+            }
+            console.log("JWT callback - Token:", token);
             return token;
         },
-        async session({ session, token }: any) {
+        async session({ session, token }: { session: any, token: JWT }): Promise<any> {
+            console.log("Session callback - Token:", token);
             const user = await prisma.user.findUnique({
                 where: {
                     id: token.sub,
                 },
             });
-            if (token) {
-                session.accessToken = token.accessToken;
-                session.user.id = token.sub;
-                session.user.admin = user?.admin;
-                session.user.username = token.username
+            console.log("Session callback - User from DB:", user);
+            if (user) {
+                session.user.id = user.id;
+                session.user.admin = user.admin;
+                session.user.username = user.username;
             }
+            console.log("Session callback - Final session:", session);
             return session;
         },
-    },
-
+    }
 }

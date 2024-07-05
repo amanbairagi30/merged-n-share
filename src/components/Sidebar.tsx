@@ -1,5 +1,6 @@
 'use client'
 import { sideBarOptions } from '@/data/data'
+import { signOut } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
@@ -21,6 +22,7 @@ export default function Sidebar() {
                 <div>
                     <p className='text-xl font-semibold'>M<span className='text-blue-500'>&</span>S</p>
                 </div>
+                <div onClick={async () => await signOut()}>Logout</div>
             </div>
 
             <main className='  font-bold  mt-6 px-4'>
@@ -28,14 +30,18 @@ export default function Sidebar() {
 
                 <div className='flex  gap-4 mt-6 h-fit flex-col'>
                     {
-                        sideBarOptions.general.map((x, idx) => (
-                            <>
-                                <div onClick={() => { setActiveIndex(idx); router.push(`${x.href}`) }} className={`flex items-center cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
-                                    <x.icon />
-                                    <p>{x.name}</p>
-                                </div>
-                            </>
-                        ))
+                        sideBarOptions.general.map((x, idx) => {
+
+                            return (
+                                <>
+                                    <div onClick={() => { setActiveIndex(idx); router.push(`${x.href}`) }} className={`flex items-center cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
+                                        <x.icon />
+                                        <p>{x.name}</p>
+                                    </div>
+                                </>
+                            )
+                        }
+                        )
                     }
                 </div>
             </main>
