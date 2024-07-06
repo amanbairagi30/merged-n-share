@@ -31,21 +31,22 @@ export default function MyPR() {
     const [prdata, setPrData] = useState<any[]>([]);
     const [organisations, setOrganisations] = useState<OrgType[]>([]);
     const [fetchedMergedPRData, setFetchedMergedPRData] = useState<any[]>([]);
-    const [orgName, setOrgName] = useState('');
+    const [selectedOrgData, setSelectedOrgData] = useState({ id: '', name: '', avatar: '', github_url: '' });
     const [isLoading, setIsLoading] = useState<Boolean>(false);
     const [showFetchedMergedPRDialog, setShowFetchedMergedPRDialog] = useState(false);
     const user = session?.data?.user;
 
+    console.log(selectedOrgData);
 
     const handleFetchPRDetails = async () => {
-        if (!user || !orgName) {
+        if (!user || !selectedOrgData?.name) {
             alert("Not having the user or org name")
             return;
         }
         setIsLoading(true);
         setShowFetchedMergedPRDialog(true)
         //@ts-ignore
-        const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${orgName}+is:merged`, {
+        const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${selectedOrgData?.name}+is:merged`, {
             method: 'GET',
         })
         setIsLoading(false);
@@ -59,6 +60,7 @@ export default function MyPR() {
 
 
         const mergedPRsData = await Promise.all(finalData?.items?.map(async (pr: any, index: number) => {
+            console.log(pr, '--------------------------------');
             // @ts-ignore
             if (user?.username === pr.user.login) {
                 const prDetails = {
@@ -69,6 +71,7 @@ export default function MyPR() {
                     userName: pr.user.login,
                     avatar: pr.user.avatar_url,
                     commentURL: pr.comments_url,
+                    organisationId: selectedOrgData.id,
                     isVerified: true,
                     mergedAt: pr.pull_request.merged_at,
                     body: pr.body,
@@ -174,7 +177,8 @@ export default function MyPR() {
                 <div className='flex items-center justify-between '>
                     <div>Merged PRs({prdata?.length})</div>
                     <div className="flex gap-2 ">
-                        <Select onValueChange={(e) => setOrgName(e)}>
+                        {/* @ts-ignore */}
+                        <Select onValueChange={(e) => setSelectedOrgData({ id: e?.id, name: e?.name, avatar: e?.avatar_url, github_url: e?.github_url })}>
                             <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-[#202020]">
                                 <SelectValue placeholder="Select a Organisation" />
                             </SelectTrigger>
@@ -184,7 +188,7 @@ export default function MyPR() {
                                     {
                                         organisations && organisations.map((org: any) => {
                                             return (
-                                                <SelectItem  value={org.name} key={org.id}>
+                                                <SelectItem value={org} key={org.id}>
                                                     <div className='flex items-center gap-2'>
                                                         <Image className='w-[1.5rem] rounded-full h-[1.5rem]' src={org?.avatar_url} width='500' height='500' alt='org-img' />
                                                         <p>{org.name}</p>
@@ -202,7 +206,7 @@ export default function MyPR() {
                                 <DialogHeader>
                                     <DialogTitle>Fetch PRs</DialogTitle>
                                     <DialogDescription>
-                                        Fetch all of your merged PRs from {orgName}
+                                        Fetch all of your merged PRs from
                                     </DialogDescription>
                                 </DialogHeader>
                                 <div className={`h-[15rem] ${isLoading ? "flex items-center justify-center" : ""}  overflow-auto`}>

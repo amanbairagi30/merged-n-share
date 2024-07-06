@@ -60,13 +60,14 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model Organisations{
-   id        Int      @id 
-   name      String
-   avatar_url String?  @default("https://www.campusfrance.org/sites/default/files/styles/mobile_visuel_principal_page/public/organisation%20organigramme_3.jpg?itok=qD2R_LHp")
-   github_url String?
-}
+model Organisations {
+  id         Int     @id
+  name       String
+  avatar_url String? @default("https://www.campusfrance.org/sites/default/files/styles/mobile_visuel_principal_page/public/organisation%20organigramme_3.jpg?itok=qD2R_LHp")
+  github_url String?
+  pullRequests  PullRequest[]
 
+}
 
 model PullRequest {
   id         String   @id @default(cuid())
@@ -83,6 +84,9 @@ model PullRequest {
   prPoint    Int
   draft      Boolean
   bounty     String? // Nullable field for bounty information
+
+  orgId Int
+  org Organisations @relation(fields: [orgId] , references: [id] , onDelete: Cascade)
 
   userId String // Foreign key relation to User model
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)

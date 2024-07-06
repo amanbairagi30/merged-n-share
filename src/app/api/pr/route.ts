@@ -38,6 +38,15 @@ export async function GET(req: Request) {
         const savedPullRequests = await prisma.pullRequest.findMany({
             where: {
                 userId: userId
+            },
+            include: {
+                org: {
+                    select: {
+                        name: true,
+                        avatar_url : true,
+                        github_url : true,
+                    }
+                }
             }
         });
 
@@ -69,7 +78,8 @@ export async function POST(req: Request) {
             body: prData.body,
             draft: prData.draft,
             bounty: prData.bounty[0],
-            prPoint : pointPerPRWrtBounty,
+            prPoint: pointPerPRWrtBounty,
+            orgId: prData.organisationId,
             //@ts-ignore
             userId: session?.user?.id
         }

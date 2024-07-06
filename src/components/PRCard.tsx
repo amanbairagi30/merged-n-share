@@ -6,6 +6,7 @@ import PointIcon from "../app/assets/point.png";
 import Image from 'next/image';
 
 export default function PRCard({ user, PRData }: any) {
+    console.log(PRData)
     const { prURL,
         mergedAt,
         prTitle,
@@ -14,6 +15,7 @@ export default function PRCard({ user, PRData }: any) {
         bounty,
         avatar,
         prPoint,
+        org,
         userName,
         commentURL,
         isVerified,
@@ -82,7 +84,7 @@ export default function PRCard({ user, PRData }: any) {
                 <div className='flex items-center justify-between'>
                     <div className='flex flex-col'>
                         <div className='flex gap-2 items-center'>
-                            <span className='font-semibold text-lg border-r-2 pr-2'>code100x</span>
+                            <span className='font-semibold text-lg border-r-2 pr-2'>{org.name}</span>
                             <span className='text-xs opacity-75'>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(mergedAt)).replace(/(^\w{3})/, (match) => match.toUpperCase())}</span>
                         </div>
 
@@ -90,7 +92,7 @@ export default function PRCard({ user, PRData }: any) {
                     </div>
                     <div className="!w-[2.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[2.5rem]">
                         <Avatar>
-                            <AvatarImage className='rounded-full' src={avatar || ''} alt="@shadcn" />
+                            <AvatarImage className='rounded-full' src={org.avatar_url || ''} alt="@shadcn" />
                             <AvatarFallback className='bg-[#fff]!w-[2.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[2.5rem] text-black'>{user?.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                         </Avatar>
                     </div>
