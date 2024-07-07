@@ -57,6 +57,7 @@ export const authOptions: AuthOptions = {
                 session.user.id = user.id;
                 session.user.admin = user.admin;
                 session.user.username = user.username;
+                session.user.name = user.name;
             }
             console.log("Session callback - Final session:", session);
             return session;
