@@ -44,18 +44,18 @@ export default function Sidebar() {
                         sideBarOptions.general.map((x, idx) => {
 
                             return (
-                                <div key={idx}>
-                                    <div onClick={() => { setActiveIndex(idx); router.push(`${x.href}`) }} className={`flex items-center cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
+                                <Link href={`${x.href}`} key={idx}>
+                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
                                         <x.icon />
                                         <p>{x.name}</p>
                                     </div>
-                                </div>
+                                </Link>
                             )
                         }
                         )
                     }
                 </div>
-                <button onClick={()=>router.push(`/work/profile`)} className="bg-slate-800 no-underline group mb-4 cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px font-semibold leading-6  text-white inline-block">
+                <button onClick={() => router.push(`/work/profile`)} className="bg-slate-800 no-underline group mb-4 cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px font-semibold leading-6  text-white inline-block">
                     <span className="absolute inset-0 overflow-hidden rounded-full">
                         <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
                     </span>

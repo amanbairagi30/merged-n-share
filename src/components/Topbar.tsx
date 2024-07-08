@@ -1,6 +1,12 @@
-import React from 'react'
+'use client'
+import { Bell, LogOut } from 'lucide-react'
+import React, { useState } from 'react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './ui/dialog'
+import { Button } from './ui/button'
+import { signOut } from 'next-auth/react'
 
 export default function Topbar() {
+    const [openDialog, setOpenDialog] = useState(false);
     return (
         <div className='border-b-2 flex px-4 items-center border-[#353535] min-h-[4rem]'>
             <div className="w-full">
@@ -10,6 +16,24 @@ export default function Topbar() {
                     </span>
                     <span className="invisible">Dashboard</span>
                 </p>
+            </div>
+            <div className='flex items-center gap-4'>
+                <Bell className='cursor-pointer' size={18} />
+                <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+                    <DialogTitle onClick={() => setOpenDialog(true)}>
+                        <LogOut className='hover:text-red-400 cursor-pointer' size={18} />
+                    </DialogTitle>
+
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>Do you want to logout ?</DialogTitle>
+                        </DialogHeader>
+                        <div className='flex flex-col sm:flex-row border-2 w-full gap-2'>
+                            <Button variant={'destructive'} className='w-full' onClick={async () => await signOut()}>Yes, please</Button>
+                            <Button variant={'outline'} className='border-2 w-full border-[#353535]' onClick={() => setOpenDialog(false)}>No , thanks</Button>
+                        </div>
+                    </DialogContent>
+                </Dialog>
             </div>
         </div>
     )

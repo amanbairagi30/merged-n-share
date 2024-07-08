@@ -7,6 +7,7 @@ import prisma from '@/lib/db';
 import { BadgeDollarSign, ExternalLink, Pencil } from 'lucide-react';
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
+import Link from 'next/link';
 import React from 'react'
 
 export default async function ProfilePage() {
@@ -36,7 +37,7 @@ export default async function ProfilePage() {
 
     console.log(prData);
 
-  
+
     return (
         <div className='text-white'>
             <main className='flex border-b border-[#35353588] pb-6 items-start justify-between'>
@@ -53,7 +54,10 @@ export default async function ProfilePage() {
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
-                                        <ExternalLink className='cursor-pointer' size='15' />
+                                        {/* @ts-ignore */}
+                                        <Link href={`/profile/${user?.username}`} target='_blank'>
+                                            <ExternalLink className='cursor-pointer' size='15' />
+                                        </Link>
                                     </TooltipTrigger>
                                     <TooltipContent>
                                         <p>Preview</p>
