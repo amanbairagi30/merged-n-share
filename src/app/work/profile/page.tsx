@@ -95,6 +95,9 @@ export default async function ProfilePage() {
                     </div>
                 </div>
             </main>
+            <section className='mt-4'>
+                More things to add 
+            </section>
         </div>
     )
 }

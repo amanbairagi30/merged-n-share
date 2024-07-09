@@ -47,7 +47,7 @@ model Session {
 model User {
   id            String        @id @default(cuid())
   name          String?
-  username      String?
+  username      String?       @unique
   email         String?       @unique
   emailVerified DateTime?
   image         String?
@@ -61,12 +61,11 @@ model User {
 }
 
 model Organisations {
-  id         Int     @id
-  name       String
-  avatar_url String? @default("https://www.campusfrance.org/sites/default/files/styles/mobile_visuel_principal_page/public/organisation%20organigramme_3.jpg?itok=qD2R_LHp")
-  github_url String?
-  pullRequests  PullRequest[]
-
+  id           Int           @id
+  name         String
+  avatar_url   String?       @default("https://www.campusfrance.org/sites/default/files/styles/mobile_visuel_principal_page/public/organisation%20organigramme_3.jpg?itok=qD2R_LHp")
+  github_url   String?
+  pullRequests PullRequest[]
 }
 
 model PullRequest {
@@ -86,7 +85,7 @@ model PullRequest {
   bounty     String? // Nullable field for bounty information
 
   orgId Int
-  org Organisations @relation(fields: [orgId] , references: [id] , onDelete: Cascade)
+  org   Organisations @relation(fields: [orgId], references: [id], onDelete: Cascade)
 
   userId String // Foreign key relation to User model
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)

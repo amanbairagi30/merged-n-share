@@ -109,7 +109,7 @@ export default function PRCard({ user, PRData }: any) {
                             <span className='text-sm'>{prPoint}</span>
                         </div>
                         {
-                            bounty.length !== 0 && (
+                            bounty?.length !== 0 && (
                                 <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                                     <BadgeDollarSign size={18} className='text-green-500' />
                                     {/* <span className='text-sm'>{bounty[0]}</span> */}
