@@ -5,8 +5,7 @@ import Link from 'next/link';
 import PointIcon from "../app/assets/point.png";
 import Image from 'next/image';
 
-export default function PRCard({ user, PRData }: any) {
-    console.log(PRData)
+export default function PRCard({ user, isCurrentUser, PRData }: any) {
     const { prURL,
         mergedAt,
         prTitle,
@@ -23,10 +22,12 @@ export default function PRCard({ user, PRData }: any) {
         draft
     } = PRData;
 
+    console.log(org)
+
     const renderPRQualityViaBounty = (bt: any) => {
         console.log(typeof bt)
-        const bountyAmount = Number(typeof bt === 'string' && bt.replace("$",""));
-        if(bountyAmount === 0 || !bountyAmount) {
+        const bountyAmount = Number(typeof bt === 'string' && bt.replace("$", ""));
+        if (bountyAmount === 0 || !bountyAmount) {
             return {
                 textColor: "text-gray-500",
                 bgColor: "bg-gray-500",
@@ -84,7 +85,7 @@ export default function PRCard({ user, PRData }: any) {
                 <div className='flex items-center justify-between'>
                     <div className='flex flex-col'>
                         <div className='flex gap-2 items-center'>
-                            <span className='font-semibold text-lg border-r-2 pr-2'>{org.name}</span>
+                            <span className='font-semibold text-lg border-r-2 pr-2'>{org?.name}</span>
                             <span className='text-xs opacity-75'>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(mergedAt)).replace(/(^\w{3})/, (match) => match.toUpperCase())}</span>
                         </div>
 
@@ -92,7 +93,7 @@ export default function PRCard({ user, PRData }: any) {
                     </div>
                     <div className="!w-[2.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[2.5rem]">
                         <Avatar>
-                            <AvatarImage className='rounded-full' src={org.avatar_url || ''} alt="@shadcn" />
+                            <AvatarImage className='rounded-full' src={org?.avatar_url || ''} alt="@shadcn" />
                             <AvatarFallback className='bg-[#fff]!w-[2.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[2.5rem] text-black'>{user?.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
                         </Avatar>
                     </div>
@@ -145,9 +146,9 @@ export default function PRCard({ user, PRData }: any) {
                         <div className={`h-[0.5rem]  rounded-full w-[0.5rem] ${renderPRQualityViaBounty(bounty)?.bgColor} `}></div>
                         {renderPRQualityViaBounty(bounty)?.text}
                     </div>
-                    <div  className='flex underline items-center gap-2'>
+                    <div className='flex underline items-center gap-2'>
                         <Link href={prURL} target='_blank' className='flex items-center gap-1'>PR <LucideExternalLink size={15} /></Link>
-                        <span className=''><EllipsisVertical /></span>
+                        {isCurrentUser && <span className=''><EllipsisVertical /></span>}
                     </div>
                 </div>
             </div>
