@@ -101,17 +101,24 @@ export default async function PublicProfilePage({ params }: any) {
                     </div>
                 </div>
                 <div className='px-2'>
-                    <h1 className='text-gray-300 '>List of PR got merged of {urlUser?.name}</h1>
+                    <div className='flex justify-between items-center'>
+                        <h1 className='text-gray-300 '>List of PR got merged of {urlUser?.name}</h1>
+                        <p>Total {urlUser?.pullRequests.length} merged PRs</p>
+                    </div>
                     <div className='my-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
                         {
                             urlUser?.pullRequests?.map((item: any, index: number) => {
                                 return (
-                                    <PRCard
-                                        user={urlUser}
-                                        // @ts-ignore
-                                        isCurrentUser={urlUser?.id === user?.id}
-                                        PRData={item}
-                                    />
+                                    <div
+                                        key={index}
+                                    >
+                                        <PRCard
+                                            user={urlUser}
+                                            // @ts-ignore
+                                            isCurrentUser={urlUser?.id === user?.id}
+                                            PRData={item}
+                                        />
+                                    </div>
                                 )
                             })
                         }
