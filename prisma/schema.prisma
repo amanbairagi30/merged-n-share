@@ -55,7 +55,6 @@ model User {
   accounts      Account[]
   sessions      Session[]
   pullRequests  PullRequest[]
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -82,7 +81,7 @@ model PullRequest {
   body       String?
   prPoint    Int
   draft      Boolean
-  bounty     String? // Nullable field for bounty information
+  bounty     Int? // Nullable field for bounty information
 
   orgId Int
   org   Organisations @relation(fields: [orgId], references: [id], onDelete: Cascade)

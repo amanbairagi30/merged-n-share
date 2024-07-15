@@ -4,8 +4,8 @@ import { PullRequest } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
 
-function getPRPointsByBounty(bt: string) {
-    const bountyAmount = Number(typeof bt === 'string' && bt.replace("$", ""));
+function getPRPointsByBounty(bountyAmount: number) {
+    // const bountyAmount = Number(typeof bt === 'string' && bt.replace("$", ""));
     if (bountyAmount === 0 || !bountyAmount) {
         return 1;
     } else if (bountyAmount > 0 && bountyAmount <= 30) {
@@ -111,6 +111,6 @@ export async function POST(req: Request) {
         }
     } catch (error) {
         console.error("Error creating pull requests:", error);
-        return NextResponse.json({ success: true, message: "Failed to create pull requests" });
+        return NextResponse.json({ success: false, message: "Failed to create pull requests" });
     }
 }

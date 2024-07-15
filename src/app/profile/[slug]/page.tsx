@@ -10,6 +10,9 @@ import { PullRequest } from '@prisma/client';
 import { getServerSideProps } from 'next/dist/build/templates/pages';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import prisma from '@/lib/db';
+import PRListings from '@/components/PRListings';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -41,6 +44,27 @@ export default async function PublicProfilePage({ params }: any) {
 
     const urlUser: any = await getUserProfile(un)
     console.log(urlUser?.image)
+
+    const organisationData = await prisma.organisations.findMany({
+        select: {
+            name: true,
+            id: true,
+            pullRequests: true,
+            github_url: true,
+            avatar_url: true,
+        }
+    })
+
+    console.log(organisationData)
+
+    const totalPoints = urlUser?.pullRequests?.reduce((acc: any, pr: any) => {
+        return pr.prPoint + acc
+    }, 0);
+
+    const totalBounty = urlUser?.pullRequests?.reduce((acc: any, pr: any) => {
+        return pr.bounty + acc
+    }, 0);
+
     return (
         <div className=' min-h-screen max-h-fit text-white'>
             <div className='max-w-[1280px] mx-auto mt-4 px-2'>
@@ -90,39 +114,29 @@ export default async function PublicProfilePage({ params }: any) {
                     <div className='flex items-center gap-2 w-full'>
                         <div className='mt-2 border-2 border-yellow-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                             <Image width='400' height='400' className='w-[1rem] h-[1rem]' src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="coin-image" />
-                            <span className='text-xs md:text-sm '>1000</span>
+                            <span className='text-xs md:text-sm '>{totalPoints}</span>
                         </div>
 
                         <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                             <BadgeDollarSign size={18} className='text-green-500' />
                             {/* <span className='text-sm'>{bounty[0]}</span> */}
-                            <span className='text-xs md:text-sm '>$4000</span>
+                            <span className='text-xs md:text-sm '>{totalBounty}</span>
                         </div>
                     </div>
                 </div>
-                <div className='px-2'>
-                    <div className='flex justify-between items-center'>
-                        <h1 className='text-gray-300 '>List of PR got merged of {urlUser?.name}</h1>
+                <div className='px-2 '>
+                    <div className='flex my-4 justify-between items-center'>
+                        <p>Merged PRs</p>
+                        {/* <h1 className='text-gray-300 '>List of PR got merged of {urlUser?.name}</h1> */}
                         <p>Total {urlUser?.pullRequests.length} merged PRs</p>
+
+
                     </div>
-                    <div className='my-6 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3'>
-                        {
-                            urlUser?.pullRequests?.map((item: any, index: number) => {
-                                return (
-                                    <div
-                                        key={index}
-                                    >
-                                        <PRCard
-                                            user={urlUser}
-                                            // @ts-ignore
-                                            isCurrentUser={urlUser?.id === user?.id}
-                                            PRData={item}
-                                        />
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    <PRListings
+                        urlUser={urlUser}
+                        user={user}
+                        organisationData={organisationData}
+                    />
                 </div>
 
             </div>

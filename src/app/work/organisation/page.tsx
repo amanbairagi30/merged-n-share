@@ -18,6 +18,9 @@ const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisati
 
         const response = await fetch(`https://api.github.com/search/users?q=${name}+type:org`, {
             method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`
+            }
         });
 
         if (response.ok) {

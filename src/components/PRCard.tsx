@@ -17,16 +17,16 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
         org,
         userName,
         commentURL,
-        isVerified,
+        isVerified, 
         body,
         draft
     } = PRData;
 
     console.log(org)
 
-    const renderPRQualityViaBounty = (bt: any) => {
-        console.log(typeof bt)
-        const bountyAmount = Number(typeof bt === 'string' && bt.replace("$", ""));
+    const renderPRQualityViaBounty = (bountyAmount: any) => {
+        // console.log(typeof bt)
+        // const bountyAmount = Number(typeof bt === 'string' && bt.replace("$", ""));
         if (bountyAmount === 0 || !bountyAmount) {
             return {
                 textColor: "text-gray-500",
@@ -110,7 +110,7 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
                             <span className='text-sm'>{prPoint}</span>
                         </div>
                         {
-                            bounty?.length !== 0 && (
+                            bounty && bounty?.length !== 0 && (
                                 <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                                     <BadgeDollarSign size={18} className='text-green-500' />
                                     {/* <span className='text-sm'>{bounty[0]}</span> */}

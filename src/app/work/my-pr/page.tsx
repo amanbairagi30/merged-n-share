@@ -48,6 +48,9 @@ export default function MyPR() {
         //@ts-ignore
         const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${selectedOrgData?.name}+is:merged`, {
             method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`
+            }
         })
         setIsLoading(false);
 
@@ -60,8 +63,7 @@ export default function MyPR() {
 
 
         const mergedPRsData = await Promise.all(finalData?.items?.map(async (pr: any, index: number) => {
-            console.log(pr, '--------------------------------');
-            // @ts-ignore
+            //@ts-ignore
             if (user?.username === pr.user.login) {
                 const prDetails = {
                     prURL: pr.html_url,
@@ -81,6 +83,9 @@ export default function MyPR() {
 
                 const commentsResponse = await fetch(pr.comments_url, {
                     method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`
+                    }
                 });
                 const commentsData = await commentsResponse.json();
 
@@ -143,11 +148,11 @@ export default function MyPR() {
         return /\/bounty\s+(\$?\d+|\d+\$)/i.test(comment);
     };
 
-    const extractAmount = (comment: string) => {
+    const extractAmount = (comment: string): number | null => {
         console.log(comment);
-        const bountyExtractor = /\/bounty\s+(\$?\d+|\d+\$)/i;
+        const bountyExtractor = /\/bounty\s+\$?(\d+)/i;
         const match = comment.match(bountyExtractor);
-        return match ? match[1] : null;
+        return match ? parseInt(match[1]) : null;
     };
 
     const savePRsInDatabase = async (prs: any[]) => {
