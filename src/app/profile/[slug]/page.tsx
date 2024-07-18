@@ -82,7 +82,7 @@ export default async function PublicProfilePage({ params }: any) {
                             </aside>
                         </header>
                         <div className='flex flex-col items-center justify-center mt-4'>
-                            <div>The person's profile is private</div>
+                            <div>This person&apos;s profile is private</div>
                             <div>React out : {urlUser?.email}</div>
                         </div>
 
