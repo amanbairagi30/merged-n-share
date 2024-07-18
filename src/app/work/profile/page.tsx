@@ -1,9 +1,11 @@
-import ProfileEditForm from '@/components/ProfileEditForm';
-
+import ProfileEditForm, { PersonalDetailForm } from '@/components/ProfileEditForm';
+import ProfileSwitch from '@/components/ProfileSwitch';
+import { Input } from '@/components/ui/input';
 import { Switch } from '@/components/ui/switch';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/db';
+import { updatedUserProfile } from '@/lib/profile';
 import { BadgeDollarSign, ExternalLink, Pencil } from 'lucide-react';
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
@@ -13,6 +15,7 @@ import React from 'react'
 export default async function ProfilePage() {
     const session = await getServerSession(authOptions);
     const user = session?.user;
+
 
     const getPRData = async () => {
         const response = await prisma.pullRequest.findMany({
@@ -36,7 +39,6 @@ export default async function ProfilePage() {
     const prData = await getPRData();
 
     console.log(prData);
-
 
     return (
         <div className='text-white'>
@@ -89,14 +91,13 @@ export default async function ProfilePage() {
                             </div>
                         </button>
                     </div>
-                    <div className='flex flex-col gap-1 items-center'>
-                        {/* <p className='text-sm'>Visibility</p> */}
-                        <Switch defaultChecked className="data-[state=checked]:bg-green-500" id="airplane-mode" />
-                    </div>
+                    <ProfileSwitch />
                 </div>
             </main>
             <section className='mt-4'>
-                More things to add 
+                <div className=''>Personal Details</div>
+
+               <PersonalDetailForm />
             </section>
         </div>
     )

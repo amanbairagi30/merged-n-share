@@ -24,7 +24,7 @@ export default function Sidebar() {
         setActiveIndex(newActive);
     }, [pathName])
     return (
-        <div className='border-r-2 flex flex-col border-[#353535] min-w-[18rem] max-w-[18rem]'>
+        <div className='border-r-2 hidden md:flex flex-col border-[#353535] min-w-[18rem] max-w-[18rem]'>
             <div className=' border-[#424242] flex justify-between items-center px-4 h-[4rem]'>
                 <div>
                     <p className='text-xl font-semibold'>M<span className='text-blue-500'>&</span>S</p>

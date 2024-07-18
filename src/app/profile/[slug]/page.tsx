@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import React from 'react'
 import x from "@/app/assets/x.svg"
-import { BadgeDollarSign, User } from 'lucide-react';
+import { BadgeDollarSign, Lock, User } from 'lucide-react';
 import PRCard from '@/components/PRCard';
 import { PullRequest } from '@prisma/client';
 import { getServerSideProps } from 'next/dist/build/templates/pages';
@@ -13,6 +13,7 @@ import { getServerSession } from 'next-auth';
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 import prisma from '@/lib/db';
 import PRListings from '@/components/PRListings';
+import Link from 'next/link';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -57,6 +58,45 @@ export default async function PublicProfilePage({ params }: any) {
 
     console.log(organisationData)
 
+    if (!urlUser) {
+        return (
+            <div className='h-screen w-screen border-2 border-transparent text-white'>
+                <div className='max-w-[800px] flex flex-col rounded-lg items-center justify-center p-[2.5rem] border-2 border-[#353535] mx-auto mt-[5rem]'>
+                    404 - Not found
+                    <p>There is no user with this username</p>
+                </div>
+            </div>
+        )
+    }
+
+    // @ts-ignore
+    if (!urlUser.isProfilePublic && urlUser?.id !== user?.id) {
+        return (
+            <>
+                <div className='h-screen w-screen border-2 border-transparent text-white'>
+                    <div className='max-w-[800px] flex flex-col rounded-lg items-center justify-center p-[2.5rem] border-2 border-[#353535] mx-auto mt-[5rem]'>
+                        <Lock size={30} className='my-4' />
+                        <header className="flex items-center border-neutral-900 justify-between">
+                            <aside className="flex items-center gap-[10px]">
+                                <p className="text-neutral-100 text-xl font-extrabold">Merged<span className="text-blue-500">&</span>Share</p>
+                            </aside>
+                        </header>
+                        <div className='flex flex-col items-center justify-center mt-4'>
+                            <div>The person's profile is private</div>
+                            <div>React out : {urlUser?.email}</div>
+                        </div>
+
+                        <p className='my-[1rem]'>or</p>
+
+                        <button className='flex items-center hover:bg-blue-600 justify-center bg-blue-500 w-fit h-fit rounded-lg py-[1rem] px-[2.5rem]'>Request to make it public</button>
+                    </div>
+                </div>
+            </>
+        )
+    }
+
+
+
     const totalPoints = urlUser?.pullRequests?.reduce((acc: any, pr: any) => {
         return pr.prPoint + acc
     }, 0);
@@ -74,9 +114,15 @@ export default async function PublicProfilePage({ params }: any) {
                         <p className='font-semibold text-base'>{urlUser?.username}</p>
                     </div>
                     <div className='flex items-center gap-4'>
-                        <GitHubLogoIcon width={20} height={20} />
-                        <LinkedInLogoIcon width={20} height={20} />
-                        <Image className='w-[1.3rem] h-[1.3rem] invert' src={x} width='500' height='500' alt='x' />
+                        <Link href={`https://github.com/${urlUser?.username}`} target='_blank'>
+                            <GitHubLogoIcon width={20} height={20} />
+                        </Link>
+                        <Link href={urlUser?.linkedInProfile} target='_blank'>
+                            <LinkedInLogoIcon width={20} height={20} />
+                        </Link>
+                        <Link href={urlUser?.xProfile} target='_blank'>
+                            <Image className='w-[1.3rem] h-[1.3rem] invert' src={x} width='500' height='500' alt='x' />
+                        </Link>
                     </div>
                 </div>
 

@@ -16,19 +16,82 @@ export async function PUT(req: Request) {
 
         console.log(body);
 
-        const updatedUser = await prisma.user.updateMany({
+        if (body.name !== undefined) {
+            await prisma.user.updateMany({
+                where: {
+                    id: userId,
+                },
+                data: {
+                    name: body.name
+                }
+
+            })
+        } else if (body.isChecked !== undefined) {
+            await prisma.user.updateMany({
+                where: {
+                    id: userId,
+                },
+                data: {
+                    isProfilePublic: body.isChecked
+                }
+
+            })
+        } else if (body.socialLinks !== undefined) {
+            const { x, linkedIn } = body.socialLinks;
+            await prisma.user.updateMany({
+                where: {
+                    id: userId,
+                },
+                data: {
+                    xProfile: x,
+                    linkedInProfile: linkedIn
+                }
+
+            })
+        }
+
+        return NextResponse.json({ success: 'true', message: 'Your name has been updated' }, { status: 200 })
+
+    } catch (error) {
+        console.log(error);
+        return NextResponse.json({ success: 'false', message: 'Something went wrong' }, { status: 500 })
+    }
+}
+
+export async function GET(req: Request) {
+    const session = await getServerSession(authOptions);
+    // @ts-ignore
+    const userId = session?.user?.id;
+    try {
+
+        if (!userId) {
+            return NextResponse.json({ success: false, message: "User ID not found" });
+        }
+
+        const userData = await prisma.user.findMany({
             where: {
                 id: userId,
             },
-            data: {
-                name: body.name
+            select: {
+                id: true,
+                name: true,
+                email: true,
+                githubProfile: true,
+                linkedInProfile: true,
+                isProfilePublic: true,
+                updatedAt: true,
+                xProfile: true,
+                username: true,
+                admin: true,
+                createdAt: true,
             }
-
         })
 
-        return NextResponse.json({success: 'true', message: 'Your name has been updated' }, { status: 200 })
-        
+
+        return NextResponse.json({ success: 'true', user: userData, message: 'Your name has been updated' }, { status: 200 })
+
     } catch (error) {
-        return NextResponse.json({success: 'false', message: 'Something went wrong' }, { status: 500 })
+        console.log(error);
+        return NextResponse.json({ success: 'false', message: 'Something went wrong' }, { status: 500 })
     }
 }

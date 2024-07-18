@@ -13,7 +13,7 @@ export const Navbar = () => {
     return (
         <>
             <div className=" z-[999] h-fit flex items-center justify-between">
-                <header className="fflex items-center border-b-[1px] border-neutral-900 justify-between">
+                <header className="flex items-center border-b-[1px] border-neutral-900 justify-between">
                     <aside className="flex items-center gap-[10px]">
                         <p className="text-neutral-100 text-xl font-extrabold">Merged<span className="text-blue-500">&</span>Share</p>
                     </aside>

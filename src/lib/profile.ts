@@ -14,3 +14,15 @@ export async function getUserProfile(username: string) {
 
     return user;
 }
+
+export async function updatedUserProfile(e: any) {
+    const updatedData = await prisma.user.update({
+        where: {
+            // @ts-ignore
+            id: user?.id
+        },
+        data: {
+            isProfilePublic: e
+        }
+    })
+}

@@ -45,18 +45,22 @@ model Session {
 }
 
 model User {
-  id            String        @id @default(cuid())
-  name          String?
-  username      String?       @unique
-  email         String?       @unique
-  emailVerified DateTime?
-  image         String?
-  admin         Boolean       @default(false)
-  accounts      Account[]
-  sessions      Session[]
-  pullRequests  PullRequest[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              String        @id @default(cuid())
+  name            String?
+  username        String?       @unique
+  email           String?       @unique
+  emailVerified   DateTime?
+  image           String?
+  isProfilePublic Boolean       @default(true)
+  githubProfile   String?
+  xProfile        String?
+  linkedInProfile String?
+  admin           Boolean       @default(false)
+  accounts        Account[]
+  sessions        Session[]
+  pullRequests    PullRequest[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }
 
 model Organisations {
