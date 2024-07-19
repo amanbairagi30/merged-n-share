@@ -61,6 +61,21 @@ export const PersonalDetailForm = () => {
         })
     }
 
+    const getUserDetails = async () => {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user`, {
+            method: "GET",
+        })
+
+        const resp = await response.json();
+
+        console.log(resp?.user)
+        setSocialLinks({ x: resp?.user[0]?.xProfile, linkedIn: resp?.user[0]?.linkedInProfile })
+    }
+
+    useEffect(() => {
+        getUserDetails();
+    }, [])
+
     return (
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 '>
 
@@ -68,6 +83,7 @@ export const PersonalDetailForm = () => {
                 <p className='text-xs text-gray-400'>Enter X profile (optional)</p>
                 <Input
                     placeholder='Enter X profile'
+                    value={socialLinks.x}
                     onChange={(e) => setSocialLinks((prev) => ({ ...prev, x: e.target.value.trim() }))}
                 />
             </div>
@@ -75,6 +91,7 @@ export const PersonalDetailForm = () => {
                 <p className='text-xs text-gray-400'>Enter LinkedIn profile (optional)</p>
                 <Input
                     placeholder='Enter X profile'
+                    value={socialLinks.linkedIn}
                     onChange={(e) => setSocialLinks((prev) => ({ ...prev, linkedIn: e.target.value.trim() }))}
                 />
             </div>

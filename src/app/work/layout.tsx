@@ -5,7 +5,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import Sidebar from '@/components/Sidebar'
-import Topbar from '@/components/Topbar'
+import AuxiliaryProvider from '@/components/AuxiliaryProvider'
 
 
 type Props = { children: React.ReactNode }
@@ -17,17 +17,14 @@ const Layout = async (props: Props) => {
     if (!session || !session?.user) {
         redirect('/');
     }
+
     return (
-        <div className="flex text-white  h-screen w-screen">
+        <div className="flex text-white !h-screen w-screen">
             {/* <Sidebar /> */}
             <Sidebar />
-            <div className="flex flex-col  w-[calc(100vw-18rem)]">
-                {/* <TopBar /> */}
-                <Topbar />
-                <div className='!h-[calc(100vh-4rem)] overflow-auto p-4 border-green-500'>
-                    {props.children}
-                </div>
-            </div>
+            <AuxiliaryProvider>
+                {props.children}
+            </AuxiliaryProvider>
         </div>
     )
 }

@@ -73,7 +73,7 @@ export default async function PublicProfilePage({ params }: any) {
     if (!urlUser.isProfilePublic && urlUser?.id !== user?.id) {
         return (
             <>
-                <div className='h-screen w-screen border-2 border-transparent text-white'>
+                <div className='h-screen px-4 text-center w-screen border-2 border-transparent text-white'>
                     <div className='max-w-[800px] flex flex-col rounded-lg items-center justify-center p-[2.5rem] border-2 border-[#353535] mx-auto mt-[5rem]'>
                         <Lock size={30} className='my-4' />
                         <header className="flex items-center border-neutral-900 justify-between">
