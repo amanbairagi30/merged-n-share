@@ -62,8 +62,8 @@ export default function Sidebar() {
 
                             return (
                                 <Link onClick={() => toggleSidebar(false)} href={`${x.href}`} key={idx}>
-                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
-                                        <x.icon />
+                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center text-sm cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
+                                        <x.icon size={18} />
                                         <p>{x.name}</p>
                                     </div>
                                 </Link>

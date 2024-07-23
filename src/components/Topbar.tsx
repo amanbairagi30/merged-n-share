@@ -6,18 +6,22 @@ import { Button } from './ui/button'
 import { signOut } from 'next-auth/react'
 import { HamburgerMenuIcon } from '@radix-ui/react-icons'
 import { useSidebarStore } from '@/store/sidebar'
+import { usePathname } from 'next/navigation'
+import { capitalizeFirstLetter } from '@/util'
 
 export default function Topbar() {
     const [openDialog, setOpenDialog] = useState(false);
     const sidebarVisibility = useSidebarStore((state) => state.sidebarVisibility);
     const toggleSidebar = useSidebarStore((state) => state.toggleSidebarVisibility);
+
+    const pathName = usePathname();
     return (
         <div className='border-b-2 flex px-4 items-center border-[#353535] min-h-[4rem]'>
             <HamburgerMenuIcon onClick={()=>toggleSidebar(true)} className='mr-4 cursor-pointer block md:hidden' />
             <div className="w-full">
                 <p className="text md:text-lg font-extrabold relative">
                     <span className="bg-gradient-to-b from-neutral-200 to-neutral-500 text-transparent bg-clip-text absolute inset-0">
-                        Dashboard
+                        {capitalizeFirstLetter(pathName.split('/')[2])}
                     </span>
                     <span className="invisible">Dashboard</span>
                 </p>

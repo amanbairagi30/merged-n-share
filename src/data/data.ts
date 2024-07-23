@@ -1,4 +1,4 @@
-import { Building2, GitPullRequest, LayoutDashboard } from 'lucide-react'
+import { Building2, GitPullRequest, LayoutDashboard, Trophy } from 'lucide-react'
 
 export const sideBarOptions = {
     general: [
@@ -6,6 +6,11 @@ export const sideBarOptions = {
             name: 'Dashboard',
             icon: LayoutDashboard,
             href: "/work/dashboard",
+        },
+        {
+            name: 'Leaderboard',
+            icon: Trophy,
+            href: "/work/leaderboard",
         },
         {
             name: 'My PRs',
