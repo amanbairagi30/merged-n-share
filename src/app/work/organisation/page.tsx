@@ -58,15 +58,17 @@ const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisati
         }
     }
 
-    return <div className='w-full text-center p-10'>
-        <h1 className='text-white my-6 text-4xl text-semibold'> Find Your Organisations here</h1>
-        <Input type="text" placeholder="Search Organisation Name..."
-            className='bg-black text-white border-none w-4/6 mx-auto'
-            name={orgName as any}
-            value={orgName as any}
-            onChange={HandleChange}
-        />
-    </div>
+    return (
+        <div className='w-full border-2 p-10'>
+            <h1 className='text-white my-6 text-xl text-semibold'> Find your organisations here</h1>
+            <Input type="text" placeholder="Search Organisation Name..."
+                className='bg-black text-white border-none w-4/6 mx-auto'
+                name={orgName as any}
+                value={orgName as any}
+                onChange={HandleChange}
+            />
+        </div>
+    );
 }
 
 
@@ -107,7 +109,7 @@ const Organisations = () => {
 
 
     return (
-        <div className="flex flex-col bg-[#1b1b1b] items-start font-normal relative border-none border-r-0 min-h-full max-h-fit rounded-l-[8px] border-2 border-red-400">
+        <div className="flex flex-col items-start font-normal relative border-none border-r-0 min-h-full max-h-fit rounded-l-[8px] border-2 border-red-400">
             <SearchBox setOrganisations={setOrganisations} approvedOrganisations={approvedOrganisations} />
             <div className='p-10 flex gap-5 justify-evenly w-full flex-wrap'>
 

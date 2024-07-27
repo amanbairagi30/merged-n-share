@@ -54,7 +54,7 @@ export async function GET(req: Request) {
         return NextResponse.json({ success: true, pullRequests: savedPullRequests });
     } catch (error) {
         console.error("Error creating pull requests:", error);
-        return NextResponse.json({ success: true, message: "Failed to create pull requests" });
+        return NextResponse.json({ success: false, message: "Failed to create pull requests" });
     }
     return NextResponse.json({ message: "Working" });
 }
