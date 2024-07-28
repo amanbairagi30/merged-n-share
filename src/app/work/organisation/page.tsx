@@ -61,7 +61,7 @@ const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisati
     return (
         <div className='w-full p-10'>
             <h1 className='text-white my-2 text-xl text-center text-semibold'> Find your organisations here</h1>
-            <p className='my-2 mb-6 text-sm text-slate-400 text-center text-semibold'>You can allow which organisation's contribution one should show as their POW</p>
+            <p className='my-2 mb-6 text-sm text-slate-400 text-center text-semibold'>You can allow which organisation&apos;s contribution one should show as their POW</p>
             <Input type="text" placeholder="Search Organisation Name..."
                 className='bg-black text-white border-none w-4/6 mx-auto'
                 name={orgName as any}
