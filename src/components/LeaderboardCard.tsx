@@ -16,7 +16,7 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
             <ul className='mt-[2rem] flex flex-col gap-[1.5rem] items-center'>
                 {leaderboard.map((user: any) => (
                     // @ts-ignore
-                    <li className={`border-2 ${currUser?.id === user.id ? 'border-blue-500' : ' '} flex rounded-lg  border-[#353535] w-[80%] md:w-[60%] h-fit`} key={user.id}>
+                    <li className={`border-2 ${currUser?.id === user.id ? 'border-blue-500' : ' '} flex rounded-lg  border-[#353535] w-full md:w-[60%] h-fit`} key={user.id}>
                         {/* {user.name || user.username} - {user.totalPoints} - {user.bounties} points */}
                         <div className='w-[7rem] h-[7rem] '>
                             <Image src={user?.image} className='w-full rounded-l-lg h-full' width='1500' height='1500' alt='user_image' />
