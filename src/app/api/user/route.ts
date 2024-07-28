@@ -88,7 +88,7 @@ export async function GET(req: Request) {
         })
 
 
-        return NextResponse.json({ success: 'true', user: userData, message: 'Your name has been updated' }, { status: 200 })
+        return NextResponse.json({ success: 'true', user: userData, message: 'Your Details have been fetched successfully' }, { status: 200 })
 
     } catch (error) {
         console.log(error);

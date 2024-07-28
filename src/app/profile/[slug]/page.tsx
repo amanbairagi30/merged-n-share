@@ -88,7 +88,7 @@ export default async function PublicProfilePage({ params }: any) {
 
                         <p className='my-[1rem]'>or</p>
 
-                        <button className='flex items-center hover:bg-blue-600 justify-center bg-blue-500 w-fit h-fit rounded-lg py-[1rem] px-[2.5rem]'>Request to make it public</button>
+                        <button onClick={() => alert('Coming Soon!')} className='flex items-center hover:bg-blue-600 justify-center bg-blue-500 w-fit h-fit rounded-lg py-[1rem] px-[2.5rem]'>Request to make it public</button>
                     </div>
                 </div>
             </>

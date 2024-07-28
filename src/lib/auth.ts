@@ -24,6 +24,9 @@ export const authOptions: AuthOptions = {
                 token.username = profile.login as string;
             }
             console.log("JWT callback - Token:", token);
+            if (user) {
+                token.admin = user.admin;
+            }
             return token;
         },
         async session({ session, token }: { session: any, token: JWT }): Promise<any> {
@@ -35,7 +38,7 @@ export const authOptions: AuthOptions = {
                         data: { username: token.username as string },
                     });
                     console.log("Updated user:", user);
-                    
+
                     session.user.id = user.id;
                     session.user.admin = user.admin;
                     session.user.username = user.username;

@@ -59,8 +59,9 @@ const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisati
     }
 
     return (
-        <div className='w-full border-2 p-10'>
-            <h1 className='text-white my-6 text-xl text-semibold'> Find your organisations here</h1>
+        <div className='w-full p-10'>
+            <h1 className='text-white my-2 text-xl text-center text-semibold'> Find your organisations here</h1>
+            <p className='my-2 mb-6 text-sm text-slate-400 text-center text-semibold'>You can allow which organisation's contribution one should show as their POW</p>
             <Input type="text" placeholder="Search Organisation Name..."
                 className='bg-black text-white border-none w-4/6 mx-auto'
                 name={orgName as any}
@@ -109,7 +110,7 @@ const Organisations = () => {
 
 
     return (
-        <div className="flex flex-col items-start font-normal relative border-none border-r-0 min-h-full max-h-fit rounded-l-[8px] border-2 border-red-400">
+        <div className="flex flex-col items-start font-normal relative border-none border-r-0 min-h-full max-h-fit rounded-l-[8px] border-red-400">
             <SearchBox setOrganisations={setOrganisations} approvedOrganisations={approvedOrganisations} />
             <div className='p-10 flex gap-5 justify-evenly w-full flex-wrap'>
 

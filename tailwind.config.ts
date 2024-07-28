@@ -84,6 +84,14 @@ const config = {
             "tranform": "rotate(360deg)"
           }
         },
+        "spinRev": {
+          from: {
+            "tranform": "rotate(360deg)"
+          },
+          to: {
+            "tranform": "rotate(0deg)"
+          }
+        },
         "shimmer": {
           from: {
             "backgroundPosition": "0 0"
@@ -97,7 +105,8 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 2s linear infinite",
-        spin: "spin 2s linear infinite",
+        spin: "spin 1.5s linear infinite",
+        spinRev: "spinRev 2s linear infinite",
       },
 
     },

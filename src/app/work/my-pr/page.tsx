@@ -261,7 +261,7 @@ export default function MyPR() {
                 {/* PR cards */}
                 {isLoading ? (
                     <div className='flex w-full h-[80vh] gap-2 items-center justify-center'>
-                        <Loader className='animate-in' />
+                        <Loader className='animate-spin' />
                         <span className='text-xs'>Fetching your PRs from DB</span>
                     </div>
                 ) : (

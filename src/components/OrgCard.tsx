@@ -23,39 +23,46 @@ export default function OrgCard({ organisation, isApproved, setApprovedOrganisat
     const [approved, setApproved] = useState<boolean>(isApproved)
 
     const handleApproval = async () => {
+        const newApprovedState = !approved;
+        setApproved(newApprovedState);
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/organisation`, {
-            method: 'POST',
-            body: JSON.stringify({
-                id: organisation.id,
-                name: organisation.name,
-                github_url: organisation.github_url,
-                avatar_url: organisation.avatar_url
-            })
-        });
-        const finalData = await response.json();
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/organisation`, {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: organisation.id,
+                    name: organisation.name,
+                    github_url: organisation.github_url,
+                    avatar_url: organisation.avatar_url
+                })
+            });
+            const finalData = await response.json();
 
-        if (finalData.action === "approved") {
-            setApproved(true);
-            // @ts-ignore
-            setApprovedOrganisations((previousOrgs) => [...previousOrgs, organisation]);
-        } else if (finalData.action === "disapproved") {
-            setApproved(false);
-            // @ts-ignore
-            setApprovedOrganisations((previousOrgs) =>
+            if (finalData.action === "approved") {
+                setApproved(true);
                 // @ts-ignore
-                previousOrgs.filter(org => org.id !== organisation.id)
-            );
-            // @ts-ignore
-            setOrganisations((previousOrgs) =>
+                setApprovedOrganisations((previousOrgs) => [...previousOrgs, organisation]);
+            } else if (finalData.action === "disapproved") {
+                setApproved(!newApprovedState);
                 // @ts-ignore
-                previousOrgs.filter(org => org.id !== organisation.id)
-            );
+                setApprovedOrganisations((previousOrgs) =>
+                    // @ts-ignore
+                    previousOrgs.filter(org => org.id !== organisation.id)
+                );
+                // @ts-ignore
+                setOrganisations((previousOrgs) =>
+                    // @ts-ignore
+                    previousOrgs.filter(org => org.id !== organisation.id)
+                );
+            }
+        } catch (error) {
+            console.error("Error updating approval status:", error);
+            setApproved(!newApprovedState);
         }
     }
 
     return (
-        <Card className="w-[300px] border-none">
+        <Card className="w-[300px] bg-[#35355] text-white border-2 border-[#202020]">
             <CardHeader>
                 <CardTitle>{login}</CardTitle>
             </CardHeader>
@@ -69,8 +76,8 @@ export default function OrgCard({ organisation, isApproved, setApprovedOrganisat
                 />
             </CardContent>
             <CardFooter className="flex justify-between ">
-                <Link href={organisation.github_url ?? ''} target='_blank' className='flex items-center gap-1  bg-white p-2 rounded-md '>
-                    <Image src={GithubIcon.src} className="w-5 h-5 mr-2" alt="Github Icon" width={25} height={25} />
+                <Link href={organisation.github_url ?? ''} target='_blank' className='flex items-center gap-1 text-white p-2 rounded-md '>
+                    <Image src={GithubIcon.src} className="w-5 h-5 mr-2 invert" alt="Github Icon" width={25} height={25} />
                     <LucideExternalLink size={15} />
                 </Link>
 
