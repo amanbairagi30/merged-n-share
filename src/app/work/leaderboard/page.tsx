@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import React from 'react'
 
 export default function Leaderboard() {
-  const { isConnected, leaderboard, message, requestUpdate } = useWebSocket('ws://localhost:8080');
+  const { isConnected, leaderboard, message, requestUpdate } = useWebSocket(process.env.NEXT_PUBLIC_WS_SERVER_URL || 'ws://localhost:8080');
   const session = useSession();
   const currUser = session?.data?.user;
 
