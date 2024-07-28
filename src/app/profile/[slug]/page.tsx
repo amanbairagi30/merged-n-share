@@ -117,10 +117,10 @@ export default async function PublicProfilePage({ params }: any) {
                         <Link href={`https://github.com/${urlUser?.username}`} target='_blank'>
                             <GitHubLogoIcon width={20} height={20} />
                         </Link>
-                        <Link href={urlUser?.linkedInProfile} target='_blank'>
+                        <Link href={urlUser?.linkedInProfile || ''} target='_blank'>
                             <LinkedInLogoIcon width={20} height={20} />
                         </Link>
-                        <Link href={urlUser?.xProfile} target='_blank'>
+                        <Link href={urlUser?.xProfile || ''} target='_blank'>
                             <Image className='w-[1.3rem] h-[1.3rem] invert' src={x} width='500' height='500' alt='x' />
                         </Link>
                     </div>
