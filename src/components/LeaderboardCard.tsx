@@ -4,6 +4,7 @@ import { User } from 'next-auth'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { toast } from 'sonner'
 
 interface LeaderboardCardProps {
     leaderboard: LeaderboardEntry,
@@ -45,7 +46,7 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                                     </div>
                                 </div>
 
-                                <div onClick={() => alert('Coming Soon !')} className='w-fit px-2 py-1 rounded-sm cursor-pointer bg-blue-500 text-sm'>Hire/Refer</div>
+                                <div onClick={() => toast.success('Coming Soon !')} className='w-fit px-2 py-1 rounded-sm cursor-pointer bg-blue-500 text-sm'>Hire/Refer</div>
                             </div>
                         </div>
                     </li>

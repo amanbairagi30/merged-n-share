@@ -23,7 +23,7 @@ export default function ContributedOrg({ contributions }: ContributionType) {
                                     return null;
                                 }
                                 return (
-                                    <Image className='!w-[1.5rem] !h-[1.5rem] rounded-full' src={item?.avatar_url || ''} width='500' height='500' alt='org' />
+                                    <Image key={item.id} className='!w-[1.5rem] !h-[1.5rem] rounded-full' src={item?.avatar_url || ''} width='500' height='500' alt='org' />
                                 )
                             })
                         }

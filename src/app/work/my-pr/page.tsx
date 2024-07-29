@@ -171,7 +171,7 @@ export default function MyPR() {
         await updateUserContributedOrgs(user?.id, orgsToUpdate);
 
         if (resp.success) {
-            alert("saved to DB");
+            toast.success("Saved to DB");
         }
     }
 
