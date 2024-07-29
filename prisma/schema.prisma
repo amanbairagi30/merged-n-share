@@ -45,22 +45,23 @@ model Session {
 }
 
 model User {
-  id              String        @id @default(cuid())
+  id              String          @id @default(cuid())
   name            String?
-  username        String?       @unique
-  email           String?       @unique
+  username        String?         @unique
+  email           String?         @unique
   emailVerified   DateTime?
   image           String?
-  isProfilePublic Boolean       @default(true)
+  isProfilePublic Boolean         @default(true)
   githubProfile   String?
   xProfile        String?
   linkedInProfile String?
-  admin           Boolean       @default(false)
+  admin           Boolean         @default(false)
   accounts        Account[]
   sessions        Session[]
   pullRequests    PullRequest[]
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+  contributedOrgs Organisations[] @relation("UserContributions")
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 }
 
 model Organisations {
@@ -69,6 +70,7 @@ model Organisations {
   avatar_url   String?       @default("https://www.campusfrance.org/sites/default/files/styles/mobile_visuel_principal_page/public/organisation%20organigramme_3.jpg?itok=qD2R_LHp")
   github_url   String?
   pullRequests PullRequest[]
+  contributors User[]        @relation("UserContributions")
 }
 
 model PullRequest {

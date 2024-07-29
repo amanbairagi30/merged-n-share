@@ -7,7 +7,7 @@ export async function middleware(request: NextRequest) {
   
   if (request.nextUrl.pathname.startsWith('/work/organisation')) {
     if (!token) {
-      return NextResponse.redirect(new URL('/login', request.url))
+      return NextResponse.redirect(new URL('/', request.url))
     }
     
     // @ts-ignore (remove this if you've properly typed your token)

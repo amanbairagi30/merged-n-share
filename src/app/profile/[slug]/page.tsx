@@ -6,7 +6,7 @@ import React from 'react'
 import x from "@/app/assets/x.svg"
 import { BadgeDollarSign, Lock, User } from 'lucide-react';
 import PRCard from '@/components/PRCard';
-import { PullRequest } from '@prisma/client';
+import { Organisations, PullRequest } from '@prisma/client';
 import { getServerSideProps } from 'next/dist/build/templates/pages';
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
@@ -14,6 +14,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import prisma from '@/lib/db';
 import PRListings from '@/components/PRListings';
 import Link from 'next/link';
+import ContributedOrg from '@/components/ContributedOrg';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -95,6 +96,7 @@ export default async function PublicProfilePage({ params }: any) {
         )
     }
 
+    console.log(urlUser?.contributedOrgs)
 
 
     const totalPoints = urlUser?.pullRequests?.reduce((acc: any, pr: any) => {
@@ -117,12 +119,19 @@ export default async function PublicProfilePage({ params }: any) {
                         <Link href={`https://github.com/${urlUser?.username}`} target='_blank'>
                             <GitHubLogoIcon width={20} height={20} />
                         </Link>
-                        <Link href={urlUser?.linkedInProfile || ''} target='_blank'>
-                            <LinkedInLogoIcon width={20} height={20} />
-                        </Link>
-                        <Link href={urlUser?.xProfile || ''} target='_blank'>
-                            <Image className='w-[1.3rem] h-[1.3rem] invert' src={x} width='500' height='500' alt='x' />
-                        </Link>
+                        {
+                            urlUser?.linkedInProfile &&
+                            <Link href={urlUser?.linkedInProfile || ''} target='_blank'>
+                                <LinkedInLogoIcon width={20} height={20} />
+                            </Link>
+                        }
+
+                        {
+                            urlUser?.xProfile &&
+                            <Link href={urlUser?.xProfile || ''} target='_blank'>
+                                <Image className='w-[1.3rem] h-[1.3rem] invert' src={x} width='500' height='500' alt='x' />
+                            </Link>
+                        }
                     </div>
                 </div>
 
@@ -130,19 +139,9 @@ export default async function PublicProfilePage({ params }: any) {
                     <div className='text-sm flex items-center justify-between gap-2 text-gray-400'>
                         <p>Hi ! This is</p>
                         <div>
-                            <button className="relative inline-flex h-fit overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-
-                                <div className="inline-flex gap-2 h-fit w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-xs font-medium text-white backdrop-blur-3xl">
-                                    <p className='hidden md:block'>Contirbuted in {10}+ orgs</p>
-                                    <p className='block md:hidden'>Orgs</p>
-                                    <div className='flex gap-1'>
-                                        <Image className='!w-[1.5rem] !h-[1.5rem] rounded-full' src={urlUser?.image} width='500' height='500' alt='org' />
-                                        <Image className='!w-[1.5rem] !h-[1.5rem] rounded-full' src={urlUser?.image} width='500' height='500' alt='org' />
-                                        <Image className='!w-[1.5rem] !h-[1.5rem] rounded-full' src={urlUser?.image} width='500' height='500' alt='org' />
-                                    </div>
-                                </div>
-                            </button>
+                            <ContributedOrg
+                                contributions={urlUser?.contributedOrgs}
+                            />
                         </div>
                     </div>
                     <div className='text-[2.5rem] flex flex-col leading-[2.2rem] my-2 font-semibold'>

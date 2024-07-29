@@ -25,6 +25,7 @@ import { Loader } from 'lucide-react';
 import { Organisations as OrgType } from '@prisma/client';
 import { toast } from 'sonner';
 import Image from 'next/image';
+import { updateUserContributedOrgs } from '@/app/actions/userAction';
 
 export default function MyPR() {
     const session = useSession();
@@ -36,7 +37,7 @@ export default function MyPR() {
     const [showFetchedMergedPRDialog, setShowFetchedMergedPRDialog] = useState(false);
     const user = session?.data?.user;
 
-    console.log(selectedOrgData);
+    // console.log(selectedOrgData);
 
     const handleFetchPRDetails = async () => {
         if (!user || !selectedOrgData?.name) {
@@ -56,8 +57,8 @@ export default function MyPR() {
 
         const finalData = await response.json();
         if (Number(finalData.status) === 422) {
-            console.log(finalData.errors[0].message);
-            toast("Hi : ", finalData.errors[0].message);
+            // console.log(finalData.errors[0].message);
+            toast.error("Hi : ", finalData.errors[0].message);
             return;
         }
 
@@ -97,7 +98,7 @@ export default function MyPR() {
                     return null;
                 }).filter((amount: any) => amount !== null);
 
-                console.log(hkiratComments)
+                // console.log(hkiratComments)
                 prDetails.bounty = hkiratComments;
 
                 return prDetails;
@@ -108,7 +109,7 @@ export default function MyPR() {
 
         setIsLoading(false);
         setFetchedMergedPRData(mergedPRsData);
-        console.log(mergedPRsData);
+        // console.log(mergedPRsData);
     }
 
 
@@ -123,7 +124,7 @@ export default function MyPR() {
             })
             const resp = await response.json();
             if (resp.success) {
-                console.log({ resp })
+                // console.log({ resp })
                 setOrganisations(resp.organisations)
             }
         }
@@ -137,8 +138,8 @@ export default function MyPR() {
         })
         const resp = await response.json();
         if (resp.success) {
-            console.log("fetched PRs suyccessfully");
-            console.log(resp.pullRequests);
+            // console.log("fetched PRs suyccessfully");
+            // console.log(resp.pullRequests);
             setPrData(resp.pullRequests)
             setIsLoading(false);
         }
@@ -149,7 +150,7 @@ export default function MyPR() {
     };
 
     const extractAmount = (comment: string): number | null => {
-        console.log(comment);
+        // console.log(comment);
         const bountyExtractor = /\/bounty\s+\$?(\d+)/i;
         const match = comment.match(bountyExtractor);
         return match ? parseInt(match[1]) : null;
@@ -165,6 +166,10 @@ export default function MyPR() {
         })
 
         const resp = await response.json();
+        const orgsToUpdate = prs.map(pr => pr.organisationId);
+        // @ts-ignore
+        await updateUserContributedOrgs(user?.id, orgsToUpdate);
+
         if (resp.success) {
             alert("saved to DB");
         }
@@ -173,8 +178,8 @@ export default function MyPR() {
     const newMergedPRData = fetchedMergedPRData.filter((pr: any) => {
         return !prdata.some(savedPR => savedPR?.prNumber === pr?.prNumber && savedPR?.repoURL === pr?.repoURL);
     })
-    console.log(newMergedPRData);
-    console.log(fetchedMergedPRData);
+    // console.log(newMergedPRData);
+    // console.log(fetchedMergedPRData);
 
     return (
         <div className="flex flex-col items-start font-normal relative w-full">

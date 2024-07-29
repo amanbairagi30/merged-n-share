@@ -9,6 +9,7 @@ export async function getUserProfile(username: string) {
                     org: true,
                 }
             },
+            contributedOrgs: true,
         },
     })
 
