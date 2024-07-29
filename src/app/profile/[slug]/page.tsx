@@ -15,6 +15,7 @@ import prisma from '@/lib/db';
 import PRListings from '@/components/PRListings';
 import Link from 'next/link';
 import ContributedOrg from '@/components/ContributedOrg';
+import RequestAccessButton from '@/components/RequestAccessButton';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -89,7 +90,7 @@ export default async function PublicProfilePage({ params }: any) {
 
                         <p className='my-[1rem]'>or</p>
 
-                        <button onClick={() => alert('Coming Soon!')} className='flex items-center hover:bg-blue-600 justify-center bg-blue-500 w-fit h-fit rounded-lg py-[1rem] px-[2.5rem]'>Request to make it public</button>
+                        <RequestAccessButton />
                     </div>
                 </div>
             </>
