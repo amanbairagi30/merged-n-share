@@ -279,7 +279,7 @@ export default function MyPR() {
                     ) : (
                         <div className='flex w-full h-[80vh] gap-2 items-center justify-center'>
                             {/* <Loader className='animate-spin' /> */}
-                            <span className='tezt-xs'>No PR data from DB</span>
+                            <span className='text-sm md:w-[40%] text-center'>No PR data from DB , you can fetch your new merged PR by selecting organisation and then save it to DB</span>
                         </div>
                     )
                 )}
