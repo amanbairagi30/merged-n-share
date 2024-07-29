@@ -49,9 +49,9 @@ export default function MyPR() {
         //@ts-ignore
         const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${selectedOrgData?.name}+is:merged`, {
             method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`
-            }
+            // headers: {
+            //     'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`
+            // }
         })
         setIsLoading(false);
 
