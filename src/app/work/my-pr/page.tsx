@@ -57,7 +57,7 @@ export default function MyPR() {
 
         const finalData = await response.json();
         if (Number(finalData.status) === 422) {
-            console.log(finalData.errors[0].message);
+            // console.log(finalData.errors[0].message);
             toast.error("Hi : ", finalData.errors[0].message);
             return;
         }
@@ -109,7 +109,7 @@ export default function MyPR() {
 
         setIsLoading(false);
         setFetchedMergedPRData(mergedPRsData);
-        console.log(mergedPRsData);
+        // console.log(mergedPRsData);
     }
 
 
@@ -124,7 +124,7 @@ export default function MyPR() {
             })
             const resp = await response.json();
             if (resp.success) {
-                console.log({ resp })
+                // console.log({ resp })
                 setOrganisations(resp.organisations)
             }
         }
@@ -178,8 +178,8 @@ export default function MyPR() {
     const newMergedPRData = fetchedMergedPRData.filter((pr: any) => {
         return !prdata.some(savedPR => savedPR?.prNumber === pr?.prNumber && savedPR?.repoURL === pr?.repoURL);
     })
-    console.log(newMergedPRData);
-    console.log(fetchedMergedPRData);
+    // console.log(newMergedPRData);
+    // console.log(fetchedMergedPRData);
 
     return (
         <div className="flex flex-col items-start font-normal relative w-full">
