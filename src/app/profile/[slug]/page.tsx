@@ -147,7 +147,7 @@ export default async function PublicProfilePage({ params }: any) {
                     </div>
                     <div className='text-[2.5rem] flex flex-col leading-[2.2rem] my-2 font-semibold'>
                         <p>{urlUser.name}</p>
-                        <div>
+                        {/* <div>
                             <button className="relative inline-flex h-fit overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-50">
                                 <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
 
@@ -155,7 +155,7 @@ export default async function PublicProfilePage({ params }: any) {
                                     #7 ranked among 89+ contributers in code100x
                                 </div>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                     <div className='flex items-center gap-2 w-full'>
                         <div className='mt-2 border-2 border-yellow-500 px-2 py-1 rounded-full gap-1 flex items-center'>

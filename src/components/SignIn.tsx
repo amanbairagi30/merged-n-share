@@ -23,7 +23,11 @@ const SignIn = () => {
     <div className="flex bg-black">
       <div className="w-full md:w-2/5 bg-black flex justify-center items-center h-screen max-sm:hidden max-md:hidden">
         <div>
-          <h1 className="text-4xl font-bold mb-4 text-white">100xCommunity</h1>
+          <aside className="text-4xl font-bold mb-4 text-white">
+            <div className="flex items-center gap-[10px]">
+              <p className="text-neutral-100 text-4xl font-extrabold">Merged<span className="text-blue-500">&</span>Share</p>
+            </div>
+          </aside>
           <div className="grid grid-cols-3 gap-4">
             {[...Array(9)].map((_, index) => (
               <div key={index} className="opacity-50">
@@ -44,7 +48,7 @@ const SignIn = () => {
                 <div className="flex flex-col items-center justify-center gap-4">
                   <p className="font-normal text-2xl text-gray-900">Welcome</p>
 
-                  <p className="font-light text-sm text-gray-600">Log in to continue to 100xCommunity.</p>
+                  <p className="font-light text-sm text-gray-600">Log in to continue to Merged&Share.</p>
                   <button
                     className="w-full flex justify-center items-center gap-2 py-3 px-4 border rounded font-light text-md text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 -mt-2"
                     onClick={async () => {

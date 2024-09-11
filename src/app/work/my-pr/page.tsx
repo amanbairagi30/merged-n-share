@@ -21,11 +21,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Loader } from 'lucide-react';
+import { Info, Loader } from 'lucide-react';
 import { Organisations as OrgType } from '@prisma/client';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import { updateUserContributedOrgs } from '@/app/actions/userAction';
+
 
 export default function MyPR() {
     const session = useSession();
@@ -186,7 +187,19 @@ export default function MyPR() {
             <div className='h-full w-full flex-col text-white rounded-l-[12px]'>
                 <div className='flex items-center justify-between '>
                     <div>Merged PRs({prdata?.length})</div>
-                    <div className="flex gap-2 ">
+                    <div className="flex gap-2 items-center">
+                            <Dialog>
+                                <DialogTrigger><Info /></DialogTrigger>
+                                <DialogContent>
+                                    <DialogHeader>
+                                        <DialogTitle>Organisation</DialogTitle>
+                                        <DialogDescription>
+                                            You can see only those organisations which have been approved by the admin.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                </DialogContent>
+                            </Dialog>
+
                         {/* @ts-ignore */}
                         <Select onValueChange={(e) => setSelectedOrgData({ id: e?.id, name: e?.name, avatar: e?.avatar_url, github_url: e?.github_url })}>
                             <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-[#202020]">

@@ -5,7 +5,7 @@ import { Switch } from '@/components/ui/switch';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/db';
-import { updatedUserProfile } from '@/lib/profile';
+import { getUserProfile, updatedUserProfile } from '@/lib/profile';
 import { BadgeDollarSign, ExternalLink, Pencil } from 'lucide-react';
 import { getServerSession } from 'next-auth'
 import Image from 'next/image'
@@ -35,6 +35,18 @@ export default async function ProfilePage() {
         });
         return response;
     }
+
+    // @ts-ignore
+    const urlUser = await getUserProfile(user?.username)
+
+
+    const totalPoints = urlUser?.pullRequests?.reduce((acc: any, pr: any) => {
+        return pr.prPoint + acc
+    }, 0);
+
+    const totalBounty = urlUser?.pullRequests?.reduce((acc: any, pr: any) => {
+        return pr.bounty + acc
+    }, 0);
 
     const prData = await getPRData();
 
@@ -71,13 +83,13 @@ export default async function ProfilePage() {
                     <div className='flex items-center gap-2 w-full'>
                         <div className='mt-2 border-2 border-yellow-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                             <Image width='400' height='400' className='w-[1rem] h-[1rem]' src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="coin-image" />
-                            <span className='text-xs md:text-sm '>1000</span>
+                            <span className='text-xs md:text-sm '>{totalPoints}</span>
                         </div>
 
                         <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                             <BadgeDollarSign size={18} className='text-green-500' />
                             {/* <span className='text-sm'>{bounty[0]}</span> */}
-                            <span className='text-xs md:text-sm '>$4000</span>
+                            <span className='text-xs md:text-sm '>{totalBounty}</span>
                         </div>
                     </div>
                 </div>
@@ -97,7 +109,7 @@ export default async function ProfilePage() {
             <section className='mt-4'>
                 <div className=''>Personal Details</div>
 
-               <PersonalDetailForm />
+                <PersonalDetailForm />
             </section>
         </div>
     )

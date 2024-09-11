@@ -48,8 +48,8 @@ export default async function Dashboard() {
                 </div>
                 <div className='border-2 rounded-md p-4 flex flex-col border-[#353535] col-span-1 md:col-span-2 lg:col-span-3 h-96'>
                     {/* <div className='text-lg font-semibold mb-4'>Bar Graph</div> */}
-                    <div className='flex-1 flex items-center justify-center'>
-
+                    <div className='flex-1 w-full mx-auto md:w-[30%] text-center flex items-center justify-center'>
+                        More features will be rolling out very shortly , Thanks for your patience
                     </div>
                 </div>
             </div>
