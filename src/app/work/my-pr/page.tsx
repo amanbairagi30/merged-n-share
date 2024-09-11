@@ -42,7 +42,7 @@ export default function MyPR() {
 
     const handleFetchPRDetails = async () => {
         if (!user || !selectedOrgData?.name) {
-            alert("Not having the user or org name")
+            toast.warning("Select the organisation and then proceed")
             return;
         }
         setIsLoading(true);
