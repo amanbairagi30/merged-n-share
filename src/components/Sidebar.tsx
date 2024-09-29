@@ -31,7 +31,7 @@ export default function Sidebar() {
 
 
     return (
-        <div className={`border-r-2 bg-[#0f0f0f] h-screen z-[2000] transition-transform duration-500 ease-in-out
+        <div className={`border-r-2 h-screen z-[50] bg-background transition-transform duration-500 ease-in-out
             md:flex md:relative md:translate-x-0
             ${sidebarVisibility
                 ? "absolute translate-x-0 flex"
@@ -62,9 +62,9 @@ export default function Sidebar() {
 
                             if (x.name.toLowerCase() === 'organisation') {
                                 // @ts-ignore
-                                if (!user?.admin && user?.username !== 'hkirat') {
-                                    return null;
-                                }
+                                // if (!user?.admin && user?.username !== 'hkirat') {
+                                //     return null;
+                                // }
                             }
 
                             return (

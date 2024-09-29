@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function LaptopScreen() {
     return (
-        <div className="border-2 overflow-hidden border-gray-500 rounded-t-md mt-6 w-full h-[50rem]">
+        <div className="border-2 overflow-hidden border-gray-500 rounded-t-md mt-6 w-full h-[80vh]">
             <div className="w-full text-white px-4 rounded-t-md flex items-center justify-between bg-[#202020] h-[2.55rem]">
                 <div className="flex items-center gap-2">
                     <div className="w-[0.8rem] h-[0.8rem] rounded-full bg-red-500"></div>

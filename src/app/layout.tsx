@@ -5,6 +5,7 @@ import Providers from "@/components/Providers";
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react"
+import { ThemeProvider } from "@/components/theme-provider";
 
 const font = DM_Sans({
   subsets: ["latin"],
@@ -23,11 +24,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={`${font.className}`}>
         <NextTopLoader color="#2E78C7" height={2} />
-        <Providers>
-          {children}
-        </Providers>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <Providers>
+            {children}
+          </Providers>
+        </ThemeProvider>
         <Analytics />
         <Toaster />
       </body>
