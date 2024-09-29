@@ -27,6 +27,9 @@ const config = {
       },
     },
     extend: {
+      cursor: {
+        'custom': 'url(/custom-cursor.png), auto',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
