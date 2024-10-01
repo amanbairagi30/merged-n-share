@@ -68,6 +68,10 @@
     @apply border-border;
   }
 
+  p {
+    @apply font-paragraph;
+  }
+
   body {
     @apply bg-background text-foreground;
   }
