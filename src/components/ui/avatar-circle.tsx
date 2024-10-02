@@ -36,7 +36,7 @@ const AvatarCircles = ({
             ))}
             <a
                 className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-primary text-center text-xs font-medium text-white dark:border-primary dark:bg-primary dark:text-black"
-                href=""
+                href="#testimonials"
             >
                 +{numPeople}
             </a>

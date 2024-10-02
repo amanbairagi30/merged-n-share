@@ -35,7 +35,7 @@ export default function Hero() {
                 </div>
                 <div className="flex items-center gap-4">
                     <Button className="font-bold h-10 font-paragraph">Explore the arena</Button>
-                    <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-primary/10 h-10">What's more ?</Button>
+                    <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-primary/10 h-10">What&apos;s more ?</Button>
                 </div>
             </div>
 

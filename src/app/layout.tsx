@@ -52,10 +52,10 @@ export default function RootLayout({
           enableSystem
         >
           <Providers>
-            <div className="w-full h-[100vh] py-8 relative " >
+            <div className="w-full h-[100vh] py-8 relative overflow-x-hidden" >
               <div className='absolute left-[50%] translate-x-[-50%] -top-[2rem] md:-top-[6rem] size-[12rem] md:size-[14rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'>
               </div>
-              <div className=" max-w-[1180px]  px-4 mx-auto">
+              <div className=" max-w-[1180px]  px-4 mx-auto ">
                 {children}
               </div>
             </div>
