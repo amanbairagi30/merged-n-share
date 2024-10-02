@@ -11,21 +11,24 @@ import { ThemeProvider } from "@/components/theme-provider";
 const work_sans = Work_Sans({
   subsets: ["latin"],
   weight: ["200", "300", "500", "600", "700", "800"],
-  variable: '--font-primary'
+  variable: '--font-primary',
+  display: "swap",
 });
 
 // secondary font 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
   weight: ["200", "300", "500", "600", "700", "800"],
-  variable: '--font-secondary'
+  variable: '--font-secondary',
+  display: "swap",
 });
 
 // paragraph/text font 
 const epilogue = Epilogue({
   subsets: ["latin"],
   weight: ["200", "300", "500", "600", "700", "800"],
-  variable: '--font-paragraph'
+  variable: '--font-paragraph',
+  display: "swap",
 });
 
 
@@ -49,7 +52,13 @@ export default function RootLayout({
           enableSystem
         >
           <Providers>
-            {children}
+            <div className="w-full h-[100vh] py-8 relative " >
+              <div className='absolute left-[50%] translate-x-[-50%] -top-[2rem] md:-top-[6rem] size-[12rem] md:size-[14rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'>
+              </div>
+              <div className=" max-w-[1180px]  px-4 mx-auto">
+                {children}
+              </div>
+            </div>
           </Providers>
         </ThemeProvider>
         <Analytics />
