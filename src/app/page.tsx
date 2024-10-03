@@ -6,13 +6,13 @@ import Testimonials from "@/components/testimonials";
 
 export default function Home() {
   return (
-    <main>
+    <section>
       <Hero />
       {/* <ProductDemo /> */}
       <Features />
       <Statistics />
       <Testimonials />
       <Footer />
-    </main>
+    </section>
   );
 }

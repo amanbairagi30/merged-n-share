@@ -5,7 +5,7 @@ import React from 'react'
 export default function Footer() {
     const year = new Date().getFullYear();
     return (
-        <footer className='border-2 min-h-[10rem] max-h-fit flex flex-col md:flex-row gap-10 md:items-center justify-between rounded-xl p-6'>
+        <footer className='border-2 bg-background z-20 min-h-[10rem] max-h-fit flex flex-col md:flex-row gap-10 md:items-center justify-between rounded-xl p-6'>
             <section>
                 <aside className="flex flex-col gap-[10px]">
                     <p className="text-xl md:text-4xl font-extrabold font-secondary">Merged<span className="text-primary">&</span>Share .</p>
