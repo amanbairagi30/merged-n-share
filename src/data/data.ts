@@ -18,9 +18,9 @@ export const sideBarOptions = {
             href: "/work/my-pr",
         },
         {
-            name: 'Organisation',
+            name: 'Organisations',
             icon: Building2,
-            href: "/work/organisation",
+            href: "/work/organisations",
         },
     ],
 }

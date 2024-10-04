@@ -140,7 +140,7 @@ export default function Features() {
     ]
     return (
         <section className='h-fit flex flex-col items-center my-[10rem] py-4'>
-            <TitleCard icon={Crown} title={'Featured'}/>
+            <TitleCard icon={Crown} title={'Features'}/>
             <div className='mt-10 text-2xl md:text-4xl  font-secondary flex items-center justify-center font-bold'>
                 <h3 className='w-full md:w-[70%] text-center'>
                     Streamline Your Open-Source Journey, with some of our <span className='text-primary'>cool</span> features.

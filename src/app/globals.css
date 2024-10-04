@@ -76,3 +76,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+.clip-text {
+  -webkit-background-clip: text;
+  background-clip: text;
+}

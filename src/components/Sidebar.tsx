@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react'
 import Github from '@/app/assets/github.svg';
 import Link from 'next/link';
 import { useSidebarStore } from '@/store/sidebar';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 
 export default function Sidebar() {
     const pathName = usePathname();
@@ -31,7 +32,7 @@ export default function Sidebar() {
 
 
     return (
-        <div className={`border-r-2 h-screen z-[50] bg-background transition-transform duration-500 ease-in-out
+        <div className={`border-r-2 border-accent h-screen z-[50] bg-background transition-transform duration-500 ease-in-out
             md:flex md:relative md:translate-x-0
             ${sidebarVisibility
                 ? "absolute translate-x-0 flex"
@@ -40,10 +41,10 @@ export default function Sidebar() {
             flex-col border-[#353535] min-w-[18rem] max-w-[18rem]`}>
             <div className=' border-[#424242] flex justify-between items-center px-4 h-[4rem]'>
                 <div>
-                    <p className='text-xl font-semibold'>M<span className='text-blue-500'>&</span>S</p>
+                    <p className='text-xl font-semibold font-secondary'>M<span className='text-primary'>&</span>S</p>
                 </div>
                 <Link href='https://github.com/amanbairagi30/merged-n-share' target='_blank'>
-                    <Image className='invert w-[1.2rem] h-[1.2rem] cursor-pointer' src={Github} height='500' width='500' alt='github-icon' />
+                    <GitHubLogoIcon className=' w-[1.2rem] h-[1.2rem] cursor-pointer' />
                 </Link>
             </div>
 
@@ -69,7 +70,7 @@ export default function Sidebar() {
 
                             return (
                                 <Link onClick={() => toggleSidebar(false)} href={`${x.href}`} key={idx}>
-                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center text-sm cursor-pointer ${activeIndex === idx ? 'bg-blue-500' : 'hover:bg-slate-800'} rounded-md px-2 py-2 h-fit gap-2`}>
+                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center text-sm cursor-pointer ${activeIndex === idx ? 'bg-primary dark:text-background' : 'hover:bg-accent'} rounded-md px-2 py-2 h-fit gap-2`}>
                                         <x.icon size={18} />
                                         <p>{x.name}</p>
                                     </div>
@@ -94,7 +95,7 @@ export default function Sidebar() {
                             <div className='text-xs text-gray-400'>{user?.email}</div>
                         </div>
                     </div>
-                    <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-blue-400/90 to-blue-400/0 transition-opacity duration-500 group-hover:opacity-40"></span>
+                    <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/90 to-primary/0 transition-opacity duration-500 group-hover:opacity-40"></span>
                 </button>
 
 

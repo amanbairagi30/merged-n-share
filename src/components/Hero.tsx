@@ -1,8 +1,10 @@
-import React from 'react'
+"use client";
+import React from 'react';
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import { UsersAvatar } from "@/components/users-avatars";
 import { GitMerge } from "lucide-react";
+import { signIn } from 'next-auth/react';
 
 
 export default function Hero() {
@@ -21,7 +23,7 @@ export default function Hero() {
                 <div className="flex flex-col gap-6 h-fit  items-center justify-center">
 
                     <div className="text-3xl font-secondary font-[600] sm:text-5xl w-fit md:w-[80%] text-center z-20 justify-center items-center">
-                        Showcase your open source contributions as <span className="transition-all font-[900] duration-200 bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-yellow-200 w-fit h-fit">Proof of Work</span>
+                        Showcase your open source contributions as <span className="transition-all font-[900] duration-200 bg-clip-text clip-text  text-transparent bg-gradient-to-r from-yellow-500 to-yellow-200 w-fit h-fit">Proof of Work</span>
                     </div>
 
                     <div className="text-xs md:text-base text-center font-paragraph md:w-[60%]">
@@ -34,7 +36,7 @@ export default function Hero() {
 
                 </div>
                 <div className="flex items-center gap-4">
-                    <Button className="font-bold h-10 font-paragraph">Explore the arena</Button>
+                    <Button onClick={async () => await signIn()} className="font-bold h-10 font-paragraph">Explore the arena</Button>
                     <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-primary/10 h-10">What&apos;s more ?</Button>
                 </div>
             </div>

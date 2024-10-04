@@ -188,24 +188,13 @@ export default function MyPR() {
                 <div className='flex items-center justify-between '>
                     <div>Merged PRs({prdata?.length})</div>
                     <div className="flex gap-2 items-center">
-                            <Dialog>
-                                <DialogTrigger><Info /></DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>Organisation</DialogTitle>
-                                        <DialogDescription>
-                                            You can see only those organisations which have been approved by the admin.
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                </DialogContent>
-                            </Dialog>
-
+                        
                         {/* @ts-ignore */}
                         <Select onValueChange={(e) => setSelectedOrgData({ id: e?.id, name: e?.name, avatar: e?.avatar_url, github_url: e?.github_url })}>
-                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-[#202020]">
+                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-background text-foreground">
                                 <SelectValue placeholder="Select a Organisation" />
                             </SelectTrigger>
-                            <SelectContent className='bg-[#202020] text-white'>
+                            <SelectContent className='bg-background text-foreground'>
                                 <SelectGroup>
                                     <SelectLabel>Select</SelectLabel>
                                     {
@@ -223,7 +212,7 @@ export default function MyPR() {
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
-                        <Button onClick={() => handleFetchPRDetails()} className='bg-[#202020] border-2 border-white'>Fetch</Button>
+                        <Button onClick={() => handleFetchPRDetails()} className='bg-primary w-[8rem]'>Fetch</Button>
                         <Dialog open={showFetchedMergedPRDialog} onOpenChange={setShowFetchedMergedPRDialog}>
                             <DialogContent className="overflow-auto h-fit">
                                 <DialogHeader>

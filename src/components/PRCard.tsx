@@ -81,7 +81,7 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
 
     return (
         <>
-            <div className='border-2 border-slate-800 hover:transition-all hover:duration-700 hover:ease-linear hover:border-blue-500 hover:border-2 bg-[#101010] flex flex-col cursor-pointer rounded-lg h-[20rem] p-4'>
+            <div className='border-2 border-accent shadow-lg transition-all duration-200 ease-linear  text-foreground flex flex-col cursor-pointer rounded-lg h-[20rem] p-4'>
                 <div className='flex items-center justify-between'>
                     <div className='flex flex-col'>
                         <div className='flex gap-2 items-center'>
@@ -146,7 +146,7 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
                         <div className={`h-[0.5rem]  rounded-full w-[0.5rem] ${renderPRQualityViaBounty(bounty)?.bgColor} `}></div>
                         {renderPRQualityViaBounty(bounty)?.text}
                     </div>
-                    <div className='flex underline items-center gap-2'>
+                    <div className='flex hover:underline items-center gap-2'>
                         <Link href={prURL} target='_blank' className='flex items-center gap-1'>PR <LucideExternalLink size={15} /></Link>
                         {isCurrentUser && <span className=''><EllipsisVertical /></span>}
                     </div>
