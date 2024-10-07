@@ -42,7 +42,7 @@ export async function GET(req: NextRequest, { params: { username } }: { params: 
             return NextResponse.json({ success: true, message: "No Pull requests found for this username , try saving the new prs from my-pr section in Merged&Share" });
         }
         
-        return NextResponse.json({ success: true, pullRequests: userData, message: "Merged PRs with this  username has been found successfully  " });
+        return NextResponse.json({ success: true, userData: userData, message: "Merged PRs with this  username has been found successfully  " });
     } catch (error) {
         console.error("Error creating pull requests:", error);
         return NextResponse.json({ success: false, message: "Failed to create pull requests" });
