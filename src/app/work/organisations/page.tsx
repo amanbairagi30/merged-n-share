@@ -4,6 +4,7 @@ import OrgCard from '@/components/OrgCard'
 import { Input } from "@/components/ui/input"
 import debounce from 'lodash/debounce';
 import { Organisations as OrgType } from '@prisma/client';
+import { Save, Search, SearchCode, Telescope } from 'lucide-react';
 
 
 const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisations: (orgs: OrgType[]) => void, approvedOrganisations: OrgType[] }) => {
@@ -59,15 +60,38 @@ const SearchBox = ({ setOrganisations, approvedOrganisations, }: { setOrganisati
     }
 
     return (
-        <div className='w-full p-10'>
-            <h1 className='text-white my-2 text-xl text-center text-semibold'> Find your organisations here</h1>
-            <p className='my-2 mb-6 text-sm text-slate-400 text-center text-semibold'>You can allow which organisation&apos;s contribution one should show as their POW</p>
-            <Input type="text" placeholder="Search Organisation Name..."
-                className='bg-black text-white border-none w-4/6 mx-auto'
-                name={orgName as any}
-                value={orgName as any}
-                onChange={HandleChange}
-            />
+        <div className='w-full flex flex-col gap-6 text-center py-6 items-center justify-center h-fit'>
+            <div className='max-w-2xl mx-auto px-4'>
+                <h1 className='text-2xl mb-2 font-semibold font-primary'>Find your organisations</h1>
+                <p className='text-sm text-gray-500 font-semibold'>Search and save the organisations which you think you have made some contributions in.</p>
+            </div>
+
+            <aside className='flex items-center justify-evenly gap-4 max-w-lg w-full mx-auto px-4'>
+                <div className='flex items-center gap-2'>
+                    <SearchCode className='w-4 h-4' />
+                    <p className='font-normal text-gray-500 text-sm font-secondary'>Search</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                    <Save className='w-4 h-4' />
+                    <p className='font-normal text-gray-500 text-sm font-secondary'>Save</p>
+                </div>
+                <div className='flex items-center gap-2'>
+                    <Telescope className='w-4 h-4' />
+                    <p className='font-normal text-gray-500 text-sm font-secondary'>Explore</p>
+                </div>
+            </aside>
+
+            <div className='flex gap-2 items-center border-2 p-4 rounded-xl w-full max-w-2xl mx-auto mt-4'>
+                <div className='w-[3rem] flex items-center justify-center rounded-xl h-[3rem]'>
+                    <Search />
+                </div>
+                <Input
+                    type="text"
+                    placeholder="Search organisations names here (ex. code100x, dicedb and vercel etc...)"
+                    className='bg-background placeholder:text-opacity-10 border-none h-[3rem]'
+                    onChange={HandleChange}
+                />
+            </div>
         </div>
     );
 }
@@ -110,15 +134,21 @@ const Organisations = () => {
 
 
     return (
-        <div className="flex flex-col items-start font-normal relative border-none border-r-0 min-h-full max-h-fit rounded-l-[8px] border-red-400">
+        <div className="flex flex-col font-normal relative border-none border-r-0 min-h-full max-h-fit rounded-l-[8px]">
             <SearchBox setOrganisations={setOrganisations} approvedOrganisations={approvedOrganisations} />
-            <div className='p-10 flex gap-5 justify-evenly w-full flex-wrap'>
-
-                {organisations && organisations.map((org) => {
-                    //@ts-ignore
-                    return <OrgCard key={org.id} organisation={org} isApproved={org.isApproved || false} setApprovedOrganisations={setApprovedOrganisations} setOrganisations={setOrganisations} />
-                })}
-
+            <div className='w-full mt-10'>
+                <div className='p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto'>
+                    {organisations && organisations.map((org) => (
+                        <OrgCard
+                            key={org.id}
+                            organisation={org}
+                            // @ts-ignore
+                            isApproved={org.isApproved || false}
+                            setApprovedOrganisations={setApprovedOrganisations}
+                            setOrganisations={setOrganisations}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     )

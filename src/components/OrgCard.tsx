@@ -14,6 +14,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Switch } from "./ui/switch";
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 
 
 export default function OrgCard({ organisation, isApproved, setApprovedOrganisations, setOrganisations }: { organisation: OrgType, isApproved: boolean, setApprovedOrganisations: (orgs: OrgType[]) => void, setOrganisations: (orgs: OrgType[]) => void }) {
@@ -62,28 +63,61 @@ export default function OrgCard({ organisation, isApproved, setApprovedOrganisat
     }
 
     return (
-        <Card className="w-[300px] bg-[#35355] text-white border-2 border-[#202020]">
-            <CardHeader>
-                <CardTitle>{login}</CardTitle>
-            </CardHeader>
-            <CardContent >
-                <Image
-                    src={organisation.avatar_url as string}
-                    alt="Image not found"
-                    className="object-cover rounded-md"
-                    width={250}
-                    height={300}
-                />
-            </CardContent>
-            <CardFooter className="flex justify-between ">
-                <Link href={organisation.github_url ?? ''} target='_blank' className='flex items-center gap-1 text-white p-2 rounded-md '>
-                    <Image src={GithubIcon.src} className="w-5 h-5 mr-2 invert" alt="Github Icon" width={25} height={25} />
-                    <LucideExternalLink size={15} />
-                </Link>
+        <>
+            <div className="w-full rounded-2xl relative bg-accent dark:bg-accent/30 flex items-center justify-center flex-col h-[16rem] transition-all duration-300 hover:shadow-lg">
+                <div className="mb-4">
+                    <Image
+                        src={organisation.avatar_url as string}
+                        alt={`${organisation.name} avatar`}
+                        className="object-cover w-20 h-20 rounded-xl"
+                        width={80}
+                        height={80}
+                    />
+                </div>
 
-                <Switch checked={approved} onCheckedChange={handleApproval} className="data-[state=checked]:bg-green-500" id="airplane-mode" />
+                <div className="text-center mb-8">
+                    <p className="font-semibold text-lg mb-2">{login}</p>
+                </div>
 
-            </CardFooter>
-        </Card>
+                <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 bg-background/40 backdrop-blur-sm rounded-b-2xl">
+                    <Link
+                        href={organisation.github_url ?? ''}
+                        target='_blank'
+                        className='flex items-center justify-center w-10 h-10 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors duration-200'
+                    >
+                        <GitHubLogoIcon className="w-5 h-5" />
+                    </Link>
+
+                    <Switch
+                        checked={approved}
+                        onCheckedChange={handleApproval}
+                        className="data-[state=checked]:bg-primary"
+                    />
+                </div>
+            </div>
+
+            {/* <Card className="w-[300px] bg-[#35355] text-white border-2 border-[#202020]">
+                <CardHeader>
+                    <CardTitle>{login}</CardTitle>
+                </CardHeader>
+                <CardContent >
+                    <Image
+                        src={organisation.avatar_url as string}
+                        alt="Image not found"
+                        className="object-cover rounded-md"
+                        width={250}
+                        height={300}
+                    />
+                </CardContent>
+                <CardFooter className="flex justify-between ">
+                    <Link href={organisation.github_url ?? ''} target='_blank' className='flex items-center gap-1 text-white p-2 rounded-md '>
+                        <GitHubLogoIcon />
+                    </Link>
+
+                    <Switch checked={approved} onCheckedChange={handleApproval} className="data-[state=checked]:bg-green-500" id="airplane-mode" />
+
+                </CardFooter>
+            </Card> */}
+        </>
     )
 }

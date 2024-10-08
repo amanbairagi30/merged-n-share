@@ -1,15 +1,36 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Epilogue, Work_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/react"
+import { ThemeProvider } from "@/components/theme-provider";
 
-const font = DM_Sans({
+// primary font
+const work_sans = Work_Sans({
   subsets: ["latin"],
-  weight: ["200", "300", "500", "600", "700", "800"]
+  weight: ["200", "300", "500", "600", "700", "800"],
+  variable: '--font-primary',
+  display: "swap",
 });
+
+// secondary font 
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  weight: ["200", "300", "500", "600", "700", "800"],
+  variable: '--font-secondary',
+  display: "swap",
+});
+
+// paragraph/text font 
+const epilogue = Epilogue({
+  subsets: ["latin"],
+  weight: ["200", "300", "500", "600", "700", "800"],
+  variable: '--font-paragraph',
+  display: "swap",
+});
+
 
 export const metadata: Metadata = {
   title: "M&S",
@@ -23,13 +44,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={`${epilogue.variable} ${work_sans.variable} ${bricolage.variable} font-primary`}>
         <NextTopLoader color="#2E78C7" height={2} />
-        <Providers>
-          {children}
-        </Providers>
-        <Analytics />
-        <Toaster />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+        >
+          <Providers>
+            <main>{children}</main>
+          </Providers>
+        </ThemeProvider>
+        {/* <Analytics /> */}
+        <Toaster richColors/>
       </body>
     </html>
   );
