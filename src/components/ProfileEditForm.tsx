@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Pencil } from 'lucide-react';
+import { toast } from 'sonner';
 
 export default function ProfileEditForm({ user }: any) {
     const [newName, setNewName] = useState('');
@@ -12,7 +13,7 @@ export default function ProfileEditForm({ user }: any) {
     const handleEditUpdate = async () => {
         setLoading(true);
         if (!newName) {
-            alert(" it must be a vaid name");
+            toast.warning(" it must be a vaid name");
             return;
         }
         const resp = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/user`, {
@@ -23,7 +24,7 @@ export default function ProfileEditForm({ user }: any) {
         const response = await resp.json();
         console.log(response);
         if (response?.success) {
-            alert(response?.message);
+            toast.success(response?.message);
         }
         setLoading(false);
         setOpenDialog(false);
@@ -32,7 +33,10 @@ export default function ProfileEditForm({ user }: any) {
         <div>
             <Dialog open={openDialog} onOpenChange={setOpenDialog}>
                 <DialogTitle onClick={() => setOpenDialog(true)}>
-                    <Pencil className='cursor-pointer' size='15' />
+                    <div className='border-2 px-2 cursor-pointer bg-accent flex items-center gap-4 rounded-lg py-1'>
+                        <p className='font-normal text-sm'>Edit</p>
+                        <Pencil className=' w-3 h-3' />
+                    </div>
                 </DialogTitle>
 
                 <DialogContent>
@@ -77,28 +81,28 @@ export const PersonalDetailForm = () => {
     }, [])
 
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-4 mt-4 '>
+        <div className='grid grid-cols-1 w-full gap-4 md:p-4 mt-10 md:mt-0'>
 
             <div className='flex flex-col gap-2'>
-                <p className='text-xs text-gray-400'>Enter X profile (optional)</p>
+                <p className='text-sm'>X profile (optional)</p>
                 <Input
                     placeholder='Enter X profile'
+                    className='h-[3.5rem] px-4'
                     value={socialLinks.x}
                     onChange={(e) => setSocialLinks((prev) => ({ ...prev, x: e.target.value.trim() }))}
                 />
             </div>
             <div className='flex flex-col gap-2'>
-                <p className='text-xs text-gray-400'>Enter LinkedIn profile (optional)</p>
+                <p className='text-sm'>LinkedIn profile (optional)</p>
                 <Input
                     placeholder='Enter X profile'
+                    className='h-[3.5rem] px-4'
                     value={socialLinks.linkedIn}
                     onChange={(e) => setSocialLinks((prev) => ({ ...prev, linkedIn: e.target.value.trim() }))}
                 />
             </div>
 
-            <div className='col-span-1'>
-                <button onClick={updateLinks} className='border-2 border-[#353535] rounded-lg h-fit p-2 w-[calc(50%-0.5rem)]'>Save</button>
-            </div>
+            <Button onClick={updateLinks} className='rounded-lg h-8 p-2 w-fit px-8 font-semibold'>Save</Button>
         </div>
     )
 }

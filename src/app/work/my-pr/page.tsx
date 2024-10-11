@@ -21,11 +21,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Info, Loader } from 'lucide-react';
+import { Info, Loader, Search } from 'lucide-react';
 import { Organisations as OrgType } from '@prisma/client';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import { updateUserContributedOrgs } from '@/app/actions/userAction';
+import { Input } from '@/components/ui/input';
 
 
 export default function MyPR() {
@@ -184,14 +185,14 @@ export default function MyPR() {
 
     return (
         <div className="flex flex-col items-start font-normal relative w-full">
-            <div className='h-full w-full flex-col text-white rounded-l-[12px]'>
-                <div className='flex items-center justify-between '>
+            <div className='h-full w-full flex flex-col gap-4 rounded-l-[12px]'>
+                <div className='flex p-4 rounded-xl bg-gradient-to-r from-secondary via-bg-secondary/80 to-transparent items-center justify-between '>
                     <div>Merged PRs({prdata?.length})</div>
                     <div className="flex gap-2 items-center">
-                        
+
                         {/* @ts-ignore */}
                         <Select onValueChange={(e) => setSelectedOrgData({ id: e?.id, name: e?.name, avatar: e?.avatar_url, github_url: e?.github_url })}>
-                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-background text-foreground">
+                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-background/40 text-foreground">
                                 <SelectValue placeholder="Select a Organisation" />
                             </SelectTrigger>
                             <SelectContent className='bg-background text-foreground'>
@@ -265,6 +266,11 @@ export default function MyPR() {
                     </div>
                 </div>
 
+                <div className='flex items-center border-2 px-4 py-1 rounded-md w-full max-w-md mt-4'>
+                    <Search className='w-4 h-4' />
+                    <Input className='w-full placeholder:text-opacity-10 border-none' placeholder='Search for PR' />
+                </div>
+
                 {/* PR cards */}
                 {isLoading ? (
                     <div className='flex w-full h-[80vh] gap-2 items-center justify-center'>
@@ -273,7 +279,7 @@ export default function MyPR() {
                     </div>
                 ) : (
                     prdata && prdata.length > 0 ? (
-                        <div className='grid grid-cols-1 lg:grid-cols-2 py-2 my-6 h-full flex-wrap gap-4'>
+                        <div className='grid grid-cols-1 lg:grid-cols-2 py-2 h-full flex-wrap gap-4'>
                             {prdata.map((item, index) => (
                                 <PRCard key={index} user={user} PRData={item} />
                             ))}

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import { BadgeDollarSign, EllipsisVertical, Link2, LucideExternalLink } from 'lucide-react';
+import { BadgeDollarSign, CalendarDaysIcon, EllipsisVertical, GitFork, GitMerge, Link2, LucideExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import PointIcon from "../app/assets/point.png";
 import Image from 'next/image';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
 
 export default function PRCard({ user, isCurrentUser, PRData }: any) {
     const { prURL,
@@ -17,7 +19,7 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
         org,
         userName,
         commentURL,
-        isVerified, 
+        isVerified,
         body,
         draft
     } = PRData;
@@ -81,17 +83,20 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
 
     return (
         <>
-            <div className='border-2 border-accent hover:shadow-lg transition-all duration-200 ease-linear  text-foreground flex flex-col rounded-lg h-[20rem] p-4'>
+            <div className='bg-accent/50 hover:shadow-lg transition-all duration-200 ease-linear text-foreground flex flex-col rounded-lg h-[20rem] p-4'>
                 <div className='flex items-center justify-between'>
                     <div className='flex flex-col'>
-                        <div className='flex gap-2 items-center'>
-                            <span className='font-semibold text-lg border-r-2 pr-2'>{org?.name}</span>
-                            <span className='text-xs opacity-75'>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(mergedAt)).replace(/(^\w{3})/, (match) => match.toUpperCase())}</span>
+                        <div className='flex flex-col gap-2 '>
+                            <span className='text-xl font-extrabold'>{org?.name}</span>
+                            <div className='flex items-center gap-2'>
+                                <CalendarDaysIcon className='w-4 h-4' />
+                                <span className='text-xs opacity-75'>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(mergedAt)).replace(/(^\w{3})/, (match) => match.toUpperCase())}</span>
+                            </div>
                         </div>
 
                         {/* <div className='text-xs font-semibold opacity-75'>Merged on : Apr 1, 2024</div> */}
                     </div>
-                    <div className="!w-[2.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[2.5rem]">
+                    <div className="!w-[3.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[3.5rem]">
                         <Avatar>
                             <AvatarImage className='rounded-full' src={org?.avatar_url || ''} alt="@shadcn" />
                             <AvatarFallback className='bg-[#fff]!w-[2.5rem]  rounded-full flex items-center p-[0.2rem]  justify-center !h-[2.5rem] text-black'>{user?.name?.slice(0, 2).toUpperCase()}</AvatarFallback>
@@ -100,24 +105,32 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
                 </div>
                 <div className='mt-4  flex-1'>
                     <div className='mb-2 flex items-center gap-2'>
-                        <span className='flex items-center gap-1 text-sm'>{repoURL.split("/")[repoURL.split("/").length - 1]}</span>
-                        <span className='text-md opacity-75'>#{prNumber}</span>
+                        <Badge variant="secondary" className="text-sm flex items-center gap-2 font-medium">
+                            <GitFork className='w-4 h-4' />
+                            <span className='flex items-center gap-1 text-sm'>{repoURL.split("/")[repoURL.split("/").length - 1]}</span>
+                        </Badge>
+                        <Badge variant="secondary" className="text-sm font-medium">
+                            <span className='text-md opacity-75'>#{prNumber}</span>
+                        </Badge>
                     </div>
-                    <span className='text-2xl font-[600]'>{prTitle.slice(0, 40)}...</span>
-                    <div className='flex items-center gap-2'>
-                        <div className='mt-2 border-2 border-yellow-500 px-2 py-1 rounded-full gap-1 flex items-center'>
+
+                    <div className='my-4'>
+                        <span className='text-2xl font-[600]'>{prTitle.slice(0, 40)}...</span>
+                    </div>
+                    {/* the bounty system may be dropped soon or we need to have a better generalised idea about them */}
+                    <div className='flex items-center gap-2 my-2'>
+                        <Badge variant="secondary" className="text-sm font-medium flex items-center bg-primary/20 gap-2 rounded-full">
                             <Image width='400' height='400' className='w-[1rem] h-[1rem]' src="https://img.icons8.com/3d-fluency/94/dollar-coin.png" alt="coin-image" />
                             <span className='text-sm'>{prPoint}</span>
-                        </div>
-                        {
+                        </Badge>
+                        {/* {
                             bounty && bounty?.length !== 0 && (
                                 <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                                     <BadgeDollarSign size={18} className='text-green-500' />
-                                    {/* <span className='text-sm'>{bounty[0]}</span> */}
                                     <span className='text-sm'>{bounty}</span>
                                 </div>
                             )
-                        }
+                        } */}
                     </div>
                 </div>
 
@@ -142,14 +155,20 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
                     </div>
                 </div> */}
                 <div className='mt-4 flex items-center justify-between '>
-                    <div className={`text-sm h-fit w-fit rounded-full ${renderPRQualityViaBounty(bounty)?.textColor} font-bold flex items-center gap-2`}>
+                    {/* <div className={`text-sm h-fit w-fit rounded-full ${renderPRQualityViaBounty(bounty)?.textColor} font-bold flex items-center gap-2`}>
                         <div className={`h-[0.5rem]  rounded-full w-[0.5rem] ${renderPRQualityViaBounty(bounty)?.bgColor} `}></div>
                         {renderPRQualityViaBounty(bounty)?.text}
-                    </div>
-                    <div className='flex hover:underline items-center gap-2'>
-                        <Link href={prURL} target='_blank' className='flex items-center gap-1'>PR <LucideExternalLink size={15} /></Link>
-                        {isCurrentUser && <span className=''><EllipsisVertical /></span>}
-                    </div>
+                    </div> */}
+
+                    <Badge variant="secondary" className="text-sm font-medium flex items-center bg-purple-500/80 gap-2 rounded-md text-white">
+                        <GitMerge className='w-4 h-4' />
+                        <span className='text-sm'>Merged</span>
+                    </Badge>
+                    <Button className='flex items-center font-semibold gap-1 p-0'>
+                        <Link href={prURL} target='_blank' className='flex items-center font-semibold gap-1 w-full p-2'>
+                            View PR <LucideExternalLink size={15} />
+                        </Link>
+                    </Button>
                 </div>
             </div>
 
