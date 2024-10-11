@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import localFont from 'next/font/local';
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import Script from "next/script";
 
 const circular = localFont({
   variable: '--font-paragraph',
@@ -81,7 +82,7 @@ export default function RootLayout({
         </ThemeProvider>
         {/* <Analytics /> */}
         <Toaster richColors />
-        <script src="https://custom-web-widget.vercel.app/widget.umd.js"></script>
+        <Script async src="https://custom-web-widget.vercel.app/widget.umd.js"></Script>
       </body>
     </html >
   );
