@@ -81,7 +81,7 @@ export default function Embed() {
             <div>
               <p className="font-semibold text-red-500">No Pull Requests Found</p>
               <p className="text-sm">
-                It seems you don't have any pull requests saved in the
+                It seems you don&apos;t have any pull requests saved in the
                 <Badge className='font-secondary bg-accent hover:bg-accent text-foreground mx-1'>
                   Merged<span className='text-primary'>&</span>Share
                 </Badge>
