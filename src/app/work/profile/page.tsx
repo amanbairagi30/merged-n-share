@@ -96,21 +96,21 @@ export default async function ProfilePage() {
 
                 <div className='w-full grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-4 gap-3 border-t-2 mt-4 p-6'>
                     <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 overflow-hidden rounded-xl'>
-                        <p className='text-gray-400 mb-3'>Email</p>
+                        <p className='dark:text-gray-400 mb-3'>Email</p>
                         <span>{user?.email}</span>
                     </div>
                     <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
-                        <p className='text-gray-400 mb-3'>Username</p>
+                        <p className='dark:text-gray-400 mb-3'>Username</p>
                         {/* @ts-ignore */}
                         <span>{user?.username}</span>
                     </div>
                     <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
-                        <p className='text-gray-400 mb-3'>Merged PRs</p>
+                        <p className='dark:text-gray-400 mb-3'>Merged PRs</p>
                         {/* @ts-ignore */}
                         <span>{prData.length}</span>
                     </div>
                     <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
-                        <p className='text-gray-400 mb-3'>Profile Visibility</p>
+                        <p className='dark:text-gray-400 mb-3'>Profile Visibility</p>
                         {/* @ts-ignore */}
                         <ProfileSwitch />
                     </div>

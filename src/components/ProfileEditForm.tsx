@@ -63,6 +63,13 @@ export const PersonalDetailForm = () => {
             method: "PUT",
             body: JSON.stringify({ socialLinks })
         })
+
+        const finalResponse = await response.json();
+        if(finalResponse.success){
+            toast.success("Links Updated Successfully");
+        }else{
+            toast.error("Something went wron , Please try again after sometime");
+        }
     }
 
     const getUserDetails = async () => {
@@ -81,7 +88,7 @@ export const PersonalDetailForm = () => {
     }, [])
 
     return (
-        <div className='grid grid-cols-1 w-full gap-4 md:p-4 mt-10 md:mt-0'>
+        <div className='grid grid-cols-1 w-full gap-10 md:p-4 mt-10 md:mt-0'>
 
             <div className='flex flex-col gap-2'>
                 <p className='text-sm'>X profile (optional)</p>
@@ -95,7 +102,7 @@ export const PersonalDetailForm = () => {
             <div className='flex flex-col gap-2'>
                 <p className='text-sm'>LinkedIn profile (optional)</p>
                 <Input
-                    placeholder='Enter X profile'
+                    placeholder='Enter LinkedIn profile'
                     className='h-[3.5rem] px-4'
                     value={socialLinks.linkedIn}
                     onChange={(e) => setSocialLinks((prev) => ({ ...prev, linkedIn: e.target.value.trim() }))}

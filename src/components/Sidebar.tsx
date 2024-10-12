@@ -55,8 +55,8 @@ export default function Sidebar() {
             {/* <main className=' font-bold  mt-6 px-4'> */}
             <div className='text-xs font-bold  mt-6 px-4 text-slate-400 tracking-wider'>GENERAL</div>
 
-            <div className='flex font-bold  mt-6 px-2 justify-between flex-1 flex-col'>
-                <div className='flex gap-4 h-fit flex-col'>
+            <div className='flex font-bold  mt-6 pl-2 justify-between flex-1 flex-col'>
+                <div className='flex gap-2 h-fit flex-col'>
 
                     {
                         sideBarOptions.general.map((x, idx) => {
@@ -70,8 +70,10 @@ export default function Sidebar() {
 
                             return (
                                 <Link onClick={() => toggleSidebar(false)} href={`${x.href}`} key={idx}>
-                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center text-sm cursor-pointer ${activeIndex === idx ? 'bg-primary dark:text-background' : 'hover:bg-accent'} rounded-md px-2 py-2 h-fit gap-2`}>
-                                        <x.icon size={18} />
+                                    <div onClick={() => setActiveIndex(idx)} className={`flex items-center text-sm cursor-pointer ${activeIndex === idx ? 'bg-primary/20 border-r-[5px] border-primary' : 'hover:bg-accent'} rounded-l-md px-2 py-2 h-fit gap-1`}>
+                                        <div className={`${activeIndex === idx ? "bg-primary text-black mr-2 rounded-md" : ""} p-1 `}>
+                                            <x.icon size={18} />
+                                        </div>
                                         <p>{x.name}</p>
                                     </div>
                                 </Link>
