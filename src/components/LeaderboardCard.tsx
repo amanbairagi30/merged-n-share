@@ -17,17 +17,17 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
             <ul className='mt-[2rem] flex flex-col gap-[1.5rem] items-center'>
                 {leaderboard.map((user: any) => (
                     // @ts-ignore
-                    <li className={`border-2 ${currUser?.id === user.id ? 'border-blue-500' : ' '} flex rounded-lg  border-[#353535] w-full md:w-[60%] h-fit`} key={user.id}>
+                    <li className={`border-2 ${currUser?.id === user?.id ? 'border-blue-500' : ' '} flex rounded-lg  border-[#353535] w-full md:w-[60%] h-fit`} key={user.id}>
                         {/* {user.name || user.username} - {user.totalPoints} - {user.bounties} points */}
                         <div className='w-[7rem] h-[7rem] '>
                             <Image src={user?.image} className='w-full rounded-l-lg h-full' width='1500' height='1500' alt='user_image' />
                         </div>
 
-                        <div className={`${currUser.id === user.id ? ' border-blue-500' : ''} flex-1 flex flex-col p-2 px-3 h-[7rem]`}>
+                        <div className={`${currUser?.id === user?.id ? ' border-blue-500' : ''} flex-1 flex flex-col p-2 px-3 h-[7rem]`}>
                             <div className='text-base flex items-center justify-between font-semibold'>
                                 <div className='flex gap-2'>
                                     <p>{user?.name}</p>
-                                    {currUser?.id === user.id && <div className='bg-blue-500 rounded-md text-[0.6rem] px-2 h-fit flex items-center justify-center '>YOU</div>}
+                                    {currUser?.id === user?.id && <div className='bg-blue-500 rounded-md text-[0.6rem] px-2 h-fit flex items-center justify-center '>YOU</div>}
                                 </div>
                                 <Link href={`${process.env.NEXT_PUBLIC_URL}/profile/${user?.username}`} target='_blank' className='flex items-center text-sm cursor-pointer'><LucideExternalLink size={16} /></Link>
                             </div>
