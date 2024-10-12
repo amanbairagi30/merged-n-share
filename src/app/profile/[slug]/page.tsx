@@ -16,6 +16,8 @@ import PRListings from '@/components/PRListings';
 import Link from 'next/link';
 import ContributedOrg from '@/components/ContributedOrg';
 import RequestAccessButton from '@/components/RequestAccessButton';
+import MarketingNavbar from '@/components/fixed-marketing-navbar';
+import { Badge } from '@/components/ui/badge';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -109,9 +111,80 @@ export default async function PublicProfilePage({ params }: any) {
     }, 0);
 
     return (
-        <div className=' min-h-screen max-h-fit text-white'>
-            <div className='max-w-[1280px] mx-auto mt-4 px-2'>
-                <div className='border-2 flex items-center justify-between p-2 rounded-md border-[#353535] text-white'>
+        <div className=' min-h-screen max-h-fit'>
+            <MarketingNavbar />
+            <div className='h-48 border-b-2 bg-accent/50'></div>
+            <div className='px-4'>
+                <div className='h-fit min-h-[10rem] max-w-7xl mx-auto relative'>
+                    <div className='border-2 shadow-2xl rounded-xl absolute left-[50%] translate-x-[-50%] w-[90%] md:w-[80%] lg:w-[50%] bg-accent -top-[8rem] h-fit p-4'>
+                        <div className='flex items-center gap-4'>
+                            <Image className='w-[4rem] md:w-[5rem] h-[4rem] md:h-[5rem] rounded-md' src={urlUser?.image ?? ''} width='400' height='100' alt='user_avatar' />
+                            <div className='flex flex-col gap-2'>
+                                <div className=' text-lg md:text-2xl lg:text-3xl font-semibold'>{urlUser?.name}</div>
+                                {/* @ts-ignore */}
+                                {/* <div className='text-xs'>{user?.username}</div> */}
+                                <div className='flex items-center gap-4'>
+                                    <Link href={`https://github.com/${urlUser?.username}`} target='_blank'>
+                                        <GitHubLogoIcon width={20} height={20} />
+                                    </Link>
+                                    {
+                                        urlUser?.linkedInProfile &&
+                                        <Link href={urlUser?.linkedInProfile || ''} target='_blank'>
+                                            <LinkedInLogoIcon width={20} height={20} />
+                                        </Link>
+                                    }
+
+                                    {
+                                        urlUser?.xProfile &&
+                                        <Link href={urlUser?.xProfile || ''} target='_blank'>
+                                            <Image className='w-[1.3rem] h-[1.3rem] dark:invert' src={x} width='500' height='500' alt='x' />
+                                        </Link>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='w-full grid grid-cols-1 sm:gird-cols-2 lg:grid-cols-4 gap-4  mt-14 p-6'>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 overflow-hidden rounded-xl'>
+                            <p className='dark:text-gray-400 mb-3'>Contributed Orgs ({urlUser?.contributedOrgs?.length})</p>
+                            <ContributedOrg
+                                contributions={urlUser?.contributedOrgs}
+                            />
+                        </div>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                            <p className='dark:text-gray-400 mb-3'>Merged PRs</p>
+                            {/* @ts-ignore */}
+                            <span>{urlUser?.pullRequests.length}</span>
+                        </div>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                            <p className='dark:text-gray-400 mb-3'>Username</p>
+                            {/* @ts-ignore */}
+                            <span>{user?.username}</span>
+                        </div>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                            <p className='dark:text-gray-400 mb-3'>Email</p>
+                            {/* @ts-ignore */}
+                            <span>{urlUser?.email}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className='max-w-[1440px] mx-auto p-4 rounded-xl'>
+                    <div className='flex items-center justify-center'>
+                        <Badge className='text-sm bg-accent text-foreground py-2 px-6 rounded-xl hover:bg-accent font-bold mb-6'>All PRs</Badge>
+                    </div>
+
+                    <PRListings
+                        urlUser={urlUser}
+                        user={user}
+                        organisationData={organisationData}
+                    />
+                </div>
+            </div>
+
+            {/* <div className='max-w-[1280px] mx-auto mt-4 px-2'>
+                <div className='border-2 flex items-center justify-between p-2 rounded-md border-accent '>
                     <div className='flex items-center gap-2'>
                         <Image className='w-[2rem] rounded-md h-[2rem]' src={urlUser?.image ?? ''} width='500' height='500' alt='user_avatar' />
                         <p className='font-semibold text-base'>{urlUser?.username}</p>
@@ -147,15 +220,7 @@ export default async function PublicProfilePage({ params }: any) {
                     </div>
                     <div className='text-[2.5rem] flex flex-col leading-[2.2rem] my-2 font-semibold'>
                         <p>{urlUser.name}</p>
-                        {/* <div>
-                            <button className="relative inline-flex h-fit overflow-hidden rounded-full p-[2px] focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-                                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-
-                                <div className="inline-flex h-fit w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-xs font-medium text-white backdrop-blur-3xl">
-                                    #7 ranked among 89+ contributers in code100x
-                                </div>
-                            </button>
-                        </div> */}
+                      
                     </div>
                     <div className='flex items-center gap-2 w-full'>
                         <div className='mt-2 border-2 border-yellow-500 px-2 py-1 rounded-full gap-1 flex items-center'>
@@ -165,7 +230,6 @@ export default async function PublicProfilePage({ params }: any) {
 
                         <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>
                             <BadgeDollarSign size={18} className='text-green-500' />
-                            {/* <span className='text-sm'>{bounty[0]}</span> */}
                             <span className='text-xs md:text-sm '>{totalBounty}</span>
                         </div>
                     </div>
@@ -173,7 +237,6 @@ export default async function PublicProfilePage({ params }: any) {
                 <div className='px-2 '>
                     <div className='flex my-4 justify-between items-center'>
                         <p>Merged PRs</p>
-                        {/* <h1 className='text-gray-300 '>List of PR got merged of {urlUser?.name}</h1> */}
                         <p>Total {urlUser?.pullRequests.length} merged PRs</p>
 
 
@@ -185,7 +248,7 @@ export default async function PublicProfilePage({ params }: any) {
                     />
                 </div>
 
-            </div>
+            </div> */}
         </div>
     )
 }

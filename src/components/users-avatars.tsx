@@ -20,5 +20,5 @@ const avatarUrls = [
 ];
 
 export async function UsersAvatar() {
-    return <AvatarCircles numPeople={10} avatarUrls={avatarUrls} />;
+    return <AvatarCircles numPeople={0} avatarUrls={avatarUrls} />;
 }

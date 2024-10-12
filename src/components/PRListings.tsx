@@ -21,10 +21,10 @@ export default function PRListings({ urlUser, user, pullRequests, organisationDa
             <div className="flex gap-2 ">
                 {/* @ts-ignore */}
                 <Select onValueChange={(value) => setSelectedOrg(value.id)}>
-                    <SelectTrigger className="w-[200px] p-4 bg-[#202020]">
+                    <SelectTrigger className="w-[200px] p-4 ">
                         <SelectValue placeholder="Select a Organisation" />
                     </SelectTrigger>
-                    <SelectContent className='bg-[#202020] text-white'>
+                    <SelectContent className=''>
                         <SelectGroup>
                             <SelectLabel>Select Orgs</SelectLabel>
                             <SelectItem value={' '}>
