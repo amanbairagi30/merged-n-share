@@ -8,8 +8,7 @@ import React from 'react'
 export default async function Dashboard() {
     const session = await getServerSession(authOptions);
     const user = session?.user;
-    // @ts-ignore
-    const username = user?.username
+    const username = user?.username;
     const fetchedUser = await getUserProfile(username);
 
 

@@ -12,9 +12,8 @@ declare module "next-auth" {
             id: string;
             name?: string | null;
             email?: string | null;
-            username?: string | null;
+            username?: string | undefined;
         };
-        accessToken?: string;
     }
 }
 
