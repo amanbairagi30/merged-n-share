@@ -84,7 +84,7 @@ export default async function PublicProfilePage({ params }: any) {
                                         {/* <h2 className='text-xs'>Hi , This is </h2> */}
                                         <div className=' text-lg md:text-2xl lg:text-3xl font-semibold'>Profile Not Found</div>
                                         <p className='mt-6 text-lg dark:text-gray-300'>
-                                            We tried our best but we couldn't find the user contributions and other details associated with the username <strong className='italic'>{un}</strong>
+                                            We tried our best but we couldn&apos;t find the user contributions and other details associated with the username <strong className='italic'>{un}</strong>
                                         </p>
                                     </div>
                                     <HomeButton />
