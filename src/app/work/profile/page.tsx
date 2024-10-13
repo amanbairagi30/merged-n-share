@@ -69,7 +69,7 @@ export default async function ProfilePage() {
                                         <TooltipTrigger asChild>
                                             {/* @ts-ignore */}
                                             <Link className='border-2 bg-accent rounded-lg flex items-center gap-2 px-2 py-1' href={`/profile/${user?.username}`} target='_blank'>
-                                                <p className='text-sm'>Preview</p>
+                                                <p className='text-sm'>Public Profile</p>
                                                 <ExternalLink className='cursor-pointer' size='15' />
                                             </Link>
                                         </TooltipTrigger>

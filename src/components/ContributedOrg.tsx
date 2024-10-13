@@ -23,6 +23,9 @@ export default function ContributedOrg({ contributions }: ContributionType) {
                         )
                     })
                 }
+                {
+                    contributions?.length === 0 && "No contributions yet"
+                }
             </div>
         </div>
     )

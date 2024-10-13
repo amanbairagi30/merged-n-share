@@ -13,7 +13,7 @@ export default function PRListings({ urlUser, user, pullRequests, organisationDa
         return urlUser?.pullRequests?.some((item: any) => item.org.id === selectedOrg)
     }
 
-    const filteredPullRequests = selectedOrg ? urlUser?.pullRequests?.filter((item: any) => item.org.id === selectedOrg) : urlUser?.pullRequests;
+    const filteredPullRequests = selectedOrg ? urlUser?.pullRequests?.filter((item: any) => item?.org?.id === selectedOrg) : urlUser?.pullRequests;
 
 
     return (
