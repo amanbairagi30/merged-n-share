@@ -130,7 +130,7 @@ export default async function ProfilePage() {
                 </div> */}
 
             </main>
-            <section className='mt-12 border-2 grid grid-cols-1 md:grid-cols-2 gap-2 rounded-xl p-6'>
+            <section className='mt-12 border grid grid-cols-1 md:grid-cols-2 gap-2 rounded-xl p-6'>
                 <div className=' flex flex-col gap-2 '>
                     <p className='text-xl'>Personal Details</p>
                     <span className='text-sm text-gray-300'>Add your personal information here</span>

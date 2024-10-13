@@ -9,15 +9,18 @@ import Github from '@/app/assets/github.svg';
 import Link from 'next/link';
 import { useSidebarStore } from '@/store/sidebar';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { Button } from './ui/button';
 
 export default function Sidebar() {
     const pathName = usePathname();
     const [activeIndex, setActiveIndex] = useState<number | null>(() => {
-        return pathName === '/works/dashboard' ? 0 : null
+        return pathName === '/work/dashboard' ? 0 : null
     })
     const router = useRouter();
     const session = useSession();
     const user = session?.data?.user;
+
+    const isProfile = pathName === '/work/profile';
 
     const sidebarVisibility = useSidebarStore((state) => state.sidebarVisibility);
     const toggleSidebar = useSidebarStore((state) => state.toggleSidebarVisibility);
@@ -55,8 +58,8 @@ export default function Sidebar() {
             {/* <main className=' font-bold  mt-6 px-4'> */}
             <div className='text-xs font-bold  mt-6 px-4 text-slate-400 tracking-wider'>GENERAL</div>
 
-            <div className='flex font-bold  mt-6 pl-2 justify-between flex-1 flex-col'>
-                <div className='flex gap-2 h-fit flex-col'>
+            <div className='flex font-bold  mt-6 justify-between flex-1 flex-col'>
+                <div className='flex gap-2 h-fit pl-2  flex-col'>
 
                     {
                         sideBarOptions.general.map((x, idx) => {
@@ -82,28 +85,23 @@ export default function Sidebar() {
                         )
                     }
                 </div>
-                <button onClick={() => { router.push(`/work/profile`); toggleSidebar(false) }} className="bg-slate-800 no-underline group mb-4 cursor-pointer relative shadow-2xl shadow-zinc-900 rounded-full p-px font-semibold leading-6  text-white inline-block">
-                    <span className="absolute inset-0 overflow-hidden rounded-full">
-                        <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
-                    </span>
-                    <div className="flex items-center z-10 rounded-full bg-zinc-950 py-2 px-4 ring-1 ring-white/10 ">
 
-                        <div className='w-[20%]'>
-                            <Image className='w-[2rem] h-[2rem] rounded-full' src={user?.image ?? ''} height='500' width='400' alt='user_avatar' />
-                        </div>
-                        <div className='w-[80%] font-normal text-start flex flex-col'>
-                            {/* @ts-ignore */}
-                            <div className=' text-sm font-semibold'>{user?.username}</div>
-                            <div className='text-xs text-gray-400'>{user?.email}</div>
-                        </div>
+                <Button onClick={() => { router.push(`/work/profile`); toggleSidebar(false) }} className={`flex border-2 text-foreground items-center ${isProfile ? "border-primary bg-primary/10" :"bg-transparent hover:bg-primary/5"} hover:bg-primary/5 z-10 mb-4 rounded-xl py-8 px-4 mx-4`}>
+
+                    <div className='w-[20%]'>
+                        <Image className='w-[2rem] h-[2rem] rounded-full' src={user?.image ?? ''} height='500' width='400' alt='user_avatar' />
                     </div>
-                    <span className="absolute -bottom-0 left-[1.125rem] h-px w-[calc(100%-2.25rem)] bg-gradient-to-r from-emerald-400/0 via-primary/90 to-primary/0 transition-opacity duration-500 group-hover:opacity-40"></span>
-                </button>
+                    <div className='w-[80%] font-normal text-start flex flex-col'>
+                        {/* @ts-ignore */}
+                        <div className=' text-sm font-semibold'>{user?.username}</div>
+                        <div className='text-xs text-gray-400'>{user?.email}</div>
+                    </div>
+                </Button>
+
 
 
             </div>
 
-            {/* </main> */}
         </div>
     )
 }

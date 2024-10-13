@@ -14,7 +14,6 @@ export default function Embed() {
   const [userData, setUserData] = useState<any>([]);
   const session = useSession();
   const user = session?.data?.user;
-  // @ts-ignore
   const username = user?.username;
 
   const getData = async () => {
@@ -99,8 +98,6 @@ export default function Embed() {
         </div>
 
       }
-
-
 
       <h1 className='text-xl mb-4 md:mb-2'>Embed your PRs to your own website</h1>
       <div className='text-sm font-normal text-gray-500 dark:text-gray-400'>

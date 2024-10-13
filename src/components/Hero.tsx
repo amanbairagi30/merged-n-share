@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { UsersAvatar } from "@/components/users-avatars";
 import { GitMerge } from "lucide-react";
 import { signIn } from 'next-auth/react';
+import { DesktopScreen } from './desktop-screen';
 
 
 export default function Hero() {
@@ -26,7 +27,7 @@ export default function Hero() {
                         Showcase your open source contributions as <span className="transition-all font-[900] duration-200 bg-clip-text clip-text  text-transparent bg-gradient-to-r from-yellow-500 to-yellow-200 w-fit h-fit">Proof of Work</span>
                     </div>
 
-                    <div className="text-xs md:text-base text-center font-paragraph md:w-[60%]">
+                    <div className="text-xs md:text-base text-center font-paragraph md:w-[40%]">
                         Highlight your merged pull requests and share your impact on the open source community with the world.
                     </div>
 
@@ -35,14 +36,16 @@ export default function Hero() {
                     </div>
 
                 </div>
-                <div className="flex items-center gap-4">
-                    <Button onClick={async () => await signIn()} className="font-bold h-10 font-paragraph">Explore the arena</Button>
-                    <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-primary/10 h-10">What&apos;s more ?</Button>
+                <div className="flex flex-col w-full md:flex-row items-center justify-center gap-4 mt-4 ">
+                    <Button onClick={async () => await signIn()} className="font-bold h-8 font-paragraph w-full md:w-fit">Sign Up</Button>
+                    <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-accent h-8 w-full md:w-fit">What&apos;s more ?</Button>
                 </div>
             </div>
 
+            <DesktopScreen />
 
-            <section className="flex items-center justify-center">
+
+            {/* <section className="flex items-center justify-center">
 
                 <div
                     className="relative flex items-center justify-center w-24 md:w-64 h-24 md:h-64 rounded-3xl bg-gradient-to-br from-yellow-400 to-yellow-600 overflow-hidden"
@@ -53,10 +56,8 @@ export default function Hero() {
                     <div className="borer-2 px-4 py-4 w-fit rounded-3xl">
                         <GitMerge className="w-16  md:w-44 text-black h-44" />
                     </div>
-                    {/* Base gradient and inner shadow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent to-yellow-900 opacity-30" />
 
-                    {/* Enhanced shine effect */}
                     <div
                         className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-transparent opacity-90"
                         style={{
@@ -64,7 +65,6 @@ export default function Hero() {
                         }}
                     />
 
-                    {/* Static reflection */}
                     <div
                         className="absolute inset-0 bg-gradient-radial from-yellow-100 to-transparent opacity-50"
                         style={{
@@ -72,7 +72,6 @@ export default function Hero() {
                         }}
                     />
 
-                    {/* Animated shine */}
                     <div
                         className="absolute inset-0 opacity-30 animate-pulse"
                         style={{
@@ -82,10 +81,9 @@ export default function Hero() {
                         }}
                     />
 
-                    {/* Edge highlight */}
                     <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-transparent opacity-30 rounded-3xl" />
                 </div>
-            </section>
+            </section> */}
         </section>
     )
 }

@@ -31,11 +31,11 @@ export const Navbar = () => {
                 <aside className="flex items-center gap-2">
                     <SelectTheme />
 
-                    <Link href="https://github.com/amanbairagi30/merged-n-share" className="flex items-center cursor-pointer hover:bg-accent gap-2 border-2 px-2 py-1 rounded-md" target="_blank" rel="noopener noreferrer">
+                    <Link href="https://github.com/amanbairagi30/merged-n-share" className="flex items-center cursor-pointer bg-accent gap-2 border-2 px-2 py-1 rounded-md" target="_blank" rel="noopener noreferrer">
                         <GitHubLogoIcon className="h-5 w-5" />
                         <span className="hidden md:block">Star on Github</span>
                     </Link>
-                    <Link href="mailto:amanbairagi1089@gmail.com" className="flex items-center cursor-pointer hover:bg-accent gap-2 border-2 px-2 py-1 rounded-md" target="_blank" rel="noopener noreferrer">
+                    <Link href="mailto:amanbairagi1089@gmail.com" className="flex items-center cursor-pointer bg-accent gap-2 border-2 px-2 py-1 rounded-md" target="_blank" rel="noopener noreferrer">
                         <MailIcon className="h-5 w-5" />
                         <span className="hidden md:block">Contact Us</span>
                     </Link>

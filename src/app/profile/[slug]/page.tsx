@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import React from 'react'
 import x from "@/app/assets/x.svg"
-import { BadgeDollarSign, Lock, User } from 'lucide-react';
+import { BadgeDollarSign, Lock, LockIcon, Rss, User } from 'lucide-react';
 import PRCard from '@/components/PRCard';
 import { Organisations, PullRequest } from '@prisma/client';
 import { getServerSideProps } from 'next/dist/build/templates/pages';
@@ -19,6 +19,9 @@ import RequestAccessButton from '@/components/RequestAccessButton';
 import MarketingNavbar from '@/components/fixed-marketing-navbar';
 import { Badge } from '@/components/ui/badge';
 import X from '@/components/svgs/x';
+import Footer from '@/components/footer';
+import { Button } from '@/components/ui/button';
+import HomeButton from '@/components/home-button';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -65,11 +68,36 @@ export default async function PublicProfilePage({ params }: any) {
 
     if (!urlUser) {
         return (
-            <div className='h-screen w-screen border-2 border-transparent text-white'>
-                <div className='max-w-[800px] flex flex-col rounded-lg items-center justify-center p-[2.5rem] border-2 border-[#353535] mx-auto mt-[5rem]'>
-                    404 - Not found
-                    <p>There is no user with this username</p>
+            <div className='h-screen'>
+                <MarketingNavbar />
+                <div className='flex flex-col justify-between h-full'>
+                    <div className=''>
+                        <div className='h-80 border-b-2 bg-accent/50'></div>
+                        <div className='h-fit pt-16 md:pt-24 mb-12 rounded-b-2xl min-h-[10rem] max-w-7xl mx-auto relative'>
+                            <div className='border shadow-2xl rounded-xl absolute left-[50%] translate-x-[-50%] w-[90%] md:w-[80%] lg:w-[40%] bg-accent -top-[10rem] min-h-[20rem] max-h-fit p-4'>
+                                <div className='flex flex-col items-center justify-center gap-2'>
+                                    <div className='bg-primary/20 border-2 my-4 w-[4.5rem] md:!w-[5.5rem] h-fit md:h-fit p-2 rounded-md flex items-center justify-center border-primary'>
+                                        <span className='font-secondary text-3xl'>404</span>
+                                    </div>
+                                    {/* <Image className='w-[4.5rem] md:w-[5.5rem] h-[4.5rem] md:h-[5.5rem] rounded-md' src={urlUser?.image ?? ''} width='400' height='100' alt='user_avatar' /> */}
+                                    <div className='flex text-center flex-col w-full'>
+                                        {/* <h2 className='text-xs'>Hi , This is </h2> */}
+                                        <div className=' text-lg md:text-2xl lg:text-3xl font-semibold'>Profile Not Found</div>
+                                        <p className='mt-6 text-lg dark:text-gray-300'>
+                                            We tried our best but we couldn't find the user contributions and other details associated with the username <strong className='italic'>{un}</strong>
+                                        </p>
+                                    </div>
+                                    <HomeButton />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className='max-w-[1440px] mx-auto w-full px-4 my-12'>
+                        <Footer />
+                    </div>
                 </div>
+
             </div>
         )
     }
@@ -78,23 +106,66 @@ export default async function PublicProfilePage({ params }: any) {
     if (!urlUser.isProfilePublic && urlUser?.id !== user?.id) {
         return (
             <>
-                <div className='h-screen px-4 text-center w-screen border-2 border-transparent text-white'>
-                    <div className='max-w-[800px] flex flex-col rounded-lg items-center justify-center p-[2.5rem] border-2 border-[#353535] mx-auto mt-[5rem]'>
-                        <Lock size={30} className='my-4' />
-                        <header className="flex items-center border-neutral-900 justify-between">
-                            <aside className="flex items-center gap-[10px]">
-                                <p className="text-neutral-100 text-xl font-extrabold">Merged<span className="text-blue-500">&</span>Share</p>
-                            </aside>
-                        </header>
-                        <div className='flex flex-col items-center justify-center mt-4'>
-                            <div>This person&apos;s profile is private</div>
-                            <div>React out : {urlUser?.email}</div>
+                <div className='h-screen'>
+                    <MarketingNavbar />
+                    <div className='flex flex-col justify-between h-full'>
+                        <div className=''>
+                            <div className='h-48 border-b-2 bg-accent/50'></div>
+                            <div className=' border-b-2 h-fit pt-16 md:pt-24 mb-12 border-l-2 border-r-2 rounded-b-2xl min-h-[10rem] max-w-7xl mx-auto relative'>
+                                <div className='border shadow-2xl rounded-xl absolute left-[50%] translate-x-[-50%] w-[90%] md:w-[80%] lg:w-[50%] bg-accent -top-[3.5rem] h-fit p-4'>
+                                    <div className='flex items-center gap-4'>
+                                        <div className='bg-primary/20 border-2 w-[4.5rem] md:!w-[5.5rem] h-[4.5rem] md:h-[5.5rem] rounded-md flex items-center justify-center border-primary'>
+                                            <LockIcon className='w-10 h-10 text-primary' />
+                                        </div>
+                                        {/* <Image className='w-[4.5rem] md:w-[5.5rem] h-[4.5rem] md:h-[5.5rem] rounded-md' src={urlUser?.image ?? ''} width='400' height='100' alt='user_avatar' /> */}
+                                        <div className='flex flex-col w-[85%] md:gap-2'>
+                                            {/* <h2 className='text-xs'>Hi , This is </h2> */}
+                                            <div className=' text-lg md:text-2xl lg:text-3xl font-semibold'>{urlUser?.name}</div>
+                                            <p className='leading-[20px] text-sm  dark:text-gray-300'>This profile has been made private by the owner of this profile , To see this profile please contact the owner of this profile </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className='w-full blur-[10px] grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4   p-6'>
+                                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 overflow-hidden rounded-xl'>
+                                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Contributed Orgs ({urlUser?.contributedOrgs?.length})</p>
+                                        <span>Private</span>
+                                    </div>
+                                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Merged PRs</p>
+                                        {/* @ts-ignore */}
+                                        <span>Private</span>
+                                    </div>
+                                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Username</p>
+                                        {/* @ts-ignore */}
+                                        <span>Private</span>
+                                    </div>
+                                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Email</p>
+                                        {/* @ts-ignore */}
+                                        <span>Private</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <p className='my-[1rem]'>or</p>
+                        <div className='max-w-[1440px] mx-auto p-4 rounded-xl'>
 
-                        <RequestAccessButton />
+                            {/* <div className='mt-12 flex gap-2 border-2 p-4 rounded-xl'>
+                            <Rss className='w-6 h-6 -rotate-90' />
+                            <div className='flex flex-col gap-2'>
+                                <p>Request</p>
+                                <span>You can aslo request the user to make their profile public by pinging them </span>
+                            </div>
+                        </div> */}
+                        </div>
+
+                        <div className='max-w-[1440px] mx-auto w-full px-4 my-12'>
+                            <Footer />
+                        </div>
                     </div>
+
                 </div>
             </>
         )
@@ -112,90 +183,100 @@ export default async function PublicProfilePage({ params }: any) {
     }, 0);
 
     return (
-        <div className=' min-h-screen max-h-fit'>
-            <MarketingNavbar />
-            <div className='h-48 border-b-2 bg-accent/50'></div>
-            <div className=' border-b-2 h-fit pt-16 md:pt-24 mb-12 border-l-2 border-r-2 rounded-b-2xl min-h-[10rem] max-w-7xl mx-auto relative'>
-                <div className='border shadow-2xl rounded-xl absolute left-[50%] translate-x-[-50%] w-[90%] md:w-[80%] lg:w-[50%] bg-accent -top-[3.5rem] h-fit p-4'>
-                    <div className='flex items-center gap-4'>
-                        <Image className='w-[4.5rem] md:w-[5.5rem] h-[4.5rem] md:h-[5.5rem] rounded-md' src={urlUser?.image ?? ''} width='400' height='100' alt='user_avatar' />
-                        <div className='flex flex-col gap-2'>
-                            <div>
-                                {/* <h2 className='text-xs'>Hi , This is </h2> */}
-                                <div className=' text-lg md:text-2xl lg:text-3xl font-semibold'>{urlUser?.name}</div>
-                            </div>
-                            {/* @ts-ignore */}
-                            {/* <div className='text-xs'>{user?.username}</div> */}
-                            <div className='flex items-center gap-4'>
-                                <Link href={`https://github.com/${urlUser?.username}`} target='_blank'>
-                                    <Badge className='flex gap-2 items-center'>
-                                        <span className='hidden sm:block'>Github</span>
-                                        <GitHubLogoIcon className='w-5 h-5' />
-                                    </Badge>
-                                </Link>
-                                {
-                                    urlUser?.linkedInProfile &&
-                                    <Link href={urlUser?.linkedInProfile || ''} target='_blank'>
-                                        <Badge className='flex gap-2 items-center'>
-                                            <span className='hidden sm:block'>LinkedIn</span>
-                                            <LinkedInLogoIcon className='w-5 h-5' />
-                                        </Badge>
-                                    </Link>
-                                }
+        <>
+            {
+                (urlUser?.id === user?.id && !urlUser.isProfilePublic) ? (
 
-                                {
-                                    urlUser?.xProfile &&
-                                    <Link href={urlUser?.xProfile || ''} target='_blank'>
+                    <div className='border-2 bg-primary/10 text-center p-4'>
+                        Hi <strong>{user?.name}</strong> , When your profile is <strong>private</strong>, only you can see this page , while others will <strong>not be able</strong> to access this page
+                    </div>
+                ) : (
+                    <MarketingNavbar />
+                )
+            }
+            <div className=' min-h-screen max-h-fit'>
+                <div className='h-48 border-b-2 bg-accent/50'></div>
+                <div className=' border-b-2 h-fit pt-16 md:pt-24 mb-12 border-l-2 border-r-2 rounded-b-2xl min-h-[10rem] max-w-7xl mx-auto relative'>
+                    <div className='border shadow-2xl rounded-xl absolute left-[50%] translate-x-[-50%] w-[90%] md:w-[80%] lg:w-[50%] bg-accent -top-[3.5rem] h-fit p-4'>
+                        <div className='flex items-center gap-4'>
+                            <Image className='w-[4.5rem] md:w-[5.5rem] h-[4.5rem] md:h-[5.5rem] rounded-md' src={urlUser?.image ?? ''} width='400' height='100' alt='user_avatar' />
+                            <div className='flex flex-col gap-2'>
+                                <div>
+                                    {/* <h2 className='text-xs'>Hi , This is </h2> */}
+                                    <div className=' text-lg md:text-2xl lg:text-3xl font-semibold'>{urlUser?.name}</div>
+                                </div>
+                                {/* @ts-ignore */}
+                                {/* <div className='text-xs'>{user?.username}</div> */}
+                                <div className='flex items-center gap-4'>
+                                    <Link href={`https://github.com/${urlUser?.username}`} target='_blank'>
                                         <Badge className='flex gap-2 items-center'>
-                                            <span className='hidden sm:block'>Twitter / X</span>
-                                            <X className='w-5 h-5' />
-                                            {/* <Image className='w-[1.2rem] h-[1.2rem]' src={x} width='500' height='500' alt='x' /> */}
+                                            <span className='hidden sm:block'>Github</span>
+                                            <GitHubLogoIcon className='w-5 h-5' />
                                         </Badge>
                                     </Link>
-                                }
+                                    {
+                                        urlUser?.linkedInProfile &&
+                                        <Link href={urlUser?.linkedInProfile || ''} target='_blank'>
+                                            <Badge className='flex gap-2 items-center'>
+                                                <span className='hidden sm:block'>LinkedIn</span>
+                                                <LinkedInLogoIcon className='w-5 h-5' />
+                                            </Badge>
+                                        </Link>
+                                    }
+
+                                    {
+                                        urlUser?.xProfile &&
+                                        <Link href={urlUser?.xProfile || ''} target='_blank'>
+                                            <Badge className='flex gap-2 items-center'>
+                                                <span className='hidden sm:block'>Twitter / X</span>
+                                                <X className='w-5 h-5' />
+                                                {/* <Image className='w-[1.2rem] h-[1.2rem]' src={x} width='500' height='500' alt='x' /> */}
+                                            </Badge>
+                                        </Link>
+                                    }
+                                </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4   p-6'>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 overflow-hidden rounded-xl'>
+                            <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Contributed Orgs ({urlUser?.contributedOrgs?.length})</p>
+                            <ContributedOrg
+                                contributions={urlUser?.contributedOrgs}
+                            />
+                        </div>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                            <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Merged PRs</p>
+                            {/* @ts-ignore */}
+                            <span>{urlUser?.pullRequests.length}</span>
+                        </div>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                            <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Username</p>
+                            {/* @ts-ignore */}
+                            <span>{user?.username}</span>
+                        </div>
+                        <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
+                            <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Email</p>
+                            {/* @ts-ignore */}
+                            <span>{urlUser?.email}</span>
                         </div>
                     </div>
                 </div>
 
-                <div className='w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4   p-6'>
-                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 overflow-hidden rounded-xl'>
-                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Contributed Orgs ({urlUser?.contributedOrgs?.length})</p>
-                        <ContributedOrg
-                            contributions={urlUser?.contributedOrgs}
-                        />
-                    </div>
-                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
-                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Merged PRs</p>
-                        {/* @ts-ignore */}
-                        <span>{urlUser?.pullRequests.length}</span>
-                    </div>
-                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
-                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Username</p>
-                        {/* @ts-ignore */}
-                        <span>{user?.username}</span>
-                    </div>
-                    <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
-                        <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Email</p>
-                        {/* @ts-ignore */}
-                        <span>{urlUser?.email}</span>
-                    </div>
-                </div>
-            </div>
-
-            <div className='max-w-[1440px] mx-auto p-4 rounded-xl'>
-                <div className='flex items-center justify-center'>
-                    <Badge className='text-sm bg-accent text-foreground py-2 px-6 rounded-xl hover:bg-accent font-bold mb-6'>All PRs</Badge>
+                <div className='max-w-[1440px] mx-auto p-4 rounded-xl'>
+                    <PRListings
+                        urlUser={urlUser}
+                        user={user}
+                        organisationData={organisationData}
+                    />
                 </div>
 
-                <PRListings
-                    urlUser={urlUser}
-                    user={user}
-                    organisationData={organisationData}
-                />
-            </div>
+                <div className='max-w-[1440px] mx-auto px-4 my-12'>
+                    <Footer />
+                </div>
 
-            {/* <div className='max-w-[1280px] mx-auto mt-4 px-2'>
+                {/* <div className='max-w-[1280px] mx-auto mt-4 px-2'>
                 <div className='border-2 flex items-center justify-between p-2 rounded-md border-accent '>
                     <div className='flex items-center gap-2'>
                         <Image className='w-[2rem] rounded-md h-[2rem]' src={urlUser?.image ?? ''} width='500' height='500' alt='user_avatar' />
@@ -261,6 +342,7 @@ export default async function PublicProfilePage({ params }: any) {
                 </div>
 
             </div> */}
-        </div>
+            </div>
+        </>
     )
 }
