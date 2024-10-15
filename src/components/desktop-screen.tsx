@@ -2,7 +2,7 @@ import Safari from "@/components/ui/safari";
 
 export function DesktopScreen() {
   return (
-    <div className="relative">
+    <div className="relative z-50">
       <Safari
         url="mergedandshare.in"
         className="size-full shadow-2xl shadow-primary/30 dark:shadow-primary/20"

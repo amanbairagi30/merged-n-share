@@ -18,7 +18,7 @@ export const Navbar = () => {
 
     return (
         <>
-            <div className=" z-[999] h-fit flex items-center justify-between">
+            <div className="p-4 h-fit flex items-center justify-between">
                 <header className="flex items-center font-secondary border-neutral-900 justify-between">
                     <aside className="hidden md:flex items-center gap-[10px]">
                         <p className="text-xl font-extrabold font-secondary">Merged<span className="text-primary">&</span>Share .</p>

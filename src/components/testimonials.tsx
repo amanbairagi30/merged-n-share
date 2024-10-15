@@ -6,6 +6,7 @@ import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/rea
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
 import X from './svgs/x'
+import { signIn } from 'next-auth/react'
 
 const testimonials = [
     {
@@ -141,7 +142,7 @@ export default function Testimonials() {
 
                 <div className='mt-20 flex flex-col items-center gap-6 justify-center'>
                     <h3 className='text-2xl md:text-3xl font-secondary font-extrabold text-center'>Just try it by yourself and you won&apos;t regret.</h3>
-                    <Button className='rounded-full md:text-xl md:h-12 md:px-10 font-secondary font-extrabold hover:shadow-xl transition-all ease-in-out duration-200 hover:shadow-primary/60'>Get Started</Button>
+                    <Button onClick={async()=>await signIn()} className='rounded-full md:text-xl md:h-12 md:px-10 font-secondary font-extrabold hover:shadow-xl transition-all ease-in-out duration-200 hover:shadow-primary/60'>Get Started</Button>
                 </div>
             </section>
         </>
