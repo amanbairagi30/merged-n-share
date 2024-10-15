@@ -3,17 +3,15 @@ import type { NextRequest } from 'next/server'
 import { getToken } from 'next-auth/jwt'
 
 export async function middleware(request: NextRequest) {
+  console.log(process.env.NEXTAUTH_SECRET)
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
+  console.log(token)
   
   if (request.nextUrl.pathname.startsWith('/work')) {
     if (!token) {
       return NextResponse.redirect(new URL('/', request.url))
     }
-    
-    // // @ts-ignore (remove this if you've properly typed your token)
-    // if (!token.admin) {
-    //   return NextResponse.redirect(new URL('/unauthorized', request.url))
-    // }
+
   }
   
   return NextResponse.next()
