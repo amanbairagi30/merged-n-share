@@ -60,6 +60,17 @@ const bricolage = Bricolage_Grotesque({
 export const metadata: Metadata = {
   title: "M&S",
   description: "",
+  openGraph: {
+    type: 'website',
+    title: "M&S",
+    description: "Showcase your open source contributions as Proof of Work by sharing your merged pull requests to anyone around the world with help of Merged&Share",
+    images: [
+      {
+        url: `${process.env.NEXT_PUBLIC_URL}/api/og-images/root`,
+        alt: 'og-image-for-home-page'
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
