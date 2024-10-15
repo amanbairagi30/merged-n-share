@@ -100,7 +100,7 @@ export default function Features() {
         {
             icon: Trophy,
             title: "Leaderboard",
-            isComingSoon: false,
+            isComingSoon: true,
             description: "Track top contributors with a community-driven leaderboard. Get recognized for your open-source contributions and win bounties.",
             svgPaths: [
                 "M0,100 C50,70 150,90 400,50 L400,100 L0,100 Z",
@@ -120,7 +120,7 @@ export default function Features() {
         {
             icon: Code,
             title: "Embed",
-            isComingSoon: true,
+            isComingSoon: false,
             description: "Seamlessly integrate your contributions into your portfolio or personal website. Make your open-source impact visible anywhere, just like testimonials.",
             svgPaths: [
                 "M0,100 C150,40 250,70 400,30 L400,100 L0,100 Z",
@@ -130,7 +130,7 @@ export default function Features() {
         {
             icon: LineChart,
             title: "Analytics",
-            isComingSoon: true,
+            isComingSoon: false,
             description: "Gain insights on who’s viewing and engaging with your public profile. Track your impact and reach with detailed stats and analytics.",
             svgPaths: [
                 "M0,100 C150,40 250,70 400,30 L400,100 L0,100 Z",
