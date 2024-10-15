@@ -22,6 +22,7 @@ import X from '@/components/svgs/x';
 import Footer from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import HomeButton from '@/components/home-button';
+import ProfileView from '@/components/profile-view';
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
     const urlUser: any = await getUserProfile(params.slug)
@@ -184,6 +185,7 @@ export default async function PublicProfilePage({ params }: any) {
 
     return (
         <>
+            <ProfileView userId={urlUser.id} currentUserId={user?.id} />
             {
                 (urlUser?.id === user?.id && !urlUser.isProfilePublic) ? (
 

@@ -63,6 +63,18 @@ model User {
   contributedOrgs Organisations[] @relation("UserContributions")
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
+  ProfileView     ProfileView[]
+}
+
+model ProfileView {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  viewerIp     String
+  viewCount    Int      @default(1)
+  lastViewedAt DateTime @default(now())
+
+  @@unique([userId, viewerIp])
 }
 
 model Organisations {

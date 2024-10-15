@@ -1,10 +1,11 @@
 "use client"
 import React, { useState } from 'react'
 import TitleCard from './title-card'
-import { MessageSquareQuote, Star, ChevronLeft, ChevronRight } from 'lucide-react'
+import { MessageSquareQuote, Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
 import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { Button } from './ui/button'
+import X from './svgs/x'
 
 const testimonials = [
     {
@@ -12,6 +13,8 @@ const testimonials = [
         role: "Founder @100xdevs and Full Stack Developer",
         avatar: "https://avatars.githubusercontent.com/u/8079861",
         quote: "Oh! That looks good !",
+        x: "https://x.com/kirat_tw",
+        github: "https://github.com/hkirat",
         rating: 4
     },
     {
@@ -19,6 +22,8 @@ const testimonials = [
         role: "SWE Intern at DropStation",
         avatar: "https://avatars.githubusercontent.com/u/76874341",
         quote: "Wow bro , looks decent , great project must say!",
+        x: "",
+        github: "",
         rating: 4
     },
     {
@@ -26,6 +31,8 @@ const testimonials = [
         role: "SDE at Browserstack",
         avatar: "https://avatars.githubusercontent.com/u/37402791",
         quote: "Looking Super Cool 🔥🔥🔥 , Good Work",
+        x: "",
+        github: "",
         rating: 4
     },
     {
@@ -33,6 +40,8 @@ const testimonials = [
         role: "SWE Intern at ConcertPal",
         avatar: "https://avatars.githubusercontent.com/u/91052168",
         quote: "Looks cool + feature is also good",
+        x: "",
+        github: "",
         rating: 4
     }
 ]
@@ -86,7 +95,7 @@ export default function Testimonials() {
                         {testimonials.map((testimonial, index) => (
                             <div key={index} className='w-full flex-shrink-0 px-4'>
                                 <div className='grid grid-cols-1 lg:grid-cols-5 gap-4 border-2 p-4 rounded-xl'>
-                                    <div className='col-span-1 md:col-span-3 bg-accent/30 flex flex-col rounded-xl p-4 min-h-[20rem] max-h-fit lg:h-auto'>
+                                    <div className='col-span-1 overflow-hidden relative md:col-span-3 bg-accent/30 flex flex-col rounded-xl p-4 min-h-[20rem] max-h-fit lg:h-auto'>
                                         <div className='flex items-center mb-4'>
                                             <Avatar className="h-12 w-12 mr-4">
                                                 <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
@@ -97,13 +106,14 @@ export default function Testimonials() {
                                                 <p className="text-sm text-muted-foreground">{testimonial.role}</p>
                                             </div>
                                         </div>
-                                        <div className='flex-grow mb-4 '>
-                                            <p className="text-lg">
+                                        <div className='flex-grow my-4 px-2'>
+                                            <p className="text-xl">
                                                 {testimonial.quote}
                                             </p>
                                         </div>
+                                        <Quote className='absolute right-0 opacity-10 -bottom-10 fill-primary/50 text-primary w-40 h-40' />
                                         <div className='flex justify-start space-x-4'>
-                                            <TwitterLogoIcon className="w-6 h-6  cursor-pointer" />
+                                            <X className="w-6 h-6 dark:invert cursor-pointer" />
                                             <GitHubLogoIcon className="w-6 h-6  cursor-pointer" />
                                         </div>
                                     </div>

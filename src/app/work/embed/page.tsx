@@ -38,22 +38,7 @@ export default function Embed() {
     `;
 
     const nextjsCodeString = `
-    
   import Script from "next/script";
-    
-  declare global {
-    namespace JSX {
-      interface IntrinsicElements {
-        "widget-web-component": React.DetailedHTMLProps<
-          React.HTMLAttributes<HTMLElement>,
-          HTMLElement
-        > & {
-          theme: string;
-          username: string;
-        };
-      }
-    }
-  }
 
   <body>
     <Script async src="https://custom-web-widget.vercel.app/widget.umd.js"></Script>
@@ -188,6 +173,20 @@ export default function Embed() {
             >
               {`
   {/* use the widget component in any file like this */}
+
+   declare global {
+    namespace JSX {
+      interface IntrinsicElements {
+        "widget-web-component": React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > & {
+          theme: string;
+          username: string;
+        };
+      }
+    }
+  }
 
   const YourComponent = () =>{
     return(
