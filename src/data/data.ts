@@ -9,26 +9,31 @@ export const sideBarOptions = {
             name: 'Dashboard',
             icon: LayoutDashboard,
             href: "/work/dashboard",
+            isNew: true,
         },
         {
             name: 'Leaderboard',
             icon: Trophy,
             href: "/work/leaderboard",
+            isNew: false,
         },
         {
             name: 'My PRs',
             icon: GitPullRequest,
             href: "/work/my-pr",
+            isNew: false,
         },
         {
             name: 'Organisations',
             icon: Building2,
             href: "/work/organisations",
+            isNew: true,
         },
         {
             name: 'Embed PRs',
             icon: Code,
             href: "/work/embed",
+            isNew: true,
         },
     ],
 }
@@ -36,15 +41,15 @@ export const sideBarOptions = {
 
 export const frameWorksData = [
     {
-        name : "HTML",
-        icon : HTML
+        name: "HTML",
+        icon: HTML
     },
     {
-        name : "ReactJs",
-        icon : ReactJS
+        name: "ReactJs",
+        icon: ReactJS
     },
     {
-        name : "NextJs",
-        icon : NextJs
+        name: "NextJs",
+        icon: NextJs
     },
 ]

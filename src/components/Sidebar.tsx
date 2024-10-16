@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useSidebarStore } from '@/store/sidebar';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 
 export default function Sidebar() {
     const pathName = usePathname();
@@ -77,7 +78,12 @@ export default function Sidebar() {
                                         <div className={`${activeIndex === idx ? "bg-primary text-black mr-2 rounded-md" : ""} p-1 `}>
                                             <x.icon size={18} />
                                         </div>
-                                        <p>{x.name}</p>
+                                        <div className='flex items-center gap-2'>
+                                            <p>{x.name}</p>
+                                            {x.isNew &&
+                                                <div className='text-[0.6rem] flex items-center justify-center w-fit h-fit px-2 py-0 rounded-md text-white bg-green-700'>NEW</div>
+                                            }
+                                        </div>
                                     </div>
                                 </Link>
                             )
@@ -86,7 +92,7 @@ export default function Sidebar() {
                     }
                 </div>
 
-                <Button onClick={() => { router.push(`/work/profile`); toggleSidebar(false) }} className={`flex border-2 text-foreground items-center ${isProfile ? "border-primary bg-primary/10" :"bg-transparent hover:bg-primary/5"} hover:bg-primary/5 z-10 mb-4 rounded-xl py-8 px-4 mx-4`}>
+                <Button onClick={() => { router.push(`/work/profile`); toggleSidebar(false) }} className={`flex border-2 text-foreground items-center ${isProfile ? "border-primary bg-primary/10" : "bg-transparent hover:bg-primary/5"} hover:bg-primary/5 z-10 mb-4 rounded-xl py-8 px-4 mx-4`}>
 
                     <div className='w-[20%]'>
                         <Image className='w-[2rem] h-[2rem] rounded-full' src={user?.image ?? ''} height='500' width='400' alt='user_avatar' />

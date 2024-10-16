@@ -24,7 +24,7 @@ export default function Hero() {
             </div> */}
                 <div className="flex flex-col gap-6 h-fit  items-center justify-center">
 
-                    <div className="text-3xl font-secondary font-[600] sm:text-5xl w-fit md:w-[80%] text-center z-20 justify-center items-center">
+                    <div className="text-3xl font-secondary font-bold sm:text-5xl w-fit md:w-[80%] text-center z-20 justify-center items-center">
                         Showcase your open source contributions as <span className="transition-all font-[900] duration-200 bg-clip-text clip-text  text-transparent bg-gradient-to-r from-yellow-500 to-yellow-200 w-fit h-fit">Proof of Work</span>
                     </div>
 
@@ -130,13 +130,13 @@ export default function Hero() {
 
             <section className="hidden lg:flex absolute drop-shadow-[0_60px_50px_#facc15] top-[11rem] opacity-40 right-[20rem] rotate-12 items-center justify-center">
                 <div
-                    className="relative flex items-center justify-center w-24 md:w-16 h-24 md:h-16 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 overflow-hidden"
+                    className="relative flex items-center justify-center w-24 md:w-14 h-24 md:h-14 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 overflow-hidden"
                     style={{
                         boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2)',
                     }}
                 >
                     <div className="borer-2 px-4 py-4 w-fit rounded-3xl">
-                        <Globe className="w-16  md:w-10 text-black h-44" />
+                        <Globe className="w-16 md:w-8 text-black h-44" />
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent to-yellow-900 opacity-30" />
 
@@ -169,13 +169,13 @@ export default function Hero() {
 
             <section className="hidden lg:flex absolute drop-shadow-[0_60px_50px_#facc15] top-[11rem] opacity-40 left-[18rem] -rotate-12 items-center justify-center">
                 <div
-                    className="relative flex items-center justify-center w-24 md:w-16 h-24 md:h-16 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 overflow-hidden"
+                    className="relative flex items-center justify-center w-24 md:w-14 h-24 md:h-14 rounded-xl bg-gradient-to-br from-yellow-400 to-yellow-600 overflow-hidden"
                     style={{
                         boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2)',
                     }}
                 >
                     <div className="borer-2 px-4 py-4 w-fit rounded-3xl">
-                        <Code className="w-16  md:w-10 text-black h-44" />
+                        <Code className="w-16  md:w-8 text-black h-44" />
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-br from-transparent to-yellow-900 opacity-30" />
 
