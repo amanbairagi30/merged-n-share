@@ -76,9 +76,7 @@ export default function Hero() {
         >
     
             <motion.div variants={containerVariants} className="my-20 z-0 flex flex-col h-fit  items-center justify-center">
-              
                 <motion.div variants={containerVariants} className="flex flex-col gap-6 h-fit  items-center justify-center">
-
                     <motion.div
                         variants={itemVariants}
                         className="text-3xl font-secondary font-bold sm:text-5xl w-fit md:w-[80%] text-center z-20 justify-center items-center"
@@ -101,10 +99,12 @@ export default function Hero() {
                     </motion.div>
 
                 </motion.div>
+
                 <motion.div className="flex flex-col w-full md:flex-row items-center justify-center gap-4 mt-4 ">
                     <Button onClick={async () => await signIn()} className="font-bold h-8 font-paragraph w-full md:w-fit">Sign Up</Button>
                     <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-accent h-8 w-full md:w-fit">What&apos;s more ?</Button>
                 </motion.div>
+                
             </motion.div>
 
             <motion.div variants={containerVariants} className='flex items-center justify-center gap-8'>
