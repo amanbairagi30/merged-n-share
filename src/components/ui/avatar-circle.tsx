@@ -26,7 +26,7 @@ const AvatarCircles = ({
             {avatarUrls.map((item, index) => (
                 <img
                     key={index}
-                    className="h-10 cursor-pointer w-10 rounded-full border-2 border-primary dark:border-primary"
+                    className="h-10 cursor-pointer w-10 rounded-full shadow-xl"
                     src={item.img}
                     width={40}
                     onClick={()=>window.open(item.href , "_blank")}
@@ -36,7 +36,6 @@ const AvatarCircles = ({
             ))}
             <a
                 className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-primary text-center text-xs font-medium text-white dark:border-primary dark:bg-primary dark:text-black"
-                href="#testimonials"
             >
                 +{numPeople}
             </a>

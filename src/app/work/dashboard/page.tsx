@@ -10,6 +10,7 @@ export default async function Dashboard() {
     const session = await getServerSession(authOptions);
     const user = session?.user;
     const username = user?.username;
+    console.log(username)
     const fetchedUser = await getUserProfile(username);
 
     return (

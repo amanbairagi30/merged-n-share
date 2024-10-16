@@ -15,7 +15,7 @@ export default function Home() {
         <Navbar />
       </div>
 
-      <div className="max-w-[1180px] px-4 mx-auto">
+      <div className="max-w-[1180px] px-4 mt-28 mx-auto">
         <Hero />
         {/* <ProductDemo /> */}
         <Features />

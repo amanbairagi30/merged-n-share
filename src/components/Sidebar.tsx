@@ -44,9 +44,9 @@ export default function Sidebar() {
             } 
             flex-col border-[#353535] min-w-[18rem] max-w-[18rem]`}>
             <div className=' border-[#424242] flex justify-between items-center px-4 h-[4rem]'>
-                <div>
+                <Link href="/">
                     <p className='text-xl font-semibold font-secondary'>M<span className='text-primary'>&</span>S</p>
-                </div>
+                </Link>
                 <Link href='https://github.com/amanbairagi30/merged-n-share' target='_blank'>
                     <GitHubLogoIcon className=' w-[1.2rem] h-[1.2rem] cursor-pointer' />
                 </Link>

@@ -1,7 +1,8 @@
 "use client";
-import { Code, Crown, Globe, Layout, LineChart, LucideShare2, Share2, Sparkles, Trophy } from 'lucide-react'
+import { Code, Crown, Globe, LineChart, Share2, Trophy } from 'lucide-react'
 import React, { useState } from 'react'
 import TitleCard from './title-card';
+import { motion } from "framer-motion";
 
 const Card = ({ icon: Icon, title, description, svgPaths, isComingSoon }: any) => {
     const [isHovered, setIsHovered] = useState(false)
@@ -86,6 +87,27 @@ const Card = ({ icon: Icon, title, description, svgPaths, isComingSoon }: any) =
     )
 }
 export default function Features() {
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    }
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut",
+            },
+        },
+    }
     const cards = [
         {
             icon: Share2,
@@ -139,54 +161,50 @@ export default function Features() {
         },
     ]
     return (
-        <section className='h-fit flex flex-col items-center my-[10rem] py-4'>
-            <TitleCard icon={Crown} title={'Features'}/>
-            <div className='mt-10 text-2xl md:text-4xl  font-secondary flex items-center justify-center font-bold'>
+        <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={containerVariants}
+            className='h-fit flex flex-col items-center my-[10rem] py-4'
+        >
+            <motion.div variants={itemVariants}>
+                <TitleCard icon={Crown} title={'Features'} />
+            </motion.div>
+
+            <motion.div
+                className='mt-10 text-2xl md:text-4xl font-secondary flex items-center justify-center font-bold'
+                variants={itemVariants}
+            >
                 <h3 className='w-full md:w-[70%] text-center'>
                     Streamline Your Open-Source Journey, with some of our <span className='text-primary'>cool</span> features.
                 </h3>
-            </div>
+            </motion.div>
 
-            {/* <div className='grid grid-cols-2 gap-4 w-full my-16'>
-                <div className='h-[20rem] group p-4 cursor-pointer hover:border-primary duration-500 relative rounded-xl border-2'>
-                    <div className='relative transition-all duration-500 ease-in-out h-20 w-20 top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] group-hover:translate-x-[0%] group-hover:translate-y-[0%] group-hover:top-0 group-hover:left-0'>
-
-                        <div className='absolute bg-gradient-to-tl from-primary to-transparent h-full w-full flex items-center justify-center rounded-xl '>
-                            <LucideShare2 className='text-black' />
-                        </div>
-                        <div
-                            className="absolute inset-0 rounded-xl bg-gradient-to-br from-yellow-100 to-transparent opacity-90"
-                            style={{
-                                mixBlendMode: 'soft-light',
-                            }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-br from-yellow-400 to-transparent opacity-30 rounded-3xl" />
-
-                    </div>
-
-                    <div className='flex flex-col gap-2 mt-4'>
-                        <h1 className='text-3xl font-secondary font-bold'>Share</h1>
-                        <p className='font-paragraph w-[70%] text-sm '>Instantly showcase merged PRs with a single public link. No more searching for URLs—just copy, paste, and share.</p>
-                    </div>
-                </div>
-
-            </div> */}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full my-16">
+            <motion.div
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full my-16"
+                variants={containerVariants}
+            >
                 {cards.map((card, index) => (
                     <React.Fragment key={index}>
                         {index === cards.length - 1 && cards.length % 2 !== 0 ? (
-                            <div className="md:col-span-2 flex justify-center">
+                            <motion.div
+                                className="md:col-span-2 flex justify-center"
+                                variants={itemVariants}
+                            >
                                 <div className="w-full md:w-1/2">
                                     <Card {...card} index={index} length={cards.length} />
                                 </div>
-                            </div>
+                            </motion.div>
                         ) : (
-                            <Card {...card} index={index} length={cards.length} />
+                            <motion.div variants={itemVariants}>
+                                <Card {...card} index={index} length={cards.length} />
+                            </motion.div>
                         )}
                     </React.Fragment>
                 ))}
-            </div>
-        </section>
+            </motion.div>
+
+        </motion.section>
     )
 }

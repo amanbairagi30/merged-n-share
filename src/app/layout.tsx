@@ -81,7 +81,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(circular.variable, work_sans.variable, bricolage.variable, 'font-paragraph')}>
-        <NextTopLoader color="#2E78C7" height={2} />
+        <NextTopLoader color="#facc15" height={2} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

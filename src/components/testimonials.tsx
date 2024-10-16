@@ -1,12 +1,14 @@
-"use client"
-import React, { useState } from 'react'
-import TitleCard from './title-card'
-import { MessageSquareQuote, Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react'
-import { GitHubLogoIcon, LinkedInLogoIcon, TwitterLogoIcon } from '@radix-ui/react-icons'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Button } from './ui/button'
-import X from './svgs/x'
-import { signIn } from 'next-auth/react'
+"use client";
+import React, { useState } from 'react';
+import TitleCard from './title-card';
+import { MessageSquareQuote, Star, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Button } from './ui/button';
+import X from './svgs/x';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
+import { motion } from "framer-motion";
 
 const testimonials = [
     {
@@ -23,8 +25,8 @@ const testimonials = [
         role: "SWE Intern at DropStation",
         avatar: "https://avatars.githubusercontent.com/u/76874341",
         quote: "Wow bro , looks decent , great project must say!",
-        x: "",
-        github: "",
+        x: "https://x.com/sargampoudel",
+        github: "https://github.com/devsargam",
         rating: 4
     },
     {
@@ -32,8 +34,8 @@ const testimonials = [
         role: "SDE at Browserstack",
         avatar: "https://avatars.githubusercontent.com/u/37402791",
         quote: "Looking Super Cool 🔥🔥🔥 , Good Work",
-        x: "",
-        github: "",
+        x: "https://x.com/devnimit",
+        github: "https://github.com/nimit9",
         rating: 4
     },
     {
@@ -41,25 +43,11 @@ const testimonials = [
         role: "SWE Intern at ConcertPal",
         avatar: "https://avatars.githubusercontent.com/u/91052168",
         quote: "Looks cool + feature is also good",
-        x: "",
-        github: "",
+        x: "https://x.com/vineetwts",
+        github: "https://github.com/vineeTagarwaL-code",
         rating: 4
     }
 ]
-
-declare global {
-    namespace JSX {
-        interface IntrinsicElements {
-            "widget-web-component": React.DetailedHTMLProps<
-                React.HTMLAttributes<HTMLElement>,
-                HTMLElement
-            > & {
-                username: string;
-                theme: string;
-            };
-        }
-    }
-}
 
 export default function Testimonials() {
     const [currentIndex, setCurrentIndex] = useState(0)
@@ -72,25 +60,58 @@ export default function Testimonials() {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
     }
 
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.2,
+            },
+        },
+    }
 
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: "easeOut",
+            },
+        },
+    }
 
     return (
         <>
-            <div className='mb-8'>
-                <widget-web-component theme="dark" username="hkirat"></widget-web-component>
-            </div>
-            <section id='testimonials' className='h-fit flex flex-col items-center my-[10rem] py-4 '>
-                <TitleCard icon={MessageSquareQuote} title={'Testimonials'} />
-                <div className='mt-10 text-2xl md:text-4xl font-secondary flex items-center justify-center font-bold'>
+            <motion.section
+                id='testimonials'
+                className='h-fit flex flex-col items-center my-[10rem] py-4'
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={containerVariants}
+            >
+                <motion.div variants={itemVariants}>
+                    <TitleCard icon={MessageSquareQuote} title={'Testimonials'} />
+                </motion.div>
+
+                <motion.div
+                    className='mt-10 text-2xl md:text-4xl font-secondary flex items-center justify-center font-bold'
+                    variants={itemVariants}
+                >
                     <div className='w-full md:w-[80%] text-center'>
                         <div>
                             Still confused ?
                         </div>
                         <div>See what existing developers have to say about us.</div>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className='mt-8 mb-2 relative w-full lg:w-[70%] h-fit lg:h-[24rem]'>
+                <motion.div
+                    className='mt-8 mb-2 relative w-full lg:w-[70%] h-fit lg:h-[24rem]'
+                    variants={itemVariants}
+                >
                     <div className='flex transition-transform duration-500 ease-in-out'
                         style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                         {testimonials.map((testimonial, index) => (
@@ -114,8 +135,12 @@ export default function Testimonials() {
                                         </div>
                                         <Quote className='absolute right-0 opacity-10 -bottom-10 fill-primary/50 text-primary w-40 h-40' />
                                         <div className='flex justify-start space-x-4'>
-                                            <X className="w-6 h-6 dark:invert cursor-pointer" />
-                                            <GitHubLogoIcon className="w-6 h-6  cursor-pointer" />
+                                            <Link href={testimonial.x} target='_blank'>
+                                                <X className="w-6 h-6 dark:invert cursor-pointer" />
+                                            </Link>
+                                            <Link href={testimonial.github} target='_blank'>
+                                                <GitHubLogoIcon className="w-6 h-6  cursor-pointer" />
+                                            </Link>
                                         </div>
                                     </div>
                                     <div className='col-span-1 md:col-span-2  drop-shadow-2xl drop flex flex-col border-primary gap-1 md:gap-4 items-center justify-center border-2 bg-primary/5 rounded-xl p-4 h-[10rem] lg:h-auto'>
@@ -130,7 +155,7 @@ export default function Testimonials() {
                             </div>
                         ))}
                     </div>
-                </div>
+                </motion.div>
                 <div className=' flex justify-center space-x-4'>
                     <Button onClick={prevTestimonial} variant="outline" size="lg" className="rounded-full">
                         <ChevronLeft className="h-4 w-4" />
@@ -142,9 +167,9 @@ export default function Testimonials() {
 
                 <div className='mt-20 flex flex-col items-center gap-6 justify-center'>
                     <h3 className='text-2xl md:text-3xl font-secondary font-extrabold text-center'>Just try it by yourself and you won&apos;t regret.</h3>
-                    <Button onClick={async()=>await signIn()} className='rounded-full md:text-xl md:h-12 md:px-10 font-secondary font-extrabold hover:shadow-xl transition-all ease-in-out duration-200 hover:shadow-primary/60'>Get Started</Button>
+                    <Button onClick={async () => await signIn()} className='rounded-full md:text-xl md:h-12 md:px-10 font-secondary font-extrabold hover:shadow-xl transition-all ease-in-out duration-200 hover:shadow-primary/60'>Get Started</Button>
                 </div>
-            </section>
+            </motion.section>
         </>
     )
 }

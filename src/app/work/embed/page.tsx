@@ -23,7 +23,6 @@ export default function Embed() {
 
     setUserData(userInfo)
   }
-  console.log(user, "--------------------->")
 
   useEffect(() => {
     getData();
@@ -84,7 +83,7 @@ export default function Embed() {
 
       }
 
-      <h1 className='text-xl mb-4 md:mb-2'>Embed your PRs to your own website</h1>
+      <h1 className='text-xl mb-4 md:mb-2 font-bold'>Embed your PRs to your own website</h1>
       <div className='text-sm font-normal text-gray-500 dark:text-gray-400'>
         Now you can embed your merged PRs saved in Merged&Share in your <span className='text-primary font-semibold'>own website</span> (be it a portfolio website or any other website)
       </div>
