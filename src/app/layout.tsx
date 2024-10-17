@@ -9,6 +9,7 @@ import localFont from 'next/font/local';
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
 import Script from "next/script";
+import GoogleAnalytics from "@/components/google-analytics";
 
 const circular = localFont({
   variable: '--font-paragraph',
@@ -81,6 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(circular.variable, work_sans.variable, bricolage.variable, 'font-paragraph')}>
+        <GoogleAnalytics />
         <NextTopLoader color="#facc15" height={2} />
         <ThemeProvider
           attribute="class"
