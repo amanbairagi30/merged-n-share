@@ -8,6 +8,7 @@ import { signIn } from 'next-auth/react';
 import { DesktopScreen } from './desktop-screen';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { motion } from "framer-motion";
+import HeroButtons from './hero-buttons';
 
 export default function Hero() {
     const containerVariants = {
@@ -101,8 +102,7 @@ export default function Hero() {
                 </motion.div>
 
                 <motion.div className="flex flex-col w-full md:flex-row items-center justify-center gap-4 mt-4 ">
-                    <Button onClick={async () => await signIn()} className="font-bold h-8 font-paragraph w-full md:w-fit">Sign Up</Button>
-                    <Button variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-accent h-8 w-full md:w-fit">What&apos;s more ?</Button>
+                   <HeroButtons />
                 </motion.div>
                 
             </motion.div>

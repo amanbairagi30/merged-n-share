@@ -270,7 +270,7 @@ export default async function PublicProfilePage({ params }: any) {
                     <PRListings
                         urlUser={urlUser}
                         user={user}
-                        organisationData={organisationData}
+                        organisationData={urlUser?.contributedOrgs}
                     />
                 </div>
 

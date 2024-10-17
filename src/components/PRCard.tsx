@@ -1,13 +1,14 @@
 import React from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import { BadgeDollarSign, CalendarDaysIcon, EllipsisVertical, GitFork, GitMerge, Link2, LucideExternalLink } from 'lucide-react';
+import { CalendarDaysIcon, GitFork, GitMerge, LucideExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import PointIcon from "../app/assets/point.png";
 import Image from 'next/image';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
+import PrDeleteButton from './pr-delete-button';
 
-export default function PRCard({ user, isCurrentUser, PRData }: any) {
+export default function PRCard({ user, getAllPullrequests, isCurrentUser, PRData }: any) {
     const { prURL,
         mergedAt,
         prTitle,
@@ -21,10 +22,10 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
         commentURL,
         isVerified,
         body,
-        draft
+        draft,
+        id
     } = PRData;
 
-    console.log(org)
 
     const renderPRQualityViaBounty = (bountyAmount: any) => {
         // console.log(typeof bt)
@@ -134,26 +135,6 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
                     </div>
                 </div>
 
-                {/* <div className='flex gap-2 flex-wrap basis-1'>
-                    <div className='text-xs h-fit w-fit rounded-full border-2 px-3 py-1'>
-                        Next.Js
-                    </div>
-                    <div className='text-xs h-fit w-fit rounded-full border-2 px-3 py-1'>
-                        React.JS
-                    </div>
-                    <div className='text-xs h-fit w-fit rounded-full border-2 px-3 py-1'>
-                        PostgresSQL
-                    </div>
-                    <div className='text-xs h-fit w-fit rounded-full border-2 px-3 py-1'>
-                        MongoDB
-                    </div>
-                    <div className='text-xs h-fit w-fit rounded-full border-2 px-3 py-1'>
-                        Prisma
-                    </div>
-                    <div className='text-xs h-fit w-fit rounded-full border-2 px-3 py-1'>
-                        Excellent
-                    </div>
-                </div> */}
                 <div className='mt-4 flex items-center justify-between '>
                     {/* <div className={`text-sm h-fit w-fit rounded-full ${renderPRQualityViaBounty(bounty)?.textColor} font-bold flex items-center gap-2`}>
                         <div className={`h-[0.5rem]  rounded-full w-[0.5rem] ${renderPRQualityViaBounty(bounty)?.bgColor} `}></div>
@@ -164,11 +145,15 @@ export default function PRCard({ user, isCurrentUser, PRData }: any) {
                         <GitMerge className='w-4 h-4' />
                         <span className='text-sm'>Merged</span>
                     </Badge>
-                    <Button className='flex items-center font-semibold gap-1 p-0'>
-                        <Link href={prURL} target='_blank' className='flex items-center font-semibold gap-1 w-full p-2'>
-                            View PR <LucideExternalLink size={15} />
-                        </Link>
-                    </Button>
+
+                    <div className='flex items-center gap-2'>
+                        <PrDeleteButton pullRequestId={id} getAllPullrequests={getAllPullrequests} />
+                        <Button className='flex items-center font-semibold gap-1 p-0'>
+                            <Link href={prURL} target='_blank' className='flex items-center font-semibold gap-1 w-full p-2'>
+                                View PR <LucideExternalLink size={15} />
+                            </Link>
+                        </Button>
+                    </div>
                 </div>
             </div>
 

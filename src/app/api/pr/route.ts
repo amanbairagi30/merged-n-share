@@ -43,8 +43,8 @@ export async function GET(req: Request) {
                 org: {
                     select: {
                         name: true,
-                        avatar_url : true,
-                        github_url : true,
+                        avatar_url: true,
+                        github_url: true,
                     }
                 }
             }
@@ -112,5 +112,40 @@ export async function POST(req: Request) {
     } catch (error) {
         console.error("Error creating pull requests:", error);
         return NextResponse.json({ success: false, message: "Failed to create pull requests" });
+    }
+}
+
+export async function DELETE(req: Request) {
+    const { prId } = await req.json();
+    const session = await getServerSession(authOptions);
+    const userId = session?.user.id;
+
+    if (!userId) {
+        return NextResponse.json({ success: false, message: "Unauthorised" }, { status: 400 });
+    }
+
+    try {
+        const pullRequest = await prisma.pullRequest.findUnique({
+            where: {
+                id: prId,
+                userId: userId
+            }
+        });
+
+        if (!pullRequest) {
+            return NextResponse.json({ success: false, message: "Pull Request not found or you don't have permission to delete it" }, { status: 404 });
+        }
+
+        await prisma.pullRequest.delete({
+            where: {
+                id: prId
+            },
+        });
+
+        return NextResponse.json({ success: true, message: "Pull Request has been deleted" });
+
+    } catch (error) {
+        console.error("Error creating pull requests:", error);
+        return NextResponse.json({ success: false, message: "Failed to delete pull requests" });
     }
 }

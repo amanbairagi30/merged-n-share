@@ -27,3 +27,16 @@ export async function updatedUserProfile(e: any) {
         }
     })
 }
+
+export async function getTotalViews(userId: string | undefined) {
+    const totalViews = await prisma.profileView.aggregate({
+        where: {
+            userId: userId,
+        },
+        _sum: {
+            viewCount: true,
+        },
+    })
+
+    return totalViews._sum.viewCount || 0
+}
