@@ -31,8 +31,8 @@ export async function GET(req: Request) {
     const hasOrg = searchParams.has("org");
     const hasPR = searchParams.has("pr");
 
-    const userName = hasUserName ? searchParams.get("username") : "JohnDoe"
-    const name = hasName ? searchParams.get("name") : "Jon Doe"
+    const userName = hasUserName ? searchParams.get("username") : "merged-n-share"
+    const name = hasName ? searchParams.get("name") : "Test"
     const org = hasOrg ? searchParams.get("org") : "0"
     const pr = hasPR ? searchParams.get("pr") : "0"
 
@@ -52,23 +52,23 @@ export async function GET(req: Request) {
             <div tw=' bg-white w-full p-8  h-full flex items-start justify-center flex-col'>
 
                 <div tw="flex items-center mt-4 justify-start w-full">
-                    <img tw='w-32 h-32 mb-4 rounded-xl' src={`https://github.com/${userName}.png`} /> 
-                    <span style={{ fontFamily: 'secondary' }} tw='mx-6 text-4xl border-r-2 h-12  border-[#202020]'></span> 
-                    <div style={{ fontFamily: 'main' }} tw="font-bold text-3xl flex items-center">Merged<span tw="text-yellow-500">&</span>Share </div>
+                    <img tw='w-52 h-52 mb-4 rounded-xl' src={`https://github.com/${userName}.png`} /> 
+                    <span style={{ fontFamily: 'secondary' }} tw='mx-6 text-7xl border-r-2 h-12  border-[#202020]'></span> 
+                    <div style={{ fontFamily: 'main' }} tw="font-bold text-4xl flex items-center">Merged<span tw="text-yellow-500">&</span>Share </div>
                 </div>
                 <div tw='flex flex-col'>
-                    <p tw='text-5xl'>{name}</p>
-                    <p tw='mt-[-1rem]'>github.com/{userName}</p>
+                    <p tw='text-7xl'>{name}</p>
+                    <p tw='mt-[-1rem] text-4xl'>github.com/{userName}</p>
                 </div>
 
                 <div tw='w-[50%] mt-8 flex items-center flex-warp border-2'>
-                    <div tw=' w-38 flex flex-col border-black mr-2 min-h-10 max-h-fit'>
-                        <span tw='text-xl' style={{ fontFamily: 'secondary' }}>Merged PRs</span>
-                        <span tw='text-5xl' style={{ fontFamily: 'secondary' }}>{pr}</span>
+                    <div tw=' w-38 flex flex-col border-black mr-6 min-h-10 max-h-fit'>
+                        <span tw='text-2xl' style={{ fontFamily: 'secondary' }}>Merged PRs</span>
+                        <span tw='text-8xl' style={{ fontFamily: 'secondary' }}>{pr}</span>
                     </div>
                     <div tw=' w-full flex flex-col border-black mr-2 min-h-10 max-h-fit'>
-                        <span tw='text-xl' style={{ fontFamily: 'secondary' }}>Organisation Contributed</span>
-                        <span tw='text-5xl' style={{ fontFamily: 'secondary' }}>{org}</span>
+                        <span tw='text-2xl' style={{ fontFamily: 'secondary' }}>Organisation Contributed</span>
+                        <span tw='text-8xl' style={{ fontFamily: 'secondary' }}>{org}</span>
                     </div>
                 </div>
 
