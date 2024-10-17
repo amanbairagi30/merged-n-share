@@ -33,7 +33,7 @@ export async function GET(req: Request) {
 
     const userName = hasUserName ? searchParams.get("username") : "JohnDoe"
     const name = hasName ? searchParams.get("name") : "Jon Doe"
-    const org = hasOrg ? searchParams.get("prg") : "0"
+    const org = hasOrg ? searchParams.get("org") : "0"
     const pr = hasPR ? searchParams.get("pr") : "0"
 
     console.log(userName);
