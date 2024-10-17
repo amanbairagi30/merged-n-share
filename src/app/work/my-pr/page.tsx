@@ -2,7 +2,7 @@
 import PRCard from '@/components/PRCard';
 import { Button } from '@/components/ui/button'
 import { useSession } from 'next-auth/react';
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
     Select,
     SelectContent,
@@ -21,11 +21,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
-import { Info, Loader } from 'lucide-react';
+import { Info, Loader, Search } from 'lucide-react';
 import { Organisations as OrgType } from '@prisma/client';
 import { toast } from 'sonner';
 import Image from 'next/image';
 import { updateUserContributedOrgs } from '@/app/actions/userAction';
+import { Input } from '@/components/ui/input';
+import { useDebounce } from '@/app/hooks/useDebounce';
 
 
 export default function MyPR() {
@@ -36,6 +38,8 @@ export default function MyPR() {
     const [selectedOrgData, setSelectedOrgData] = useState({ id: '', name: '', avatar: '', github_url: '' });
     const [isLoading, setIsLoading] = useState<Boolean>(false);
     const [showFetchedMergedPRDialog, setShowFetchedMergedPRDialog] = useState(false);
+    const [query, setQuery] = useState('');
+    const [resultantPrs, setResultantPrs] = useState<any[]>([]);
     const user = session?.data?.user;
 
     // console.log(selectedOrgData);
@@ -47,7 +51,6 @@ export default function MyPR() {
         }
         setIsLoading(true);
         setShowFetchedMergedPRDialog(true)
-        //@ts-ignore
         const response = await fetch(`https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${selectedOrgData?.name}+is:merged`, {
             method: 'GET',
             headers: {
@@ -65,7 +68,6 @@ export default function MyPR() {
 
 
         const mergedPRsData = await Promise.all(finalData?.items?.map(async (pr: any, index: number) => {
-            //@ts-ignore
             if (user?.username === pr.user.login) {
                 const prDetails = {
                     prURL: pr.html_url,
@@ -139,9 +141,10 @@ export default function MyPR() {
         })
         const resp = await response.json();
         if (resp.success) {
-            // console.log("fetched PRs suyccessfully");
-            // console.log(resp.pullRequests);
+            console.log("fetched PRs suyccessfully");
+            console.log(resp.pullRequests);
             setPrData(resp.pullRequests)
+            setResultantPrs(resp.pullRequests);
             setIsLoading(false);
         }
         setIsLoading(false);
@@ -182,30 +185,47 @@ export default function MyPR() {
     // console.log(newMergedPRData);
     // console.log(fetchedMergedPRData);
 
+    const debouncedQuery = useDebounce(query, 500); // 500ms debounce delay
+
+    // Filter and sort data based on debounced query
+    const searchData = useCallback(() => {
+        const filtered = prdata.filter((pr) =>
+            pr.prTitle.toLowerCase().includes(debouncedQuery.toLowerCase()) ||
+            pr.org?.name?.toLowerCase().includes(debouncedQuery.toLowerCase())
+        );
+        setResultantPrs(filtered);
+    }, [debouncedQuery]);
+
+    useEffect(() => {
+        if (debouncedQuery) {
+            searchData();
+        } else {
+            setResultantPrs(prdata); // Reset to full list if query is empty
+        }
+    }, [debouncedQuery, searchData])
+
+
+    const handleInputChange = useCallback(
+        (event: React.ChangeEvent<HTMLInputElement>) => {
+            setQuery(event.target.value);
+        },
+        [setQuery]
+    );
+
+
     return (
         <div className="flex flex-col items-start font-normal relative w-full">
-            <div className='h-full w-full flex-col text-white rounded-l-[12px]'>
-                <div className='flex items-center justify-between '>
-                    <div>Merged PRs({prdata?.length})</div>
+            <div className='h-full w-full flex flex-col gap-4 rounded-l-[12px]'>
+                <div className='flex flex-col md:flex-row p-4 rounded-xl bg-gradient-to-r from-secondary via-bg-secondary/80 to-transparent gap-4 md:items-center justify-between '>
+                    <div>Merged PRs ({prdata?.length})</div>
                     <div className="flex gap-2 items-center">
-                            <Dialog>
-                                <DialogTrigger><Info /></DialogTrigger>
-                                <DialogContent>
-                                    <DialogHeader>
-                                        <DialogTitle>Organisation</DialogTitle>
-                                        <DialogDescription>
-                                            You can see only those organisations which have been approved by the admin.
-                                        </DialogDescription>
-                                    </DialogHeader>
-                                </DialogContent>
-                            </Dialog>
 
                         {/* @ts-ignore */}
                         <Select onValueChange={(e) => setSelectedOrgData({ id: e?.id, name: e?.name, avatar: e?.avatar_url, github_url: e?.github_url })}>
-                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-[#202020]">
+                            <SelectTrigger className="min-w-[180px] max-w-full p-4 bg-background/40 text-foreground">
                                 <SelectValue placeholder="Select a Organisation" />
                             </SelectTrigger>
-                            <SelectContent className='bg-[#202020] text-white'>
+                            <SelectContent className='bg-background text-foreground'>
                                 <SelectGroup>
                                     <SelectLabel>Select</SelectLabel>
                                     {
@@ -223,7 +243,7 @@ export default function MyPR() {
                                 </SelectGroup>
                             </SelectContent>
                         </Select>
-                        <Button onClick={() => handleFetchPRDetails()} className='bg-[#202020] border-2 border-white'>Fetch</Button>
+                        <Button onClick={() => handleFetchPRDetails()} className='bg-primary w-[8rem]'>Fetch</Button>
                         <Dialog open={showFetchedMergedPRDialog} onOpenChange={setShowFetchedMergedPRDialog}>
                             <DialogContent className="overflow-auto h-fit">
                                 <DialogHeader>
@@ -276,6 +296,11 @@ export default function MyPR() {
                     </div>
                 </div>
 
+                <div className='flex items-center border-2 px-4 py-1 rounded-md w-full max-w-md mt-4'>
+                    <Search className='w-4 h-4' />
+                    <Input value={query} onChange={handleInputChange} className='w-full placeholder:text-opacity-10 border-none' placeholder='Search for PR' />
+                </div>
+
                 {/* PR cards */}
                 {isLoading ? (
                     <div className='flex w-full h-[80vh] gap-2 items-center justify-center'>
@@ -284,9 +309,9 @@ export default function MyPR() {
                     </div>
                 ) : (
                     prdata && prdata.length > 0 ? (
-                        <div className='grid grid-cols-1 lg:grid-cols-2 py-2 my-6 h-full flex-wrap gap-4'>
-                            {prdata.map((item, index) => (
-                                <PRCard key={index} user={user} PRData={item} />
+                        <div className='grid grid-cols-1 lg:grid-cols-2 py-2 h-full flex-wrap gap-4'>
+                            {resultantPrs.map((item, index) => (
+                                <PRCard key={index} getAllPullrequests={getAllPullrequests} user={user} PRData={item} />
                             ))}
                         </div>
                     ) : (

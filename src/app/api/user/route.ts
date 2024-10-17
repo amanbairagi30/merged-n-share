@@ -84,6 +84,14 @@ export async function GET(req: Request) {
                 username: true,
                 admin: true,
                 createdAt: true,
+                pullRequests: true,
+                contributedOrgs: {
+                    select: {
+                        id: true,
+                        name: true,
+                        avatar_url: true
+                    }
+                }
             }
         })
 

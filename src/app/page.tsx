@@ -1,29 +1,28 @@
+import Features from "@/components/features";
+import Footer from "@/components/footer";
+import Hero from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
-import LaptopScreen from "@/components/LaptopScreen";
+import Statistics from "@/components/statistics";
+import Testimonials from "@/components/testimonials";
 
 export default function Home() {
   return (
-    <>
-      <div className="bg-blue-500/5 p-4 text-center font-light text-white">
-       Crafted for <strong>100xdevs</strong> community , More features are on their way , Stay Tuned!
+    <section className="min-h-screen py-8 relative overflow-hidden">
+      <div className='absolute left-[50%] translate-x-[-50%] md:opacity-55 -top-[10rem] md:-top-[35rem] size-[12rem] md:size-[40rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'></div>
+      <div className='absolute left-[50%] -z-0 border-2 opacity-75 border-white translate-x-[-50%] -bottom-[2rem] md:-bottom-[6rem] size-[12rem] md:size-[14rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'></div>
+
+      <div className="max-w-7xl z-[999] rounded-xl backdrop-blur-md fixed top-4 left-[50%] translate-x-[-50%] w-full">
+        <Navbar />
       </div>
-      <div className="w-full overflow-hidden h-[100vh] py-8 bg-[#0f0f0f] dark:bg-grid-white/[0.2] bg-grid-white/[0.05] relative " >
-        <div className=" max-w-[1080px]  px-8 mx-auto">
-          <Navbar />
-          <div className=" mt-16 z-0 flex text-white flex-col h-fit  items-center justify-center">
-            <div className="w-fit border-2 items-center justify-center rounded-full text-center text-sm py-1 inline-flex h-fit animate-shimmer border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-              Let the world know about your skills
 
-            </div>
-            <p className="text-3xl font-extrabold sm:text-5xl w-fit md:w-[60%] text-center z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">
-              Showcase your Open Source contribution as POW to the world
-            </p>
-          </div>
-
-          <LaptopScreen />
-        </div>
+      <div className="max-w-[1180px] px-4 mt-28 mx-auto">
+        <Hero />
+        {/* <ProductDemo /> */}
+        <Features />
+        <Statistics />
+        <Testimonials />
+        <Footer />
       </div>
-    </>
-
+    </section>
   );
 }

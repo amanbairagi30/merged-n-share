@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Organisations } from '@prisma/client';
 import Image from 'next/image';
 import PRCard from './PRCard';
+import { Badge } from './ui/badge';
 
 export default function PRListings({ urlUser, user, pullRequests, organisationData }: any) {
     const [selectedOrg, setSelectedOrg] = useState('')
@@ -13,23 +14,26 @@ export default function PRListings({ urlUser, user, pullRequests, organisationDa
         return urlUser?.pullRequests?.some((item: any) => item.org.id === selectedOrg)
     }
 
-    const filteredPullRequests = selectedOrg ? urlUser?.pullRequests?.filter((item: any) => item.org.id === selectedOrg) : urlUser?.pullRequests;
+    const filteredPullRequests = selectedOrg ? urlUser?.pullRequests?.filter((item: any) => item?.org?.id === selectedOrg) : urlUser?.pullRequests;
 
 
     return (
         <div>
-            <div className="flex gap-2 ">
+            <div className="flex flex-col gap-2 ">
+                <div className='flex items-center my-4 justify-center'>
+                    <Badge className='text-sm bg-accent text-foreground py-2 px-6 rounded-xl hover:bg-accent font-bold mb-6'>All PRs</Badge>
+                </div>
                 {/* @ts-ignore */}
                 <Select onValueChange={(value) => setSelectedOrg(value.id)}>
-                    <SelectTrigger className="w-[200px] p-4 bg-[#202020]">
+                    <SelectTrigger className="w-full md:w-[200px] p-4 ">
                         <SelectValue placeholder="Select a Organisation" />
                     </SelectTrigger>
-                    <SelectContent className='bg-[#202020] text-white'>
+                    <SelectContent className=''>
                         <SelectGroup>
                             <SelectLabel>Select Orgs</SelectLabel>
                             <SelectItem value={' '}>
                                 <div className='flex items-center gap-2'>
-                                   All ({organisationData.length}) 
+                                    All ({organisationData.length})
                                 </div>
                             </SelectItem>
                             {
