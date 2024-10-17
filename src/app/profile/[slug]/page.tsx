@@ -29,6 +29,11 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     if (!urlUser) return {}
     console.log(urlUser)
 
+    const ogUrl = new URL(`${process.env.NEXT_PUBLIC_URL}/api/og-images/public-profile`)
+    ogUrl.searchParams.set("username", urlUser?.username)
+    ogUrl.searchParams.set("name", urlUser?.name)
+    ogUrl.searchParams.set("org", urlUser?.contributedOrgs?.length)
+    ogUrl.searchParams.set("pr", urlUser?.pullRequests?.length)
 
     return {
         title: `${urlUser?.name}'s Open Source Contributions`,
@@ -36,13 +41,13 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         openGraph: {
             title: `${urlUser?.name}'s Open Source Contributions`,
             description: urlUser?.bio || `Check out ${urlUser?.name}'s open source contributions`,
-            images: [{ url: urlUser?.image || '/default-profile.jpg' }],
+            images: ogUrl?.toString(),
         },
         twitter: {
             card: 'summary_large_image',
             title: `${urlUser?.name}'s Open Source Contributions`,
             description: urlUser?.bio || `Check out ${urlUser?.name}'s open source contributions`,
-            images: [urlUser?.image || '/default-profile.jpg'],
+            images: ogUrl?.toString(),
         },
     }
 }
@@ -65,7 +70,7 @@ export default async function PublicProfilePage({ params }: any) {
         }
     })
 
-    console.log(organisationData)
+    console.log(organisationData);
 
     if (!urlUser) {
         return (

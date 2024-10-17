@@ -93,7 +93,7 @@ export default function RootLayout({
             <main>{children}</main>
           </Providers>
         </ThemeProvider>
-        {/* <Analytics /> */}
+        <Analytics />
         <Toaster richColors />
         <Script async src="https://custom-web-widget.vercel.app/widget.umd.js"></Script>
       </body>
