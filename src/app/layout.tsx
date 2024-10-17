@@ -82,7 +82,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(circular.variable, work_sans.variable, bricolage.variable, 'font-paragraph')}>
-        {/* <GoogleAnalytics /> */}
+        <GoogleAnalytics />
         <NextTopLoader color="#facc15" height={2} />
         <ThemeProvider
           attribute="class"
