@@ -27,6 +27,14 @@ const config = {
       },
     },
     extend: {
+      cursor: {
+        'custom': 'url(/custom-cursor.png), auto',
+      },
+      fontFamily: {
+        "primary": ['var(--font-primary)', 'sans-serif'],
+        "secondary": ['var(--font-secondary)', 'sans-serif'],
+        "paragraph": ['var(--font-paragraph)', 'sans-serif'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

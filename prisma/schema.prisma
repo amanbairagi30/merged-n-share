@@ -59,9 +59,22 @@ model User {
   accounts        Account[]
   sessions        Session[]
   pullRequests    PullRequest[]
+  savedOrgs       Organisations[] @relation("UserSavedOrganisations")
   contributedOrgs Organisations[] @relation("UserContributions")
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
+  ProfileView     ProfileView[]
+}
+
+model ProfileView {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  viewerIp     String
+  viewCount    Int      @default(1)
+  lastViewedAt DateTime @default(now())
+
+  @@unique([userId, viewerIp])
 }
 
 model Organisations {
@@ -71,6 +84,7 @@ model Organisations {
   github_url   String?
   pullRequests PullRequest[]
   contributors User[]        @relation("UserContributions")
+  savedBy      User[]        @relation("UserSavedOrganisations")
 }
 
 model PullRequest {

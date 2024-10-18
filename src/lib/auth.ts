@@ -1,9 +1,21 @@
-import { AuthOptions, Profile, SessionStrategy } from "next-auth"
+import { AuthOptions, DefaultSession, Profile, SessionStrategy } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import { PrismaAdapter } from "@auth/prisma-adapter"
 import prisma from "./db"
 import { Adapter } from "next-auth/adapters"
 import { JWT } from "next-auth/jwt"
+
+declare module "next-auth" {
+    interface Session extends DefaultSession {
+        user: {
+            image: string | undefined;
+            id: string;
+            name?: string | null;
+            email?: string | null;
+            username?: string | undefined;
+        };
+    }
+}
 
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,

@@ -38,9 +38,9 @@ export default function ProfileSwitch() {
         }
     }
     return (
-        <div className='flex flex-col gap-1 items-center'>
+        <div className='flex flex-col gap-1'>
             {/* <p className='text-sm'>Visibility</p> */}
-            <Switch checked={profileVisibility} onCheckedChange={(e: any) => updatedUserProfile(e)} defaultChecked className="data-[state=checked]:bg-green-500" id="airplane-mode" />
+            <Switch checked={profileVisibility} onCheckedChange={(e: any) => updatedUserProfile(e)} defaultChecked className="data-[state=checked]:bg-primary" id="airplane-mode" />
         </div>
     )
 }
