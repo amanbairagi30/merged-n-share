@@ -1,6 +1,7 @@
 import { ProfileChart } from '@/components/profile-views-chart';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button'
+import YourProfileButton from '@/components/your-profile-button';
 import { authOptions } from '@/lib/auth';
 import { getTotalViews, getUserProfile } from '@/lib/profile'
 import { BriefcaseBusiness, Building2Icon, EyeIcon, GitMerge, LucideExternalLink } from 'lucide-react';
@@ -113,7 +114,7 @@ export default async function Dashboard() {
 
                 <div className='border-2 border-accent group overflow-hidden relative rounded-md p-4 flex flex-col min-h-[150px] h-full border-[#353535] col-span-1'>
                     <div className='flex-1'>
-                        <div className='text-sm font-semibold md:text-lg'>Total Views</div>
+                        <div className='text-sm font-semibold md:text-lg'>Total Profile Views</div>
                         <div className='text-4xl md:text-6xl mt-4'>{totalViews}</div>
 
                         <section className="flex absolute right-2 opacity-35 md:m-0 group-hover:opacity-100 transition-all duration-700 group-hover:bottom-2 -bottom-6 items-center justify-center">
@@ -167,10 +168,7 @@ export default async function Dashboard() {
                             <div className='text-gray-500 dark:text-gray-400'>Here you can see your public profile view , if made public</div>
                         </div>
 
-                        <Badge className='flex bg-accent hover:bg-accent text-foreground py-1  items-center gap-2'>
-                            <span>Your profile</span>
-                            <LucideExternalLink className='w-4 h-4' />
-                        </Badge>
+                      <YourProfileButton username={username}/>
                     </div>
                     <ProfileChart />
                 </div>

@@ -3,16 +3,43 @@ import React, { useEffect, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { frameWorksData } from '@/data/data';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Info, LucideExternalLink, TriangleAlert } from 'lucide-react';
+import { Info, LucideExternalLink, ScanEye, TriangleAlert } from 'lucide-react';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 // Importing different styles for syntax highlighting
 import { solarizedLight, atomOneDark, vs2015 } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 import { useSession } from 'next-auth/react';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet"
+import { Button } from '@/components/ui/button';
+import { useTheme } from 'next-themes';
+
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      "widget-web-component": React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      > & {
+        theme: string | undefined;
+        username: string | undefined;
+      };
+    }
+  }
+}
+
 
 export default function Embed() {
   const [selectedTab, setSelectedTab] = useState<"html" | "reactjs" | "nextjs">('html');
   const [userData, setUserData] = useState<any>([]);
   const session = useSession();
+  const { theme, setTheme } = useTheme()
   const user = session?.data?.user;
   const username = user?.username;
 
@@ -27,6 +54,7 @@ export default function Embed() {
   useEffect(() => {
     getData();
   }, [])
+
 
   const getCodeString = (): string => {
     const htmlCodeString = `
@@ -56,6 +84,7 @@ export default function Embed() {
 
   return (
     <section>
+
       {
         userData?.pullRequests?.length === 0 &&
         <div className='border-2 border-red-500 bg-red-500/10 mb-4 rounded-xl p-4'>
@@ -107,6 +136,35 @@ export default function Embed() {
         <h1 className='text-xl font-bold'>Usage</h1>
         <p className='text-sm font-normal text-gray-500 dark:text-gray-400'>Copy and paste the code in your website.</p>
       </div>
+
+      <div className='border-2 border-primary bg-primary/10 mb-4 rounded-xl p-4'>
+        <div className="flex flex-col gap-2 md:flex-row items-start md:items-center">
+          <ScanEye className='w-6 h-6 text-primary mr-2' />
+          <div className='flex items-center justify-between w-full'>
+            <p className="font-semibold text-primary">Preview the Code</p>
+            <div className="text-sm">
+              <Sheet>
+                <SheetTrigger>
+                  <div className='border-2 py-2 text-black font-semibold rounded-lg px-4 bg-primary'>See Preview</div>
+                </SheetTrigger>
+                <SheetContent className="overflow-y-auto max-h-screen">
+                  <SheetHeader className='mt-8'>
+                    <SheetTitle>You are currently previewing the PR widget</SheetTitle>
+                    <SheetDescription>
+                      Below shows that how your PR widget will look like when it is on your own website
+                    </SheetDescription>
+                  </SheetHeader>
+                  <div>
+                    <widget-web-component theme={theme} username={username} />
+                  </div>
+                </SheetContent>
+              </Sheet>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 
       <div>
         <Tabs defaultValue="html" onValueChange={(value) => setSelectedTab(value as "html" | "reactjs" | "nextjs")} className="w-full">
