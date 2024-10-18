@@ -29,7 +29,7 @@ export default function HeroButtons() {
                     "SignUp"
                 }
             </Button>
-            <Button onClick={()=>router.push("#testimonials")} variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-accent h-8 w-full md:w-fit">What&apos;s more ?</Button>
+            <Button onClick={()=>router.push("#features")} variant={'ghost'} className="font-bold font-paragraph border-primary hover:bg-accent h-8 w-full md:w-fit">What&apos;s more ?</Button>
         </>
     )
 }
