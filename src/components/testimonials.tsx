@@ -30,7 +30,7 @@ const testimonials = [
     name: 'Manu Arora',
     role: 'Founder @AceternityLabs',
     avatar: 'https://avatars.githubusercontent.com/u/23276437',
-    quote: 'Looks superclean and good',
+    quote: 'Looks superclean and good , color combination also looks great',
     x: 'https://x.com/mannupaaji',
     github: 'https://github.com/manuarora700',
     rating: 4,
@@ -57,7 +57,7 @@ const testimonials = [
     name: 'Vineet Agarwal',
     role: 'SWE @ConcertPal',
     avatar: 'https://avatars.githubusercontent.com/u/91052168',
-    quote: 'Looks cool + feature is also good',
+    quote: 'Looks cool + Clean UI + feature is also good ,  I loved it',
     x: 'https://x.com/vineetwts',
     github: 'https://github.com/vineeTagarwaL-code',
     rating: 4,
@@ -66,7 +66,7 @@ const testimonials = [
     name: 'Ankur Sharma',
     role: 'SDE Intern @Thinkit Club',
     avatar: 'https://avatars.githubusercontent.com/u/97390674',
-    quote: 'Looks cool + feature is also good',
+    quote: 'BEST WAY to showcase your open source contributions and proof of work',
     x: 'https://x.com/ankursharma1493',
     github: 'https://github.com/ankur1493',
     rating: 4,
@@ -177,7 +177,7 @@ export default function Testimonials() {
                       </div>
                     </div>
                     <div className="my-4 flex-grow px-2">
-                      <p className="text-xl">{testimonial.quote}</p>
+                      <p className="text-2xl">{testimonial.quote}</p>
                     </div>
                     <Quote className="absolute -bottom-10 right-0 h-40 w-40 fill-primary/50 text-primary opacity-10" />
                     <div className="flex justify-start space-x-4">
