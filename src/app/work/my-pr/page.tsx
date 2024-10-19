@@ -238,7 +238,7 @@ export default function MyPR() {
           <div className="flex items-center gap-2">
             {/* @ts-ignore */}
             <Select
-              onValueChange={(e) =>
+              onValueChange={(e:any) =>
                 setSelectedOrgData({
                   id: e?.id,
                   name: e?.name,
