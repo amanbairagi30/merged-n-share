@@ -261,7 +261,7 @@ export default async function PublicProfilePage({ params }: any) {
                         <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
                             <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Username</p>
                             {/* @ts-ignore */}
-                            <span>{user?.username}</span>
+                            <span>{urlUser?.username}</span>
                         </div>
                         <div className='bg-accent col-span-1 dark:bg-muted/80 p-4 rounded-xl'>
                             <p className='text-gray-600 dark:text-gray-400 mb-3 font-extrabold'>Email</p>
