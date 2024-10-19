@@ -91,7 +91,12 @@ export function ProfileChart() {
         >
           <CartesianGrid className="opacity-40" vertical={false} />
           <XAxis dataKey="date" tickFormatter={formatXAxis} />
-          <YAxis tickLine={false} axisLine={false} tickMargin={30} />
+          <YAxis
+            tickLine={false}
+            axisLine={false}
+            tickMargin={30}
+            allowDecimals={false}
+          />
           <ChartTooltip content={<ChartTooltipContent />} />
           <Area
             type="linear"
