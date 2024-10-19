@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { Bricolage_Grotesque, Epilogue, Work_Sans } from "next/font/google";
-import "./globals.css";
-import Providers from "@/components/Providers";
+import type { Metadata } from 'next';
+import { Bricolage_Grotesque, Epilogue, Work_Sans } from 'next/font/google';
+import './globals.css';
+import Providers from '@/components/Providers';
 import NextTopLoader from 'nextjs-toploader';
-import { Toaster } from "@/components/ui/sonner";
-import { Analytics } from "@vercel/analytics/react";
+import { Toaster } from '@/components/ui/sonner';
+import { Analytics } from '@vercel/analytics/react';
 import localFont from 'next/font/local';
-import { ThemeProvider } from "@/components/theme-provider";
-import { cn } from "@/lib/utils";
-import Script from "next/script";
-import GoogleAnalytics from "@/components/google-analytics";
+import { ThemeProvider } from '@/components/theme-provider';
+import { cn } from '@/lib/utils';
+import Script from 'next/script';
+import GoogleAnalytics from '@/components/google-analytics';
 
 const circular = localFont({
   variable: '--font-paragraph',
@@ -31,25 +31,25 @@ const circular = localFont({
       style: 'normal',
     },
   ],
-})
+});
 
 // primary font
 const work_sans = Work_Sans({
-  subsets: ["latin"],
-  weight: ["200", "300", "500", "600", "700", "800"],
+  subsets: ['latin'],
+  weight: ['200', '300', '500', '600', '700', '800'],
   variable: '--font-primary',
-  display: "swap",
+  display: 'swap',
 });
 
-// secondary font 
+// secondary font
 const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  weight: ["200", "300", "500", "600", "700", "800"],
+  subsets: ['latin'],
+  weight: ['200', '300', '500', '600', '700', '800'],
   variable: '--font-secondary',
-  display: "swap",
+  display: 'swap',
 });
 
-// // paragraph/text font 
+// // paragraph/text font
 // const epilogue = Epilogue({
 //   subsets: ["latin"],
 //   weight: ["200", "300", "500", "600", "700", "800"],
@@ -57,21 +57,21 @@ const bricolage = Bricolage_Grotesque({
 //   display: "swap",
 // });
 
-
 export const metadata: Metadata = {
-  title: "M&S",
-  description: "",
+  title: 'M&S',
+  description: '',
   openGraph: {
     type: 'website',
-    title: "M&S",
-    description: "Showcase your open source contributions as Proof of Work by sharing your merged pull requests to anyone around the world with help of Merged&Share",
+    title: 'M&S',
+    description:
+      'Showcase your open source contributions as Proof of Work by sharing your merged pull requests to anyone around the world with help of Merged&Share',
     images: [
       {
         url: `${process.env.NEXT_PUBLIC_URL}/api/og-images/root`,
-        alt: 'og-image-for-home-page'
-      }
-    ]
-  }
+        alt: 'og-image-for-home-page',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -81,22 +81,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(circular.variable, work_sans.variable, bricolage.variable, 'font-paragraph')}>
+      <body
+        className={cn(
+          circular.variable,
+          work_sans.variable,
+          bricolage.variable,
+          'font-paragraph',
+        )}
+      >
         <GoogleAnalytics />
         <NextTopLoader color="#facc15" height={2} />
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Providers>
             <main>{children}</main>
           </Providers>
         </ThemeProvider>
         <Analytics />
         <Toaster richColors />
-        <Script async src="https://custom-web-widget.vercel.app/widget.umd.js"></Script>
+        <Script
+          async
+          src="https://custom-web-widget.vercel.app/widget.umd.js"
+        ></Script>
       </body>
-    </html >
+    </html>
   );
 }

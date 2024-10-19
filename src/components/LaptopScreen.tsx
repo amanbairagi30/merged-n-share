@@ -1,19 +1,19 @@
-import { GitMerge, Plus } from 'lucide-react'
-import React from 'react'
+import { GitMerge, Plus } from 'lucide-react';
+import React from 'react';
 
 export default function LaptopScreen() {
-    return (
-        <div className="border-[3px] overflow-hidden border-gray-500 rounded-t-md mt-6 w-full h-[630px]">
-            <div className="w-full text-white px-4 rounded-t-md flex items-center justify-between bg-[#202020] h-[2.55rem]">
-                <div className="flex items-center gap-2">
-                    <div className="w-[0.8rem] h-[0.8rem] rounded-full bg-red-500"></div>
-                    <div className="w-[0.8rem] h-[0.8rem] rounded-full bg-yellow-500"></div>
-                    <div className="w-[0.8rem] h-[0.8rem] rounded-full bg-green-500"></div>
-                </div>
-                {/* <div><Plus /></div> */}
-                <div className='font-secondary text-primary text-xl'>&</div>
-            </div>
-            {/* <div className="bg-[#151414] flex justify-center  h-full">
+  return (
+    <div className="mt-6 h-[630px] w-full overflow-hidden rounded-t-md border-[3px] border-gray-500">
+      <div className="flex h-[2.55rem] w-full items-center justify-between rounded-t-md bg-[#202020] px-4 text-white">
+        <div className="flex items-center gap-2">
+          <div className="h-[0.8rem] w-[0.8rem] rounded-full bg-red-500"></div>
+          <div className="h-[0.8rem] w-[0.8rem] rounded-full bg-yellow-500"></div>
+          <div className="h-[0.8rem] w-[0.8rem] rounded-full bg-green-500"></div>
+        </div>
+        {/* <div><Plus /></div> */}
+        <div className="font-secondary text-xl text-primary">&</div>
+      </div>
+      {/* <div className="bg-[#151414] flex justify-center  h-full">
                 <div className="w-full mx-2 sm:w-[40%] h-[8rem] rounded-xl bg-[#202020] p-2 mt-[4rem]">
                     <div className="flex relative items-center gap-2">
                         <div className="!w-[2rem] !h-[2rem] bg-[#161515] rounded-full"></div>
@@ -24,6 +24,6 @@ export default function LaptopScreen() {
                     </div>
                 </div>
             </div> */}
-        </div>
-    )
+    </div>
+  );
 }
