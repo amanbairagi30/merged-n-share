@@ -1,14 +1,14 @@
-"use client";
-import GoogleIcon from "../app/assets/google.svg";
-import GithubIcon from "../app/assets/github.svg";
-import { signIn, useSession } from "next-auth/react";
-import { useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Star } from "lucide-react";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+'use client';
+import GoogleIcon from '../app/assets/google.svg';
+import GithubIcon from '../app/assets/github.svg';
+import { signIn, useSession } from 'next-auth/react';
+import { useEffect, useRef } from 'react';
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import { Button } from './ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
+import { Star } from 'lucide-react';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 const SignIn = () => {
   const session = useSession();
   const router = useRouter();
@@ -16,65 +16,78 @@ const SignIn = () => {
   const redirected = useRef(false);
   useEffect(() => {
     if (redirected.current === false && session.data?.user) {
-      const redirectUrl = localStorage.getItem("loginRedirectUrl");
-      localStorage.removeItem("loginRedirectUrl");
-      router.replace(redirectUrl || "/");
+      const redirectUrl = localStorage.getItem('loginRedirectUrl');
+      localStorage.removeItem('loginRedirectUrl');
+      router.replace(redirectUrl || '/');
       redirected.current = true;
     }
   }, [redirected, session, router]);
 
   const testimonials = [
     {
-      name: "Harkirat Singh",
-      role: "Founder @100xdevs and Full Stack Developer",
-      avatar: "https://avatars.githubusercontent.com/u/8079861",
-      quote: "Oh! That looks good !",
-      rating: 4
+      name: 'Harkirat Singh',
+      role: 'Founder @100xdevs and Full Stack Developer',
+      avatar: 'https://avatars.githubusercontent.com/u/8079861',
+      quote: 'Oh! That looks good !',
+      rating: 4,
     },
     {
-      name: "Sargam Poudel",
-      role: "SWE Intern at DropStation",
-      avatar: "https://avatars.githubusercontent.com/u/76874341",
-      quote: "Wow bro , looks decent , great project must say!",
-      rating: 4
+      name: 'Sargam Poudel',
+      role: 'SWE Intern at DropStation',
+      avatar: 'https://avatars.githubusercontent.com/u/76874341',
+      quote: 'Wow bro , looks decent , great project must say!',
+      rating: 4,
     },
     {
-      name: "Nimit Haria",
-      role: "SDE at Browserstack",
-      avatar: "https://avatars.githubusercontent.com/u/37402791",
-      quote: "Looking Super Cool 🔥🔥🔥 , Good Work",
-      rating: 4
+      name: 'Nimit Haria',
+      role: 'SDE at Browserstack',
+      avatar: 'https://avatars.githubusercontent.com/u/37402791',
+      quote: 'Looking Super Cool 🔥🔥🔥 , Good Work',
+      rating: 4,
     },
     {
-      name: "Vineet Agarwal",
-      role: "SWE Intern at ConcertPal",
-      avatar: "https://avatars.githubusercontent.com/u/91052168",
-      quote: "Looks cool + feature is also good",
-      rating: 4
-    }
-  ]
+      name: 'Vineet Agarwal',
+      role: 'SWE Intern at ConcertPal',
+      avatar: 'https://avatars.githubusercontent.com/u/91052168',
+      quote: 'Looks cool + feature is also good',
+      rating: 4,
+    },
+  ];
 
   return (
     <>
       <section className="h-screen px-4">
-        <div className='absolute left-[50%] -z-0 border-2 opacity-100 border-white translate-x-[-50%] -bottom-[2rem] md:bottom-[0rem] size-[4rem] md:size-[10rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'></div>
-        <div className="max-w-[1180px] flex items-center justify-center h-full mx-auto ">
-          <div className="flex flex-col max-w-2xl gap-10 w-full">
-
-            <div className="h-fit lg:h-[30rem] p-4">
-              <h6 className="text-sm mb-4 text-gray-500 dark:text-gray-400">Hi there and Welcome to,</h6>
+        <div className="absolute -bottom-[2rem] left-[50%] -z-0 size-[4rem] translate-x-[-50%] rounded-full border-2 border-white bg-gradient-to-t from-yellow-400 to-yellow-700 opacity-100 blur-[8em] md:bottom-[0rem] md:size-[10rem]"></div>
+        <div className="mx-auto flex h-full max-w-[1180px] items-center justify-center">
+          <div className="flex w-full max-w-2xl flex-col gap-10">
+            <div className="h-fit p-4 lg:h-[30rem]">
+              <h6 className="mb-4 text-sm text-gray-500 dark:text-gray-400">
+                Hi there and Welcome to,
+              </h6>
 
               <aside className="flex flex-col gap-[10px]">
-                <h1 className="text-4xl font-extrabold font-secondary">Merged<span className="text-primary">&</span>Share .</h1>
-                <p className="text-xs lg:text-sm dark:text-gray-300 w-full ">A  platform to showcase your <span className="text-primary">open source contributions</span> to the world with a <span className="text-primary">single click.</span> </p>
+                <h1 className="font-secondary text-4xl font-extrabold">
+                  Merged<span className="text-primary">&</span>Share .
+                </h1>
+                <p className="w-full text-xs dark:text-gray-300 lg:text-sm">
+                  A platform to showcase your{' '}
+                  <span className="text-primary">
+                    open source contributions
+                  </span>{' '}
+                  to the world with a{' '}
+                  <span className="text-primary">single click.</span>{' '}
+                </p>
               </aside>
 
-              <aside className="h-[20rem] lg:h-[20rem] relative mt-6">
+              <aside className="relative mt-6 h-[20rem] lg:h-[20rem]">
                 {testimonials.map((testimonial, index, arr) => (
                   <div
                     key={index}
-                    className={`border-2 shadow-lg  absolute p-4 w-full left-1/2 -translate-x-1/2 rounded-xl transition-all duration-300 ease-in-out ${index === arr.length - 1 ? "opacity-10" : null} ${index === 0 ? 'bg-background shadow-primary/5 ' : 'bg-background'
-                      }`}
+                    className={`absolute left-1/2 w-full -translate-x-1/2 rounded-xl border-2 p-4 shadow-lg transition-all duration-300 ease-in-out ${index === arr.length - 1 ? 'opacity-10' : null} ${
+                      index === 0
+                        ? 'bg-background shadow-primary/5'
+                        : 'bg-background'
+                    }`}
                     style={{
                       top: `${index * 2}rem`,
                       zIndex: testimonials.length - index,
@@ -84,26 +97,38 @@ const SignIn = () => {
                   >
                     <div className="flex items-start justify-between">
                       <div className="flex-grow">
-                        <div className='flex items-center mb-4'>
-                          <Avatar className="h-8 w-8 mr-4">
-                            <AvatarImage src={testimonial.avatar} alt={testimonial.name} />
-                            <AvatarFallback>{testimonial.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                        <div className="mb-4 flex items-center">
+                          <Avatar className="mr-4 h-8 w-8">
+                            <AvatarImage
+                              src={testimonial.avatar}
+                              alt={testimonial.name}
+                            />
+                            <AvatarFallback>
+                              {testimonial.name
+                                .split(' ')
+                                .map((n) => n[0])
+                                .join('')}
+                            </AvatarFallback>
                           </Avatar>
                           <div>
-                            <h3 className="text-md font-semibold">{testimonial.name}</h3>
-                            <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                            <h3 className="text-md font-semibold">
+                              {testimonial.name}
+                            </h3>
+                            <p className="text-xs text-muted-foreground">
+                              {testimonial.role}
+                            </p>
                           </div>
                         </div>
-                        <div className='mb-4'>
-                          <p className="text-sm">
-                            {testimonial.quote}
-                          </p>
+                        <div className="mb-4">
+                          <p className="text-sm">{testimonial.quote}</p>
                         </div>
                       </div>
-                      <div className='drop-shadow-2xl flex flex-col border-primary gap-1 md:gap-4 items-center justify-center border-2 bg-primary/5 rounded-xl p-2'>
-                        <div className='flex items-center gap-2'>
-                          <p className='font-secondary flex items-center gap-4 text-lg font-normal'>{testimonial.rating}</p>
-                          <Star className='fill-yellow-500 w-4 h-4 text-yellow-500' />
+                      <div className="flex flex-col items-center justify-center gap-1 rounded-xl border-2 border-primary bg-primary/5 p-2 drop-shadow-2xl md:gap-4">
+                        <div className="flex items-center gap-2">
+                          <p className="flex items-center gap-4 font-secondary text-lg font-normal">
+                            {testimonial.rating}
+                          </p>
+                          <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
                         </div>
                       </div>
                     </div>
@@ -112,13 +137,20 @@ const SignIn = () => {
               </aside>
             </div>
 
-            <div className="max-h-fit flex z-50 bg-background/50  flex-col border-2 rounded-xl gap-4 p-4">
-              <h1 className="text-2xl font-bold font-secondary">Sign Up</h1>
-              <p className="text-sm dark:text-gray-400 ">Sign up with your GitHub account to get started quickly. It&apos;s fast and easy!</p>
-              <Button onClick={async () => {
-                await signIn("github");
-              }} variant={'outline'} className="h-[3rem]  w-full bg-primary text-black font-semibold hover:bg-accent p-4 rounded-xl">
-                <GitHubLogoIcon className="w-4 h-4 mr-2" />
+            <div className="z-50 flex max-h-fit flex-col gap-4 rounded-xl border-2 bg-background/50 p-4">
+              <h1 className="font-secondary text-2xl font-bold">Sign Up</h1>
+              <p className="text-sm dark:text-gray-400">
+                Sign up with your GitHub account to get started quickly.
+                It&apos;s fast and easy!
+              </p>
+              <Button
+                onClick={async () => {
+                  await signIn('github');
+                }}
+                variant={'outline'}
+                className="h-[3rem] w-full rounded-xl bg-primary p-4 font-semibold text-black hover:bg-accent"
+              >
+                <GitHubLogoIcon className="mr-2 h-4 w-4" />
                 Continue with Github
               </Button>
             </div>

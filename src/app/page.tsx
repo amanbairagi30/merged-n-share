@@ -1,21 +1,21 @@
-import Features from "@/components/features";
-import Footer from "@/components/footer";
-import Hero from "@/components/Hero";
-import { Navbar } from "@/components/Navbar";
-import Statistics from "@/components/statistics";
-import Testimonials from "@/components/testimonials";
+import Features from '@/components/features';
+import Footer from '@/components/footer';
+import Hero from '@/components/Hero';
+import { Navbar } from '@/components/Navbar';
+import Statistics from '@/components/statistics';
+import Testimonials from '@/components/testimonials';
 
 export default function Home() {
   return (
-    <section className="min-h-screen py-8 relative overflow-hidden">
-      <div className='absolute left-[50%] translate-x-[-50%] md:opacity-55 -top-[10rem] md:-top-[35rem] size-[12rem] md:size-[40rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'></div>
-      <div className='absolute left-[50%] -z-0 border-2 opacity-75 border-white translate-x-[-50%] -bottom-[2rem] md:-bottom-[6rem] size-[12rem] md:size-[14rem] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em]'></div>
+    <section className="relative min-h-screen overflow-hidden py-8">
+      <div className="absolute -top-[10rem] left-[50%] size-[12rem] translate-x-[-50%] rounded-full bg-gradient-to-t from-yellow-400 to-yellow-700 blur-[8em] md:-top-[35rem] md:size-[40rem] md:opacity-55"></div>
+      <div className="absolute -bottom-[2rem] left-[50%] -z-0 size-[12rem] translate-x-[-50%] rounded-full border-2 border-white bg-gradient-to-t from-yellow-400 to-yellow-700 opacity-75 blur-[8em] md:-bottom-[6rem] md:size-[14rem]"></div>
 
-      <div className="max-w-7xl z-[999] rounded-xl backdrop-blur-md fixed top-4 left-[50%] translate-x-[-50%] w-full">
+      <div className="fixed left-[50%] top-4 z-[999] w-full max-w-7xl translate-x-[-50%] rounded-xl backdrop-blur-md">
         <Navbar />
       </div>
 
-      <div className="max-w-[1180px] px-4 mt-28 mx-auto">
+      <div className="mx-auto mt-28 max-w-[1180px] px-4">
         <Hero />
         {/* <ProductDemo /> */}
         <Features />
