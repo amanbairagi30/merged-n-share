@@ -21,7 +21,7 @@ export default function HeroButtons() {
     <>
       <Button
         onClick={handlePrimaryButtonClick}
-        className="h-8 w-full font-paragraph font-bold md:w-fit"
+        className="h-10 w-full text-[1rem] px-4 font-paragraph font-bold md:w-40"
       >
         {user ? (
           <>
@@ -41,7 +41,7 @@ export default function HeroButtons() {
       <Button
         onClick={() => router.push('#features')}
         variant={'ghost'}
-        className="h-8 w-full border-primary font-paragraph font-bold hover:bg-accent md:w-fit"
+        className="h-10 w-full text-[1rem] border-primary font-paragraph font-bold hover:bg-accent md:w-40"
       >
         What&apos;s more ?
       </Button>

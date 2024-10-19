@@ -15,11 +15,11 @@ const Card = ({
 
   return (
     <div
-      className={`group relative h-[20rem] cursor-pointer overflow-hidden rounded-xl border-2 p-4 duration-500 hover:border-primary`}
+      className={`group relative h-[20rem] hover:-translate-y-3 bg-background cursor-pointer overflow-hidden rounded-xl border-2 p-4 duration-500 hover:border-primary`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative left-[50%] top-[50%] z-10 h-20 w-20 translate-x-[-50%] translate-y-[-50%] transition-all duration-500 ease-in-out group-hover:left-0 group-hover:top-0 group-hover:translate-x-[0%] group-hover:translate-y-[0%]">
+      <div className="relative z-10 h-20 w-20 transition-all duration-500 ease-in-out left-0 top-0 translate-x-[0%] translate-y-[0%]">
         <div className="absolute flex h-full w-full items-center justify-center rounded-xl bg-gradient-to-tl from-primary to-transparent">
           <Icon className="h-10 w-10 text-black" />
         </div>
@@ -38,7 +38,7 @@ const Card = ({
         {isComingSoon ? 'Coming Soon' : 'Live now'}
       </div>
 
-      <div className="relative z-10 mt-4 flex translate-y-20 flex-col gap-2 opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+      <div className="relative z-10 mt-4 flex flex-col gap-2 transition-all duration-500 translate-y-0 opacity-100">
         <h1 className="font-secondary text-3xl font-bold">{title}</h1>
         <p className="w-[70%] font-paragraph text-sm dark:text-gray-400">
           {description}
@@ -199,11 +199,14 @@ export default function Features() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
-      className="my-[10rem] flex h-fit flex-col items-center py-4"
+      className="my-[10rem] relative flex h-fit flex-col items-center py-4"
     >
       <motion.div variants={itemVariants}>
         <TitleCard icon={Crown} title={'Features'} />
       </motion.div>
+
+      {/* <div className='rounded-full w-[30rem] h-[30rem] absolute top-[30%] drop-shadow-[0_10px_20px_#facc15] blur-[80px] opacity-10 dark:opacity-30 bg-primary'></div> */}
+
 
       <motion.div
         className="mt-10 flex items-center justify-center font-secondary text-2xl font-bold md:text-4xl"
