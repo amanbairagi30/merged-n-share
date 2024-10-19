@@ -14,7 +14,7 @@ interface LeaderboardCardProps {
 export default function LeaderboardCard({ leaderboard, currUser }: any) {
   return (
     <div>
-      <ul className="mt-[2rem] flex flex-col items-center gap-[1.5rem]">
+      <ul className="mt-[5rem] flex flex-col items-center gap-[1.5rem]">
         <div className="flex h-80 w-full items-end justify-around pb-4 lg:w-[50%]">
           {leaderboard.map((user: any, index: number) => {
             if (index < 3) {
@@ -63,7 +63,7 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                           </div>
                         )}
                       </div>
-                      <div className="flex items-center gap-1 rounded-full">
+                      {/* <div className="flex items-center gap-1 rounded-full">
                         <Image
                           width="400"
                           height="400"
@@ -72,14 +72,14 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                           alt="coin-image"
                         />
                         <span className="text-sm">{user?.totalPoints}</span>
-                      </div>
+                      </div> */}
                     </div>
                     <Link
                       href={`${process.env.NEXT_PUBLIC_URL}/profile/${user?.username}`}
                       target="_blank"
                       className="flex w-full cursor-pointer items-center justify-between rounded-md bg-primary px-2 py-1 text-xs font-bold text-black"
                     >
-                      Profile
+                      <p>Profile</p>
                       <LucideExternalLink size={16} />
                     </Link>
                   </div>
@@ -109,9 +109,9 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                 </div>
 
                 <div
-                  className={`${currUser?.id === user?.id ? 'border-primary' : ''} flex h-[7rem] flex-1 flex-col p-2 px-3`}
+                  className={`${currUser?.id === user?.id ? 'border-primary' : ''} flex h-[7rem] justify-end flex-1 flex-col p-2 px-3`}
                 >
-                  <div className="flex items-center justify-between text-base font-semibold">
+                  <div className="flex md:flex-row items-center justify-between text-base font-semibold">
                     <div className="flex gap-2">
                       <p>{user?.name}</p>
                       {currUser?.id === user?.id && (
@@ -120,19 +120,25 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                         </div>
                       )}
                     </div>
-                    <Link
-                      href={`${process.env.NEXT_PUBLIC_URL}/profile/${user?.username}`}
-                      target="_blank"
-                      className="flex cursor-pointer items-center text-sm"
-                    >
-                      <LucideExternalLink size={16} />
-                    </Link>
+                    
                   </div>
                   <div className="flex-1 text-sm font-semibold text-slate-400">
                     {user?.username}
                   </div>
 
-                  <div className="flex items-center justify-between">
+                  <div className='flex sm:justify-end'>
+                    <Link
+                      href={`${process.env.NEXT_PUBLIC_URL}/profile/${user?.username}`}
+                      target="_blank"
+                      className="flex justify-between sm:justify-start px-2 bg-primary font-semibold w-full sm:w-fit text-black py-1 rounded-md cursor-pointer items-center text-sm"
+                    >
+                      <p>Public Profile</p>
+                      <LucideExternalLink className='w-4 h-4 ml-2' />
+                    </Link>
+                  </div>
+
+                
+                  {/* <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="mt-2 flex items-center gap-1 rounded-full">
                         <Image
@@ -146,13 +152,11 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                       </div>
                       <div className="mt-2 flex items-center gap-1 rounded-full">
                         <BadgeDollarSign size={18} className="text-green-500" />
-                        {/* <span className='text-sm'>{bounty[0]}</span> */}
                         <span className="text-sm">{user?.bounties}</span>
                       </div>
                     </div>
 
-                    {/* <div onClick={() => toast.success('Coming Soon !')} className='w-fit px-2 py-1 rounded-sm cursor-pointer bg-blue-500 text-sm'>Hire/Refer</div> */}
-                  </div>
+                  </div> */}
                 </div>
               </li>
             );

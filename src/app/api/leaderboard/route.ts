@@ -9,8 +9,6 @@ export async function GET(req: Request) {
         name: true,
         username: true,
         image: true,
-        linkedInProfile: true,
-        xProfile: true,
         pullRequests: {
           where: {
             isVerified: true,

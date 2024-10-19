@@ -19,7 +19,6 @@ export default function Leaderboard() {
       setIsFetching(false);
 
       const leaderboardData = response?.data;
-      console.log(leaderboardData);
       setLeaderboard(leaderboardData);
     } catch (error) {
       setIsFetching(false);
@@ -33,6 +32,8 @@ export default function Leaderboard() {
 
   return (
     <div>
+        <h1 className='text-2xl font-semibold'>Leaderboard</h1>
+        <p className='text-sm text-gray-500 dark:text-gray-300'>Below section shows you the leaderboard of the user based on the Merged&Share coin , currently you get assigned <span className='text-primary'>one coin</span> on each successsful addition of your merged PR in our DB from the My-PR section (WIP)</p>
       {!isFetching ? (
         <>
           <LeaderboardCard leaderboard={leaderboard} currUser={currUser} />
