@@ -237,7 +237,7 @@ export default async function PublicProfilePage({ params }: any) {
         <div className="relative mx-auto mb-12 h-fit min-h-[10rem] max-w-7xl rounded-b-2xl border-b-2 border-l-2 border-r-2 pt-16 md:pt-24">
           <div className="absolute -top-[3.5rem] left-[50%] h-fit w-[90%] translate-x-[-50%] rounded-xl border bg-accent p-4 shadow-2xl md:w-[80%] lg:w-[50%]">
             <div className="flex items-center gap-4">
-              <Image
+              <img
                 className="h-[4.5rem] w-[4.5rem] rounded-md md:h-[5.5rem] md:w-[5.5rem]"
                 src={urlUser?.image ?? ''}
                 width="400"

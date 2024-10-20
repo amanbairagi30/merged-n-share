@@ -21,7 +21,7 @@ const testimonials = [
     name: 'Harkirat Singh',
     role: 'Founder @100xdevs and Full Stack Developer',
     avatar: 'https://avatars.githubusercontent.com/u/8079861',
-    quote: 'Oh! That looks good !',
+    quote: 'Oh! That looks good ! The UI also looks preety good ',
     x: 'https://x.com/kirat_tw',
     github: 'https://github.com/hkirat',
     rating: 4,
@@ -66,7 +66,8 @@ const testimonials = [
     name: 'Ankur Sharma',
     role: 'SDE Intern @Thinkit Club',
     avatar: 'https://avatars.githubusercontent.com/u/97390674',
-    quote: 'BEST WAY to showcase your open source contributions and proof of work',
+    quote:
+      'BEST WAY to showcase your open source contributions and proof of work',
     x: 'https://x.com/ankursharma1493',
     github: 'https://github.com/ankur1493',
     rating: 4,

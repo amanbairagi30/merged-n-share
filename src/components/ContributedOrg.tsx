@@ -17,7 +17,7 @@ export default function ContributedOrg({ contributions }: ContributionType) {
           }
           return (
             <>
-              <Image
+              <img
                 key={item.id}
                 className="!h-[1.5rem] !w-[1.5rem] rounded-full shadow-lg"
                 src={item?.avatar_url || ''}

@@ -61,7 +61,7 @@ export default function PRListings({
                   return (
                     <SelectItem value={org} key={org.id}>
                       <div className="flex items-center gap-2">
-                        <Image
+                        <img
                           className="h-[1.5rem] w-[1.5rem] rounded-full"
                           src={org?.avatar_url}
                           width="500"
