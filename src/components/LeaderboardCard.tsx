@@ -46,7 +46,7 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                     }`}
                   >
                     <div className="h-[7rem] w-[7rem]">
-                      <Image
+                      <img
                         src={user?.image}
                         className="h-full w-full rounded-lg"
                         width="1500"
@@ -99,7 +99,7 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
               >
                 {/* {user.name || user.username} - {user.totalPoints} - {user.bounties} points */}
                 <div className="h-[7rem] w-[7rem]">
-                  <Image
+                  <img
                     src={user?.image}
                     className="h-full w-full rounded-l-lg"
                     width="1500"
@@ -109,9 +109,9 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                 </div>
 
                 <div
-                  className={`${currUser?.id === user?.id ? 'border-primary' : ''} flex h-[7rem] justify-end flex-1 flex-col p-2 px-3`}
+                  className={`${currUser?.id === user?.id ? 'border-primary' : ''} flex h-[7rem] flex-1 flex-col justify-end p-2 px-3`}
                 >
-                  <div className="flex md:flex-row items-center justify-between text-base font-semibold">
+                  <div className="flex items-center justify-between text-base font-semibold md:flex-row">
                     <div className="flex gap-2">
                       <p>{user?.name}</p>
                       {currUser?.id === user?.id && (
@@ -120,24 +120,22 @@ export default function LeaderboardCard({ leaderboard, currUser }: any) {
                         </div>
                       )}
                     </div>
-                    
                   </div>
                   <div className="flex-1 text-sm font-semibold text-slate-400">
                     {user?.username}
                   </div>
 
-                  <div className='flex sm:justify-end'>
+                  <div className="flex sm:justify-end">
                     <Link
                       href={`${process.env.NEXT_PUBLIC_URL}/profile/${user?.username}`}
                       target="_blank"
-                      className="flex justify-between sm:justify-start px-2 bg-primary font-semibold w-full sm:w-fit text-black py-1 rounded-md cursor-pointer items-center text-sm"
+                      className="flex w-full cursor-pointer items-center justify-between rounded-md bg-primary px-2 py-1 text-sm font-semibold text-black sm:w-fit sm:justify-start"
                     >
                       <p>Public Profile</p>
-                      <LucideExternalLink className='w-4 h-4 ml-2' />
+                      <LucideExternalLink className="ml-2 h-4 w-4" />
                     </Link>
                   </div>
 
-                
                   {/* <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="mt-2 flex items-center gap-1 rounded-full">
