@@ -83,7 +83,7 @@ export default function OrgCard({
     <>
       <div className="relative flex h-[16rem] w-full flex-col items-center justify-center rounded-2xl bg-accent transition-all duration-300 hover:shadow-lg dark:bg-accent/30">
         <div className="mb-4">
-          <Image
+          <img
             src={organisation.avatar_url as string}
             alt={`${organisation.name} avatar`}
             className="h-20 w-20 rounded-xl object-cover"
