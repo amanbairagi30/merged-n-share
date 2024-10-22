@@ -2,7 +2,7 @@ FROM node:20.12.0-alpine3.19
 
 WORKDIR /src/app
 
-COPY ..
+COPY . .
 
 ENV DATABASE_URL = ${DATABASE_URL}
 
