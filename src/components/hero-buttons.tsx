@@ -21,12 +21,12 @@ export default function HeroButtons() {
     <>
       <Button
         onClick={handlePrimaryButtonClick}
-        className="h-10 w-full text-[1rem] px-4 font-paragraph font-bold md:w-40"
+        className="h-10 w-full px-4 font-paragraph text-[1rem] font-bold md:w-40"
       >
         {user ? (
           <>
             <span className="mr-2">Dashboard</span>
-            <Image
+            <img
               className="h-6 w-6 rounded-md shadow-xl"
               width={100}
               height={100}
@@ -41,7 +41,7 @@ export default function HeroButtons() {
       <Button
         onClick={() => router.push('#features')}
         variant={'ghost'}
-        className="h-10 w-full text-[1rem] border-primary font-paragraph font-bold hover:bg-accent md:w-40"
+        className="h-10 w-full border-primary font-paragraph text-[1rem] font-bold hover:bg-accent md:w-40"
       >
         What&apos;s more ?
       </Button>
