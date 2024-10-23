@@ -128,7 +128,9 @@ export default function Sidebar() {
           <div className="flex w-[80%] flex-col text-start font-normal">
             {/* @ts-ignore */}
             <div className="text-sm font-semibold">{user?.username}</div>
-            <div className="text-xs text-gray-400">{user?.email}</div>
+            <div className="text-xs text-gray-400">
+              {user?.email?.slice(0, 26)}...
+            </div>
           </div>
         </Button>
       </div>
