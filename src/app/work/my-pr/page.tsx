@@ -28,6 +28,8 @@ import Image from 'next/image';
 import { updateUserContributedOrgs } from '@/app/actions/userAction';
 import { Input } from '@/components/ui/input';
 import { useDebounce } from '@/app/hooks/useDebounce';
+import { fetchPRs } from '@/app/actions/fetchPRs';
+import { useRouter } from 'next/navigation';
 
 export default function MyPR() {
   const session = useSession();
@@ -46,6 +48,7 @@ export default function MyPR() {
   const [query, setQuery] = useState('');
   const [resultantPrs, setResultantPrs] = useState<any[]>([]);
   const user = session?.data?.user;
+  const router = useRouter();
 
   // console.log(selectedOrgData);
 
@@ -56,77 +59,86 @@ export default function MyPR() {
     }
     setIsLoading(true);
     setShowFetchedMergedPRDialog(true);
-    const response = await fetch(
-      `https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${selectedOrgData?.name}+is:merged`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`,
-        },
-      },
-    );
-    setIsLoading(false);
+    // const response = await fetch(
+    //   `https://api.github.com/search/issues?q=type:pr+author:${user?.username}+org:${selectedOrgData?.name}+is:merged`,
+    //   {
+    //     method: 'GET',
+    //     headers: {
+    //       Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`,
+    //     },
+    //   },
+    // );
+    try {
+      const finalData = await fetchPRs(user?.username, selectedOrgData?.name);
+      setIsLoading(false);
+      if (Number(finalData.status) === 422) {
+        // console.log(finalData.errors[0].message);
+        toast.error('Hi : ', finalData.errors[0].message);
+        return;
+      }
 
-    const finalData = await response.json();
-    if (Number(finalData.status) === 422) {
-      // console.log(finalData.errors[0].message);
-      toast.error('Hi : ', finalData.errors[0].message);
-      return;
+      const mergedPRsData = await Promise.all(
+        finalData?.items
+          ?.map(async (pr: any, index: number) => {
+            if (user?.username === pr.user.login) {
+              const prDetails = {
+                prURL: pr.html_url,
+                prTitle: pr.title,
+                prNumber: pr.number,
+                repoURL: pr.repository_url,
+                userName: pr.user.login,
+                avatar: pr.user.avatar_url,
+                commentURL: pr.comments_url,
+                organisationId: selectedOrgData.id,
+                isVerified: true,
+                mergedAt: pr.pull_request.merged_at,
+                body: pr.body,
+                draft: pr.draft,
+                bounty: null,
+              };
+
+              const commentsResponse = await fetch(pr.comments_url, {
+                method: 'GET',
+                headers: {
+                  Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`,
+                },
+              });
+              const commentsData = await commentsResponse.json();
+
+              const hkiratComments = commentsData
+                ?.filter((comment: any) => comment.user.login === 'hkirat')
+                .map((item: any) => {
+                  // console.log(item.body)
+                  if (isBountyComment(item.body)) {
+                    return extractAmount(item.body);
+                  }
+                  return null;
+                })
+                .filter((amount: any) => amount !== null);
+
+              // console.log(hkiratComments)
+              prDetails.bounty = hkiratComments;
+
+              return prDetails;
+            } else {
+              return;
+            }
+          })
+          .filter((pr: any) => pr !== undefined),
+      );
+      router.refresh();
+      setIsLoading(false);
+      setFetchedMergedPRData(mergedPRsData);
+      // console.log(mergedPRsData);
+    } catch (error) {
+      // Add toast notification specifically for fetchPRs errors
+      toast.error(
+        `Error fetching PRs: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      );
+    } finally {
+      setIsLoading(false);
+      router.refresh();
     }
-
-    const mergedPRsData = await Promise.all(
-      finalData?.items
-        ?.map(async (pr: any, index: number) => {
-          if (user?.username === pr.user.login) {
-            const prDetails = {
-              prURL: pr.html_url,
-              prTitle: pr.title,
-              prNumber: pr.number,
-              repoURL: pr.repository_url,
-              userName: pr.user.login,
-              avatar: pr.user.avatar_url,
-              commentURL: pr.comments_url,
-              organisationId: selectedOrgData.id,
-              isVerified: true,
-              mergedAt: pr.pull_request.merged_at,
-              body: pr.body,
-              draft: pr.draft,
-              bounty: null,
-            };
-
-            const commentsResponse = await fetch(pr.comments_url, {
-              method: 'GET',
-              headers: {
-                Authorization: `Bearer ${process.env.NEXT_PUBLIC_GITHUB_AUTH_TOKEN}`,
-              },
-            });
-            const commentsData = await commentsResponse.json();
-
-            const hkiratComments = commentsData
-              ?.filter((comment: any) => comment.user.login === 'hkirat')
-              .map((item: any) => {
-                // console.log(item.body)
-                if (isBountyComment(item.body)) {
-                  return extractAmount(item.body);
-                }
-                return null;
-              })
-              .filter((amount: any) => amount !== null);
-
-            // console.log(hkiratComments)
-            prDetails.bounty = hkiratComments;
-
-            return prDetails;
-          } else {
-            return;
-          }
-        })
-        .filter((pr: any) => pr !== undefined),
-    );
-
-    setIsLoading(false);
-    setFetchedMergedPRData(mergedPRsData);
-    // console.log(mergedPRsData);
   };
 
   useEffect(() => {
@@ -238,7 +250,7 @@ export default function MyPR() {
           <div className="flex items-center gap-2">
             {/* @ts-ignore */}
             <Select
-              onValueChange={(e:any) =>
+              onValueChange={(e: any) =>
                 setSelectedOrgData({
                   id: e?.id,
                   name: e?.name,
