@@ -41,7 +41,7 @@ export default function Sidebar() {
       {sidebarVisibility && (
         <div
           onClick={() => toggleSidebar(false)}
-          className="absolute z-50 h-screen w-full bg-background/90 bg-opacity-10"
+          className="absolute z-50 block h-screen w-full bg-background/90 bg-opacity-10 md:hidden"
         ></div>
       )}
       <div
