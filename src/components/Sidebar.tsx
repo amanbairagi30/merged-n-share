@@ -1,16 +1,14 @@
 'use client';
 import { sideBarOptions } from '@/data/data';
-import { PanelRightOpen, X } from 'lucide-react';
-import { signOut, useSession } from 'next-auth/react';
+import { X } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import Github from '@/app/assets/github.svg';
 import Link from 'next/link';
 import { useSidebarStore } from '@/store/sidebar';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Button } from './ui/button';
-import { Badge } from './ui/badge';
 
 export default function Sidebar() {
   const pathName = usePathname();
