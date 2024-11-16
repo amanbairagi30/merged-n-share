@@ -150,7 +150,7 @@ export default function PRCard({
           </div>
           {/* the bounty system may be dropped soon or we need to have a better generalised idea about them */}
           <div className="my-2 flex items-center gap-2">
-            <Badge
+            {/* <Badge
               variant="secondary"
               className="flex items-center gap-2 rounded-full bg-primary/20 text-sm font-medium"
             >
@@ -162,7 +162,7 @@ export default function PRCard({
                 alt="coin-image"
               />
               <span className="text-sm">{prPoint}</span>
-            </Badge>
+            </Badge> */}
             {/* {
                             bounty && bounty?.length !== 0 && (
                                 <div className='mt-2 border-2 border-green-500 px-2 py-1 rounded-full gap-1 flex items-center'>

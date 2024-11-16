@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useSidebarStore } from '@/store/sidebar';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { Button } from './ui/button';
+import { Badge } from './ui/badge';
 
 export default function Sidebar() {
   const pathName = usePathname();
@@ -103,9 +104,9 @@ export default function Sidebar() {
                     <div className="flex items-center gap-2">
                       <p>{x.name}</p>
                       {x.isNew && (
-                        <div className="flex h-fit w-fit items-center justify-center rounded-md bg-green-700 px-2 py-0 text-[0.6rem] text-white">
+                        <Badge className="bg-green-700 px-2 py-0 text-[0.6rem] text-white">
                           NEW
-                        </div>
+                        </Badge>
                       )}
                     </div>
                   </div>
