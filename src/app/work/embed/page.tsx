@@ -77,7 +77,7 @@ import Script from "next/script";
           title="No Pull Requests Found"
           message={
             <>
-              It seems you don't have any pull requests saved in the
+              It seems you don&apos;t have any pull requests saved in the
               <Badge className="mx-1 bg-accent font-secondary text-foreground hover:bg-accent">
                 Merged<span className="text-primary">&</span>Share
               </Badge>
