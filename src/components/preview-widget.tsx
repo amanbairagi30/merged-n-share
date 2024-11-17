@@ -43,7 +43,7 @@ export function PreviewWidget({ theme, username }: PreviewWidgetProps) {
                     card-view="list"
                     theme={theme}
                     username={username}
-                    top-visible={false}
+                    top-visible="true"
                   />
                 </div>
               </SheetContent>

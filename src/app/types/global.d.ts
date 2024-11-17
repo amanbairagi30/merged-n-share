@@ -10,7 +10,7 @@ export interface WidgetWebComponentProps
   'font-variable'?: string;
   'md-cols'?: number;
   'base-cols'?: number;
-  'top-visible'?: boolean;
+  'top-visible'?: 'true' | 'false';
 }
 
 declare global {

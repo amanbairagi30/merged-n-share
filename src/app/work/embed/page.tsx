@@ -150,7 +150,7 @@ export interface WidgetWebComponentProps
   'fontVariable'?: string; // You can add your font variable (e.g., --font-primary or any custom variable name) in this prop.
   'md-cols'?: number; // sets columns on medium screens (works with grid layout only) .
   'base-cols'?: number; // sets columns on small screens (works with grid layout only) .
-  'top-visible'?: boolean; // toggles the top bar which shows the organisations where you contributed. 
+  'top-visible'?: 'true' | 'false'; // toggles the top bar which shows the organisations where you contributed. 
 }
 
 declare global {
