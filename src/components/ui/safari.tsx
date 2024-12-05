@@ -115,7 +115,7 @@ export default function Safari({
             fill="#A3A3A3"
           />
         </g>
-        <image
+        {/* <image
           href={srcDark}
           width="1200"
           height="700"
@@ -134,7 +134,16 @@ export default function Safari({
           y="52"
           preserveAspectRatio="xMidYMid slice"
           clipPath="url(#roundedBottom)"
-        />
+        /> */}
+        <foreignObject x="0" y="60" width={width} height={height}>
+          <video
+            width={width}
+            height={height}
+            controls
+            src={'https://d3e9bmsof933bn.cloudfront.net/output.mp4'}
+            style={{ backgroundColor: 'black' }}
+          />
+        </foreignObject>
       </g>
       <defs>
         <clipPath id="path0">
