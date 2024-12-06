@@ -1,6 +1,7 @@
 import Features from '@/components/features';
 import Footer from '@/components/footer';
 import Hero from '@/components/Hero';
+import HowItWorks from '@/components/how-it-works';
 import { Navbar } from '@/components/Navbar';
 import Statistics from '@/components/statistics';
 import Testimonials from '@/components/testimonials';
@@ -17,7 +18,7 @@ export default function Home() {
 
       <div className="mx-auto mt-28 max-w-[1180px] px-4">
         <Hero />
-        {/* <ProductDemo /> */}
+        <HowItWorks />
         <Features />
         <Statistics />
         <Testimonials />

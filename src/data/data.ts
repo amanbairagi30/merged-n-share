@@ -15,12 +15,18 @@ export const sideBarOptions = {
       name: 'Dashboard',
       icon: LayoutDashboard,
       href: '/work/dashboard',
-      isNew: true,
+      isNew: false,
     },
+    // {
+    //   name: 'Leaderboard',
+    //   icon: Trophy,
+    //   href: '/work/leaderboard',
+    //   isNew: false,
+    // },
     {
-      name: 'Leaderboard',
-      icon: Trophy,
-      href: '/work/leaderboard',
+      name: 'Organisations',
+      icon: Building2,
+      href: '/work/organisations',
       isNew: false,
     },
     {
@@ -30,16 +36,10 @@ export const sideBarOptions = {
       isNew: false,
     },
     {
-      name: 'Organisations',
-      icon: Building2,
-      href: '/work/organisations',
-      isNew: true,
-    },
-    {
       name: 'Embed PRs',
       icon: Code,
       href: '/work/embed',
-      isNew: true,
+      isNew: false,
     },
   ],
 };
