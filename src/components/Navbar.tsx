@@ -1,11 +1,9 @@
 'use client';
-import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { signIn, signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { SelectTheme } from './theme-toggler';
-import { Button } from './ui/button';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
 import { MailIcon } from 'lucide-react';
 
@@ -31,11 +29,13 @@ export const Navbar = () => {
         </header>
 
         <aside className="flex items-center gap-2">
-          <SelectTheme />
+          <div className="mr-2">
+            <SelectTheme />
+          </div>
 
           <Link
             href="https://github.com/amanbairagi30/merged-n-share"
-            className="flex cursor-pointer items-center gap-2 rounded-md border-2 bg-accent px-2 py-1"
+            className="rounded-mdpx-2 flex cursor-pointer items-center gap-2 py-1"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -44,7 +44,7 @@ export const Navbar = () => {
           </Link>
           <Link
             href="mailto:amanbairagi1089@gmail.com"
-            className="flex cursor-pointer items-center gap-2 rounded-md border-2 bg-accent px-2 py-1"
+            className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1"
             target="_blank"
             rel="noopener noreferrer"
           >
