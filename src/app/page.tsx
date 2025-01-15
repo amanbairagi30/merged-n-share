@@ -5,7 +5,7 @@ import HowItWorks from '@/components/how-it-works';
 import { Navbar } from '@/components/Navbar';
 import Statistics from '@/components/statistics';
 import Testimonials from '@/components/testimonials';
-// import WallOfLove from '@/components/WallOfLove';
+import WallOfLove from '@/components/WallOfLove';
 
 export default function Home() {
   return (
@@ -21,7 +21,9 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <Features />
-        {/* <WallOfLove /> */}
+        <div className="my-8 h-[50rem]">
+          <WallOfLove />
+        </div>
         <Statistics />
         <Testimonials />
         <Footer />

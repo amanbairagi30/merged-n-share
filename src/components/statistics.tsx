@@ -11,10 +11,10 @@ import TitleCard from './title-card';
 import { motion } from 'framer-motion';
 
 const statisticsData = [
-  { icon: Eye, value: '700+', label: 'Visitors' },
-  { icon: Users, value: '100+', label: 'Users' },
+  { icon: Eye, value: '4000+', label: 'Visitors' },
+  { icon: Users, value: '200+', label: 'Users' },
   { icon: Telescope, value: '3500+', label: 'Page Views' },
-  { icon: MessageCircleHeart, value: '5+', label: 'Testimonials' },
+  { icon: MessageCircleHeart, value: '10+', label: 'Testimonials' },
 ];
 
 export default function Statistics() {
@@ -46,7 +46,7 @@ export default function Statistics() {
       whileInView="visible"
       viewport={{ once: true, amount: 0.2 }}
       variants={containerVariants}
-      className="my-[10rem] flex flex-col items-center justify-center gap-4"
+      className="mb-[10rem] mt-[25rem] flex flex-col items-center justify-center gap-4"
     >
       <motion.div variants={itemVariants}>
         <TitleCard icon={TrendingUp} title={'Statistics'} />
