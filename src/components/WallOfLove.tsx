@@ -19,7 +19,7 @@ const WallOfLove = () => {
         </h3>
       </div>
       <iframe
-        src="https://embed.viewus.in/?animated=on&slug=merged-and-share&columns=3&tagText=000000&tag=FFFFFF&star=FFD700&text=FFFFFF&cardBorderColor=FFD700&cardBackground=0c0a09&background=0c0a09&theme=dark&outerRadius=low"
+        src="https://embed.viewus.in/?animated=on&slug=merged-and-share&columns=3&tagText=000000&tag=FFFFFF&star=FFD700&text=FFFFFF&cardBorderColor=FFD700&theme=dark&outerRadius=low"
         width="100%"
         className="rounded-none"
         height="100%"
