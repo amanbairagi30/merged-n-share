@@ -21,9 +21,7 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <Features />
-        <div className="my-8 h-[50rem]">
-          <WallOfLove />
-        </div>
+        {/* <div className="my-8 h-[50rem]"><WallOfLove /></div> */}
         <Statistics />
         <Testimonials />
         <Footer />
