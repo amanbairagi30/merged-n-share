@@ -140,7 +140,9 @@ export default function Safari({
             width={width}
             height={height}
             controls
-            src={'https://d3e9bmsof933bn.cloudfront.net/output.mp4'}
+            src={
+              'https://res.cloudinary.com/dzbixx06r/video/upload/v1739859230/merged-and-share/xq1lkqtbgqjfga2tzcfc.mp4'
+            }
             style={{ backgroundColor: 'black' }}
           />
         </foreignObject>
